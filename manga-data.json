@@ -1,0 +1,46 @@
+{
+    "frieren": {
+        "Nom": "Frieren",
+        "Statut": "En cours de parution",
+        "Auteur": "Yamada Kanehito",
+        "Dessinateur": "Tsukasa Abe",
+        "Sortie": "2021",
+        "Synopsis": "Le jeune héros Himmel et ses compagnons, l'elfe Frieren, le nain Eisen et le prêtre Heiter, rentrent victorieux de leur combat contre le roi des démons. Au bout de dix années d'efforts, ils ont ramené la paix dans le royaume. Il est temps pour eux de retrouver une vie normale... Difficile à imaginer après tant d'aventures en commun ! Frieren, elle, ne semble guère touchée par la séparation. Pour la magicienne à la longévité exceptionnelle, une décennie ne pèse pas lourd. Elle reprend la route en solo et promet de retrouver ses camarades un demi-siècle plus tard. Elle tient parole... mais ces retrouvailles sont aussi les derniers instants passés avec Himmel, devenu un vieillard qui s'éteint paisiblement sous ses yeux. Frieren est sous le choc... La vie des humains est si courte ! L'elfe a beau être experte en magie, il lui reste encore un long chemin à parcourir pour comprendre la race humaine... Son nouvel objectif : s'initier aux arcanes du cœur !",
+        "Alias": "sousou no frieren",
+        "Tags": "Action, Drame, Fantaise",
+        "Image": "img/couvertures/tome-FRIEREN.jpg"
+    },
+    "kaoru-hana-wa-rin-to-saku": {
+        "Nom": "Kaoru hana wa Rin to saku",
+        "Statut": "En cours de parution",
+        "Auteur": "Mikami Saka",
+        "Dessinateur": "Mikami Saka",
+        "Sortie": "2021",
+        "Synopsis": "Au cœur d'une banlieue japonaise, se dressent face à face deux établissements que tout oppose : Chidori, le lycée public pour garçons, réunit les pires cancres de la ville, tandis que le prestigieux Kikyô rassemble les esprits les plus brillants des filles de bonne famille.\n\n Donnant régulièrement un coup de main à la pâtisserie familiale, Rintarô Tsumugi, élève à Chidori, sympathise avec l'une de ses clientes régulières, Kaoruko Waguri. Alors qu'il sent peu à peu un lien se tisser entre eux, le lycéen apprend que la jeune fille fréquente Kikyô et que comme tous les élèves de ces établissements, ils sont supposés se haïr mutuellement ! La rivalité entre leurs lycées est-elle forcément signe de fatalité ?",
+        "Alias": "Bloom",
+        "Tags": "Romance, School life",
+        "Image": "img/couvertures/tome-KAORU-HANA.jpg"
+    },
+    "jujutsu-kaisen": {
+        "Nom": "Jujutsu Kaisen",
+        "Statut": "Terminé",
+        "Auteur": "Gege Akutami",
+        "Dessinateur": "Gege Akutami",
+        "Sortie": "2020",
+        "Synopsis": "Chaque année au Japon, on recense plus de 10 000 morts inexpliquées et portés disparus. Dans la majorité des cas, ce sont les sentiments négatifs des êtres humains qui sont en cause. Souffrance, regrets, humiliation : leur accumulation dans un même endroit provoque des malédictions souvent fatales... C'est ce que va découvrir à ses dépens Yuji Itadori, lycéen et membre du club de spiritisme. Il ne croit pas aux fantômes, mais sa force physique hors du commun est un précieux atout pour les missions du groupe... jusqu'à ce que l'une d'elles tourne mal. La relique qu'ils dénichent, le doigt sectionné d'une créature millénaire, attire les monstres ! Le jeune homme n'hésite pas une seconde : il avale la relique pour conjurer le mauvais sort ! Le voilà possédé par Ryomen Sukuna, le célèbre démon à deux visages. Contre toute attente, Yuji réussit à reprendre le contrôle de son corps. C'est du jamais vu ! Malgré tout, il est condamné à mort par l'organisation des exorcistes... Une sentence qui ne pourra être repoussée qu'à une seule condition : trouver et ingérer tous les doigts de Sukuna afin d'éliminer la menace une fois pour toutes. Et pour ça, l'adolescent va devoir s'initier à l'art occulte et mystérieux de l'exorcisme !",
+        "Alias": "jujutsu-kaisen",
+        "Tags": "Action",
+        "Image": "img/couvertures/tome-JJK.jpg"
+    },
+    "gannibal": {
+        "Nom": "Gannibal",
+        "Statut": "Terminé",
+        "Auteur": "Masaaki Ninomiya",
+        "Dessinateur": "Masaaki Ninomiya",
+        "Sortie": "2019",
+        "Synopsis": "Alors qu'il vient tout juste d'être affecté à Kuge, un petit village du fin fond de la campagne, l'agent de police Daigo Agawa se retrouve nez à nez avec un cadavre complètement défiguré. Les locaux disent que le malheureux a été attaqué par un ours, mais une trace de morsure humaine attire le regard de Daigo... Et puis, il y a cette rumeur... Et si c'était vrai ?",
+        "Alias": "gannibal",
+        "Tags": "Drame, Horreur, Mystère",
+        "Image": "img/couvertures/tome-GANNIBAL.jpg"
+    }
+}

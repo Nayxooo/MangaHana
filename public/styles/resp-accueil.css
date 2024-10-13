@@ -1,0 +1,116 @@
+@media (max-width: 1400px) {
+    section .sec-populaire .mainflex .flex-container .flexboxleft {
+        width: 70%;
+    }
+    section .sec-populaire .mainflex .flex-container .flexboxright {
+        width: 30%;
+    }
+}
+
+@media (max-width: 1200px) {
+    #pepite-title .sous-titre {
+        display: none;
+    }
+    section .pepites .mainflex {
+        width: 80%;
+    }
+}
+
+@media (max-width: 950px) {
+    section .sec-populaire .mainflex .flex-container .flexboxleft {
+        width: 60%;
+    }
+    section .sec-populaire .mainflex .flex-container .flexboxright {
+        width: 40%;
+    }
+
+    section .sec-populaire .mainflex .titre-with-box {
+        width: 80%;
+        margin-left: 20%;
+    }
+    .titre-with-box .sous-titre {
+        display: none;
+    }
+
+    section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .infos h1{
+        margin-top: 80px;
+        margin-left: 7%;
+        font-size: 50px;
+    }
+    
+    section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .infos .tag-flexbox{
+        margin-left: 8.5%;
+    }
+    
+    section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .infos #synopsis{
+        margin-left: 9%;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 810px) {
+    section .sec-populaire .mainflex .flex-container .flexboxleft,
+    section .sec-populaire .mainflex .titre-with-box {
+        display: none;
+    }
+    section .sec-populaire .mainflex .flex-container .flexboxright {
+        width: 100%;
+    }
+    section .sec-populaire .flexboxright .pop-box {
+        justify-content: center;
+    }
+    section .sec-populaire .flexboxright .info-container {
+        margin-left: 1em;
+    }
+
+    section .pepites .mainflex .flexbox .flex-content .slider-flex .image-container::after {
+        display: none;
+        width: 0; 
+        height: 0; 
+    }
+    section .pepites .mainflex .flexbox .flex-content .slider-flex h3{
+        color: var(--grey3);
+    }
+}
+
+@media (max-width: 400px) {
+    section .sec-populaire .flexboxright .pop-box .number-flex{
+        width: 35%;
+    }
+    section .sec-populaire .flexboxright .info-container {
+        margin-left: 0.8em;
+        font-size: smaller;
+    }
+
+    section .pepites .mainflex .titre-with-box {
+        font-size: 16px;
+    }
+    
+    section .pepites .mainflex .titre-with-box i {
+        font-size: 33px;
+    }
+    #Slider1{
+        .inner {
+          animation-duration: 40s;
+        }
+    }
+    #Slider2{
+        .inner {
+          animation-duration: 40s;
+        }
+    }
+}
+
+@media (max-width: 350px) {
+    section .sec-populaire .mainflex {
+        width: 90%;
+    }
+    section .sec-populaire .mainflex .titre-with-box {
+        font-size: 15px;
+        margin-left: 15px;
+        margin-bottom: 5px;
+    }
+    section .sec-populaire .mainflex .titre-with-box i{
+        font-size: 30px;
+    }
+}

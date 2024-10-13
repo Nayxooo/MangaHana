@@ -1,0 +1,436 @@
+nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    background-color: var(--black);
+    height: 55px;
+    width: 100%;
+    z-index: 50;
+    margin-bottom: 20px;
+}
+
+nav .nav-searchbar, nav .nav-categories {
+    height: 100%;
+}
+
+nav .nav-searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 300px;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+nav .nav-searchbar .flexbox{
+    display: flex;
+    align-items: center;
+    height: 95%;
+    width: 100%;
+    padding-left: 20px;
+    background-color: var(--grey1);
+    border-radius: 10px;
+}
+
+nav .nav-searchbar .flexbox i{
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--grey3);
+    margin-right: 15px;
+    transition: color 0.1s ease;
+}
+
+nav .search-input {
+    width: 100%;
+    background-color: transparent; 
+    border: none; 
+    outline: none; 
+    font-family: 'Poppins';
+    font-size: 15px; 
+    color: var(--white);
+}
+
+nav .search-input::placeholder {
+    font-weight: 900;
+    text-transform: uppercase; 
+    color: var(--grey2);
+    transition: color 0.15s ease;
+}
+
+nav .nav-searchbar .flexbox:hover i,
+nav .nav-searchbar .flexbox:hover .search-input::placeholder{
+    color: var(--grey3);
+}
+
+.search-input:focus,
+.search-input:focus::placeholder,
+.nav-searchbar .flexbox:focus-within i {
+    color: #c6cac7 !important; 
+}
+
+.search-input:focus:not(:focus)::placeholder {
+    color: var(--grey2); 
+}
+
+nav .nav-img {
+    position: absolute;
+    top: -9px;
+    left: 5px;
+    height: 75px;
+}
+
+nav .nav-img img {
+    position: relative;
+    max-height: 100%;
+    transition: opacity 0.2s ease; 
+}
+
+nav .nav-img-2 {
+    display: none;
+    height: 100%;
+    margin-right: 10px;
+}
+
+nav .nav-img-2 img {
+    height: 50px; 
+    max-height: 100%;
+    transition: opacity 0.2s ease; 
+}
+
+nav .nav-categories {
+    display: flex;
+}
+
+nav .nav-categories .flex-container {
+    justify-content: center;
+}
+
+nav .nav-categories .flex-container,
+.slidemenu .flex-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent; 
+}
+
+/* CATEGORIES */
+nav .nav-categories .flex-container .bx-container,
+nav .nav-categories .flex-container .a-container,
+.slidemenu .flex-container .bx-container,
+.slidemenu .flex-container .a-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+nav .nav-categories .flex-container .a-container,
+nav .nav-categories .flex-container .bx-container i,
+.slidemenu .flex-container .a-container {
+    font-weight: 900;
+    text-transform: uppercase; 
+    color: var(--white);
+    transition: color 0.2s ease;
+}
+
+.slidemenu .flex-container .bx-container i {
+    color: var(--green);
+}
+
+nav .nav-categories .flex-container .a-container,
+.slidemenu .flex-container .a-container {
+    font-family: 'Poppins';
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+nav .nav-categories .flex-container .bx-container i,
+.slidemenu .flex-container .bx-container i {
+    font-size: 23px;
+    margin: 0 10px 0 15px;  
+}
+
+/* Effet hover catégories*/
+nav .nav-categories .flex-container::before {
+    content: '';
+    position: absolute;
+    bottom: -100%; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--grey1); 
+    transition: bottom 0.2s ease; 
+    z-index: -1; 
+}
+
+nav .nav-categories .flex-container:hover::before {
+    bottom: 0; 
+}
+
+nav .nav-categories .flex-container:hover .a-container .green-text,
+nav .nav-categories .flex-container:hover .bx-container i {
+    color: var(--green); 
+}
+
+nav .nav-img img:hover,
+nav .nav-img-2:hover img {
+    opacity: 60%;
+}
+
+/* DECO NAVBAR */
+nav .decoration-line {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav .decoration-line .left-line,
+nav .decoration-line .right-line{
+    width: 50%;
+    height: 100%;
+}
+
+nav .decoration-line .left-line{
+    background: linear-gradient(to left, var(--grey1), var(--green));
+}
+nav .decoration-line .right-line{
+    background-color: var(--grey1);
+}
+
+/* burger menu */
+.burger-menu {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 13px;
+    width: 60px;
+    height: 100%;
+    transition: padding 0.1s ease;
+}
+.burger-menu button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12%;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--grey1);
+}
+
+.burger-menu button .burger-line{
+    width: 50%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--grey3);
+    transition: background-color 0.2s ease, width 0.1s ease;
+}
+
+.burger-menu button:hover .burger-line{
+    background-color: var(--grey3);
+}
+
+/* responsive navbar */
+@media (max-width: 1110px) {
+    nav {
+        justify-content: space-between;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
+    nav .nav-img {
+        position: relative;
+        left: 0px;
+        top: 2px;
+    }
+
+    nav .nav-searchbar {
+        width: 250px;
+    }
+
+    nav .nav-categories {
+        display: none;
+    }
+}
+
+@media (max-width: 475px) {
+    nav .nav-searchbar {
+        width: 190px;
+    }
+    nav .nav-img {
+        display: none;
+    }
+    nav .nav-img-2 {
+        display: flex;
+    }
+}
+
+/* slidemenu */
+.slidemenu {
+    position: fixed;
+    top: 0;
+    left: -400px; 
+    width: 400px;
+    height: 100vh;
+    background-color: var(--black);
+    transition: left 0.3s ease; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;overflow: hidden;
+}
+
+.slidemenu.open {
+    left: 0; 
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    display: none; 
+}
+
+.overlay.active {
+    display: block; 
+}
+
+.logo-slidemenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    height: 10%;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.slidemenu .logo-slidemenu img {
+    height: 100px;
+    max-height: 100%;
+}
+
+.slidemenu .logo-slidemenu button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+}
+
+.slidemenu button i {
+    font-size: 30px;
+    color: var(--white);
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.slidemenu button i:hover {
+    color: rgba(128, 128, 128, 1);
+}
+
+.slidemenu .ligne-transition{
+    position:absolute;
+    top: 10vh;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, rgba(128, 128, 128, 1), rgba(128, 128, 128, 0));
+    border-radius: 5px;
+}
+
+.slidemenu .options-slidemenu{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 15em;
+    margin-top: -50vh;
+}
+
+/* Flexbox pour les options du slide menu */
+.slidemenu .options-slidemenu .flexbox {
+    display: flex;
+    flex-direction: left;
+    width: 100%;
+    height: 100%;
+}
+
+
+.slidemenu .options-slidemenu .flexbox .flex-pour-centrer {
+    width: 1%;
+    height: 100%;
+}
+
+.slidemenu .options-slidemenu .flex-container {
+    position: relative;
+    overflow: visible;
+    width: 45%;
+    transition: background-color 0.2s ease;
+}
+
+.slidemenu .options-slidemenu .flex-container .ligne-style {
+    position: absolute;
+    left: -5%;
+    bottom: 0;
+    height: 3px;
+    width: 0; 
+    background-color: var(--green);
+    transition: width 0.25s ease;
+}
+
+
+.slidemenu .options-slidemenu .flex-container:hover i,
+.slidemenu .options-slidemenu .flex-container:hover .a-container {
+    color: var(--green);
+}
+
+.slidemenu .options-slidemenu .flex-container:hover .ligne-style {
+    width: 250%; 
+}
+
+
+.slidemenu p {
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: var(--grey2);
+}
+
+/* responsive slidemenu */
+@media (max-width: 400px) {
+    .slidemenu {
+        width: 300px;
+    }
+    .slidemenu .options-slidemenu{
+        margin-top: -50vh;
+    }
+    .slidemenu .options-slidemenu .flexbox .flex-pour-centrer {
+        width: 2%;
+    }
+    .slidemenu .logo-slidemenu img {
+        height: 80px;
+        max-height: 100%;
+    }
+    .slidemenu .options-slidemenu .flex-container {
+        width: 60%;
+    }
+}

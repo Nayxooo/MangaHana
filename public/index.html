@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>MangaHana - Lecture de scans</title> 
+        <meta charset="UTF-8">
+        <meta name="description" content="MangaHana - Lecture de scans">
+        <meta name="keywords" content="mangahana, scan, vf, sans pubs, free">
+        <link rel="canonical" href="https://mangahana-scan.fr/">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <link rel="stylesheet" href="">
+        <link rel="shortcut icon" type="image/png" href="img/mangahana-icon.png">
+        <link rel="shortcut icon" sizes="192x192" href="img/mangahana-icon.png">
+        <link rel="apple-touch-icon" href="img/mangahana-icon.png">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/style-navbar.css">
+        <link rel="stylesheet" href="styles/style-footer.css">
+        <link rel="stylesheet" href="styles/style-history.css">
+        <link rel="stylesheet" href="styles/style-populaire.css">
+        <link rel="stylesheet" href="styles/style-sorties.css">
+        <link rel="stylesheet" href="styles/style-pepites.css">
+        <link rel="stylesheet" href="styles/resp-accueil.css">
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav>
+
+            <!-- Burger button -->
+            <div class="burger-menu">
+                <button class="burger-menu-btn">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </button>
+            </div>
+
+            <!-- Logo -->
+            <a class="nav-img" href=""><img src="img/mangahana-logo.png" alt="MangaHana-logo"></a>
+            
+            <!-- Barre de recherche -->
+            <div class="nav-searchbar">
+                <div class="flexbox">
+                    <i class='bx bx-search'></i>
+                    <input name="search_text" id="search_text" type="search" class="search-input" placeholder="Rechercher..." autocomplete="off">
+                </div>
+            </div>
+            
+            <!-- Logo icone-->
+            <a class ="nav-img-2" href=""><img src="img/mangahana-icon.png" alt="MangaHana-logo"></a>
+
+            <!-- Options navbar -->
+            <div class="nav-categories">
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-home'></i></div>
+                    <div class="a-container">Acc<span class="green-text">ueil</span></div>
+                </a>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
+                    <div class="a-container">Cata<span class="green-text">logue</span></div>
+                </a>
+                <a href="" class="flex-container">    
+                    <div class="bx-container"><i class='bx bx-shuffle'></i></div>
+                    <div class="a-container">Se lan<span class="green-text">cer</span></div>
+                </a>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bx-street-view'></i></div>
+                    <div class="a-container">Pro<span class="green-text">fil</span></div>
+                </a>
+            </div>
+
+            <div class="decoration-line">
+                <div class="left-line"></div>
+                <div class="right-line"></div>
+            </div>
+        </nav>
+
+        <!-- Slide Menu -->
+        <div class="slidemenu">
+
+            <div class="logo-slidemenu">
+                <button id="close-slidemenu"><i class='bx bxs-chevrons-left'></i></button>
+                <img class="nav-img" src="img/mangahana-logo.png" alt="MangaHana-logo">
+            </div>
+
+            <div class="ligne-transition"></div>
+
+            <!-- Options slide menu -->
+            <div class="options-slidemenu">
+                <div class="flexbox">
+                <div class="flex-pour-centrer"></div>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-home'></i></div>
+                    <div class="a-container">Acc<span class="green-text">ueil</span></div>
+                    <div class="ligne-style"></div>
+                </a>
+                </div>
+                <div class="flexbox">
+                <div class="flex-pour-centrer"></div>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
+                    <div class="a-container">Cata<span class="green-text">logue</span></div>
+                    <div class="ligne-style"></div>
+                </a>
+                </div>
+                <div class="flexbox">
+                <div class="flex-pour-centrer"></div>
+                <a href="" class="flex-container">    
+                    <div class="bx-container"><i class='bx bx-shuffle'></i></div>
+                    <div class="a-container">Se lan<span class="green-text">cer</span></div>
+                    <div class="ligne-style"></div>
+                </a>
+                </div>
+                <div class="flexbox">
+                <div class="flex-pour-centrer"></div>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bx-street-view'></i></div>
+                    <div class="a-container">Pro<span class="green-text">fil</span></div>
+                    <div class="ligne-style"></div>
+                </a>
+                </div>
+            </div>
+
+            <p>© 2024 MangaHana - Tous droits réservés.</p>
+        </div>
+
+        <button id="to-top-btn">
+            <i class='bx bx-up-arrow-alt'></i>
+        </button>
+
+        <!-- Mangas populaires -->
+        <section>      
+            <!-- Section des mangas populaires -->
+            <div class="sec-populaire">
+                <div class="mainflex">
+                    <!-- Titre avec une icone -->
+                    <div class="titre-with-box">
+                        <i class='bx bxs-hot'></i>
+                        <h1>Populaires<span class="sous-titre"> : Les <span class="green">incontournables</span> du moment !</span></h1>  
+                    </div>
+                    <div class="flex-container">  
+                        <div class="flexboxleft">
+
+                            <div class="fade" id="fade"></div>
+
+                            <div class="left-arrow-btn">
+                                <button id="prev-btn"><i class='bx bxs-chevron-left'></i></button>
+                            </div>
+                            <div class="right-arrow-btn">
+                                <button id="next-btn"><i class='bx bxs-chevron-right'></i></button>
+                            </div>
+                        
+                            <div class="manga-flex" id="manga-flex-1">
+                                <div class="infos">
+                                    <h1><span class="green">One</span> Piece</h1>
+                                    <div class="tag-flexbox">
+                                        <div id="tag"><p>Action</p></div>
+                                        <div id="tag"><p>Aventure</p></div>
+                                        <div id="tag"><p>Fantaisie</p></div>
+                                    </div>
+                                    <p id="synopsis">Partez à l'aventure aux côtés de Luffy dans la poursuite de son rêve, devenir le roi des pirates ! Soyez-en sûr(e), c'est un équipage haut en couleurs qui vous attend.</p>
+                                </div>
+                                <div class="manga-img">
+                                    <img src="img/populaire/colorspread-OP.jpg" alt="colorspread-OP">
+                                </div>
+                            </div>
+
+                            <div class="manga-flex" id="manga-flex-2">
+                                <div class="infos">
+                                    <h1><span class="green">Jujutsu</span> Kaisen</h1>
+                                    <div class="tag-flexbox">
+                                        <div id="tag"><p>Action</p></div>
+                                        <div id="tag"><p>Supernaturel</p></div>
+                                    </div>
+                                    <p id="synopsis">Des combats spectaculaires, des personnages charismatiques et un manga qui n'a plus rien à prouver. Découvrez l'intensité des traits de Gege Akutami dans Jujutsu Kaisen.</p>
+                                </div>
+                                <div class="manga-img">
+                                    <img src="img/populaire/colorspread-JJK.jpg" alt="colorspread-JJK">
+                                </div>
+                            </div>
+                        
+                            <div class="manga-flex hidden" id="manga-flex-3">
+                                <div class="infos">
+                                    <h1><span class="green">Chainsaw</span> Man</h1>
+                                    <div class="tag-flexbox">
+                                        <div id="tag"><p>Action</p></div>
+                                        <div id="tag"><p>Supernaturel</p></div>
+                                        <div id="tag"><p>Démons</p></div>
+                                    </div>
+                                    <p id="synopsis">Plongez avec un rythme effréné dans un enfer où aucun rêve n'est futile. Denji, pourtant, reste en quête d'un bonheur simple.</p>
+                                </div>
+                                <div class="manga-img">
+                                    <img src="img/populaire/colorspread-CSM.jpg" alt="colorspread-CSM">
+                                </div>
+                            </div>
+
+                            <div class="manga-flex hidden" id="manga-flex-4">
+                                <div class="infos">
+                                    <h1><span class="red">Berserk</span></h1>
+                                    <div class="tag-flexbox">
+                                        <div id="tag"><p>Action</p></div>
+                                        <div id="tag"><p>Drame</p></div>
+                                        <div id="tag"><p>Fantasie</p></div>
+                                        <div id="tag"><p>Horreur</p></div>
+                                    </div>
+                                    <p id="synopsis">Une plongée dans un monde brutal, où l'horreur embellit les rares moments de repos. Guts lutte contre la causalité avec pour seule force sa volonté.</p>
+                                </div>
+                                <div class="manga-img">
+                                    <img src="img/populaire/colorspread-BERSERK.jpg" alt="colorspread-BERSERK">
+                                </div>
+                            </div>
+
+                            <div class="manga-flex" id="manga-flex-5">
+                                <div class="infos">
+                                    <h1><span class="red">Kingdom</h1>
+                                    <div class="tag-flexbox">
+                                        <div id="tag"><p>Action</p></div>
+                                        <div id="tag"><p>Guerre</p></div>
+                                        <div id="tag"><p>Stratégie</p></div>
+                                    </div>
+                                    <p id="synopsis">Au cœur de la Chine ancienne, des guerres aux milliers d'hommes et des stratégies sans pitié décident du destin des royaumes. Parmi ces bains de sang, un homme fait entendre son rêve : unifier la Chine.</p>
+                                </div>
+                                <div class="manga-img">
+                                    <img src="img/populaire/colorspread-KINGDOM.jpg" alt="colorspread-KINGDOM">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flexboxright">
+                            <div class="pop-title"><h1>Populaires</h1></div>
+                            <a href="" class="pop-box">
+                                <div class="number-flex">
+                                    <div class="number"><p>1</p></div>
+                                </div>
+                                <div class="img-info-flex">
+                                    <div class="img-container">
+                                        <img src="img/couvertures/tome-OP.jpg" alt="tome-OP">
+                                    </div>
+                                    <div class="info-container">
+                                        <p><span class="manga-name bolder">One Piece</span></p>
+                                        <p><span class="grey italic">Chapitre 1129</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="" class="pop-box">
+                                <div class="number-flex">
+                                    <div class="number"><p>2</p></div>
+                                </div>
+                                <div class="img-info-flex">
+                                    <div class="img-container">
+                                        <img src="img/couvertures/tome-JJK.jpg" alt="tome-JJK">
+                                    </div>
+                                    <div class="info-container">
+                                        <p><span class="manga-name bolder">Jujutsu Kaisen</span></p>
+                                        <p><span class="grey italic">Chapitre 270</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="" class="pop-box">
+                                <div class="number-flex">
+                                    <div class="number"><p>3</p></div>
+                                </div>
+                                <div class="img-info-flex">
+                                    <div class="img-container">
+                                        <img src="img/couvertures/tome-CSM.jpg" alt="tome-CSM">
+                                    </div>
+                                    <div class="info-container">
+                                        <p><span class="manga-name bolder">Chainsaw Man</span></p>
+                                        <p><span class="grey italic">Chapitre 177</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="" class="pop-box">
+                                <div class="number-flex">
+                                    <div class="number"><p>4</p></div>
+                                </div>
+                                <div class="img-info-flex">
+                                    <div class="img-container">
+                                        <img src="img/couvertures/tome-BERSERK.jpg" alt="tome-BERSERK">
+                                    </div>
+                                    <div class="info-container">
+                                        <p><span class="manga-name bolder">Berserk</span></p>
+                                        <p><span class="grey italic">Chapitre 368</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="" class="pop-box">
+                                <div class="number-flex">
+                                    <div class="number"><p>5</p></div>
+                                </div>
+                                <div class="img-info-flex">
+                                    <div class="img-container">
+                                        <img src="img/couvertures/tome-KINGDOM.jpg" alt="tome-KINGDOM">
+                                    </div>
+                                    <div class="info-container">
+                                        <p><span class="manga-name bolder">Kingdom</span></p>
+                                        <p><span class="grey italic">Chapitre 1059</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </section>
+
+        <!-- Dernières sorties et dernières lectures -->
+        <section>
+            <div class="sec-sorties">
+                <div class="mainflex">
+                    <div class="left-flexbox">
+                        <div class="dernieres-sorties">
+                            <div class="release"></div>
+                        </div>
+                    </div>
+                    <div class="right-flexbox">
+                        <div class="history">
+                            <p>Vos dernières lectures</p>
+                            <a class="history-line" href="">Kaoru Hana wa Rin to Saku : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                            <a class="history-line" href="">Berserk : Chapitre 201</a>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </section>
+
+        <!-- Pépites -->
+        <section>
+            <!-- Section dernières lectures -->
+            <div class="pepites">
+                <div class="mainflex">
+                    <!-- Titre avec une icone -->
+                    <div class="titre-with-box" id="pepite-title">
+                        <i class='bx bxs-star-half' ></i>
+                        <h1> Nos pépites<span class="sous-titre"> : À consommer <span class="green">sans modération</span>.</span></h1>  
+                    </div>
+
+                    <div class="flexbox">
+                        <div class="flex-content loop-slider" id="Slider1" style="--duration:65s; --direction:normal;">
+
+                            <!-- gradient -->
+                            <div class="gradient-left"></div>
+                            <div class="gradient-right"></div>
+
+                            <div class="inner">
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-KAGUYA-SAMA.jpg" alt="tome-KAGUYA-SAMA">
+                                        </div>
+                                        <h3>Kaguya-sama</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-HAIKYUU.jpg" alt="tome-HAIKYUU">
+                                        </div>
+                                        <h3>Haikyuu</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-GACHIAKUTA.jpg" alt="tome-GACHIAKUTA">
+                                        </div>
+                                        <h3>Gachiakuta</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-BALLROOM.jpg" alt="tome-BALLROOM">
+                                        </div>
+                                        <h3 id="little-title">Ballroom e youkoso</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-KAORU-HANA.jpg" alt="tome-KAORU-HANA">
+                                        </div>
+                                        <h3>Kaoru Hana</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
+                                        </div>
+                                        <h3>Gannibal</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-TIME-SHADOWS.jpg" alt="tome-TIME-SHADOWS">
+                                        </div>
+                                        <h3 id="little-title">Summertime Render</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-CALL-OF-THE-NIGHT.jpg" alt="tome-CALL-OF-THE-NIGHT">
+                                        </div>
+                                        <h3>Call of the night</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-FRIEREN.jpg" alt="tome-FRIEREN">
+                                        </div>
+                                        <h3>Frieren</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-ASCENSION.jpg" alt="tome-ASCENSION">
+                                        </div>
+                                        <h3>Ascension</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-BLUE-BOX.jpg" alt="tome-BLUE-BOX">
+                                        </div>
+                                        <h3>Blue Box</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-LESLIENSDUSANG.jpg" alt="tome-LESLIENSDUSANG">
+                                        </div>
+                                        <h3>Les liens du sang</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-FIRE-PUNCH.jpg" alt="tome-FIRE-PUNCH">
+                                        </div>
+                                        <h3>Fire Punch</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-ACT-AGE.jpg" alt="tome-ACT-AGE">
+                                        </div>
+                                        <h3>Act-age</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-SHONEN-NO-ABYSS.jpg" alt="tome-SHONEN-NO-ABYSS">
+                                        </div>
+                                        <h3>Shonen no abyss</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank"></a>
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-KAGUYA-SAMA.jpg" alt="tome-KAGUYA-SAMA">
+                                        </div>
+                                        <h3>Kaguya-sama</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Classiques -->
+        <section>
+            <!-- Section Classiques -->
+            <div class="pepites">
+                <div class="mainflex">
+                    <!-- Titre avec une icone -->
+                    <div class="titre-with-box" id="pepite-title">
+                        <i class='bx bxs-group'></i>
+                        <h1>Inévitables<span class="sous-titre"> : Les <span class="green">classiques</span>.</span></h1>  
+                    </div>
+
+                    <div class="flexbox">
+                        <div class="flex-content loop-slider" id="Slider2" style="--duration:81s; --direction:normal;">
+
+                            <!-- gradient -->
+                            <div class="gradient-left"></div>
+                            <div class="gradient-right"></div>
+
+                            <div class="inner">
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-GUNNM.jpg" alt="tome-GUNNM">
+                                        </div>
+                                        <h3>Gunnm</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-OP.jpg" alt="tome-OP">
+                                        </div>
+                                        <h3>One Piece</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-NARUTO.jpg" alt="tome-NARUTO">
+                                        </div>
+                                        <h3>Naruto</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-BLEACH.jpg" alt="tome-BLEACH">
+                                        </div>
+                                        <h3>Bleach</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-DRAGON-BALL.jpg" alt="tome-DRAGON-BALL">
+                                        </div>
+                                        <h3>Dragon Ball</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-SNK.jpg" alt="tome-SNK">
+                                        </div>
+                                        <h3 id="little-title">Shingeki no Kyojin</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-TOKYO-GHOUL.jpg" alt="tome-TOKYO-GHOUL">
+                                        </div>
+                                        <h3>Tokyo Ghoul</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-HXH.jpg" alt="tome-HXH">
+                                        </div>
+                                        <h3 id="little-title">Hunter x Hunter</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-MONSTER.jpg" alt="tome-MONSTER">
+                                        </div>
+                                        <h3>Monster</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-FAIRY-TAIL.jpg" alt="tome-FAIRY-TAIL">
+                                        </div>
+                                        <h3>Fairy Tail</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-20TH-CENTURYBOYS.jpg" alt="tome-20TH-CENTURYBOYS">
+                                        </div>
+                                        <h3 id="little-title">20th Century Boys</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-VAGABOND.jpg" alt="tome-VAGABOND">
+                                        </div>
+                                        <h3>Vagabond</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-FMA.jpg" alt="tome-FMA">
+                                        </div>
+                                        <h3 id="little-title">FullMetal Alchemist</h3>
+                                    </div>
+                                </a>
+                                <a href="https://anime-sama.fr/" target="_blank">
+                                    <div class="slider-flex">
+                                        <div class="image-container">
+                                            <img src="img/couvertures/tome-GUNNM.jpg" alt="tome-GUNNM">
+                                        </div>
+                                        <h3>Gunnm</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="script/script-slidemenu.js"></script>
+        <script src="script/script-affiche-popu.js"></script>
+        <script src="script/script-slider.js"></script>
+        <script src="script/script-to-top-btn.js"></script>
+
+        <footer>
+            <div class="decoration-line">
+                <div class="left-line"></div>
+                <div class="right-line"></div>
+            </div>
+
+            <div class="flexbox">
+                <div class="flex-container">
+                    <a href="#">Accueil</a>
+                    <div class="footer-line"></div>
+                    <a href="./a-propos.html">À propos de nous</a>
+                    <div class="footer-line"></div>
+                    <a href="./privacy-policy.html">Privacy Policy</a>
+                    <div class="footer-line"></div>
+                    <a href="./dmca.html">DMCA</a>
+                </div>
+                <p>©MangaHana - Tous droits réservés.</p>
+            </div>
+            
+
+        </footer>
+    </body>
+</html>

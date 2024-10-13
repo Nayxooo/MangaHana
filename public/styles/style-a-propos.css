@@ -1,0 +1,71 @@
+.mainbloc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+    margin-top: 30px;
+}
+
+.bloc-central {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: fit-content;
+    /* background-color: blue; */
+}
+
+.bloc-central h1{
+    font-family: "Poppins";
+    letter-spacing: 0.2em;
+    font-size: 40px;
+    font-weight: 900;
+}
+.bloc-central h2{
+    font-family: "Montserrat";
+    letter-spacing: 2px;
+    font-size: 20px;
+    margin: 20px 0 5px 0;
+    font-weight: 900;
+    color: var(--white);
+}
+
+.bloc-central p,a{
+    font-family: "Montserrat";
+    font-size: 15px;
+    color: var(--grey3);
+}
+
+.bloc-central a{
+    color: var(--white);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+.bloc-central a:hover{
+    color: var(--green);
+}
+
+
+.bloc-central .separation-line {
+    width: 80%;
+    height: 3px;
+    background: linear-gradient(to right, var(--grey3), var(--black));
+}
+
+.separation-footer {
+    width: 100%;
+    height: 30vh;
+}
+
+/* responsive */
+@media (max-width: 1000px) {
+    .bloc-central {
+        width: 70%;
+    }
+}
+@media (max-width: 500px) {
+    .bloc-central {
+        width: 90%;
+    }
+}

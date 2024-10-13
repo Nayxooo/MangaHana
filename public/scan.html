@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>MangaHana - Lecture de scans</title> 
+        <meta charset="UTF-8">
+        <meta name="description" content="MangaHana - Lecture de scans" id="meta-description">
+        <meta name="keywords" content="mangahana, scan, vf, sans pubs, free">
+        <link rel="canonical" href="https://mangahana-scan.fr/">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <link rel="stylesheet" href="">
+        <link rel="shortcut icon" type="image/png" href="/img/mangahana-icon.png">
+        <link rel="shortcut icon" sizes="192x192" href="/img/mangahana-icon.png">
+        <link rel="apple-touch-icon" href="/img/mangahana-icon.png">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="/styles/style-navbar.css">
+        <link rel="stylesheet" href="/styles/style-footer.css">
+        <link rel="stylesheet" href="/styles/style-scan.css">
+        <link rel="stylesheet" href="/styles/resp-scan.css">
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav>
+
+            <!-- Burger button -->
+            <div class="burger-menu">
+                <button class="burger-menu-btn">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </button>
+            </div>
+
+            <!-- Logo -->
+            <a class="nav-img" href=""><img src="/img/mangahana-logo.png" alt="MangaHana-logo"></a>
+            
+            <!-- Barre de recherche -->
+            <div class="nav-searchbar">
+                <div class="flexbox">
+                    <i class='bx bx-search'></i>
+                    <input name="search_text" id="search_text" type="search" class="search-input" placeholder="Rechercher..." autocomplete="off">
+                </div>
+            </div>
+            
+            <!-- Logo icone-->
+            <a class ="nav-img-2" href=""><img src="/img/mangahana-icon.png" alt="MangaHana-logo"></a>
+
+            <!-- Options navbar -->
+            <div class="nav-categories">
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-home'></i></div>
+                    <div class="a-container">Acc<span class="green-text">ueil</span></div>
+                </a>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
+                    <div class="a-container">Cata<span class="green-text">logue</span></div>
+                </a>
+                <a href="" class="flex-container">    
+                    <div class="bx-container"><i class='bx bx-shuffle'></i></div>
+                    <div class="a-container">Se lan<span class="green-text">cer</span></div>
+                </a>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bx-street-view'></i></div>
+                    <div class="a-container">Pro<span class="green-text">fil</span></div>
+                </a>
+            </div>
+
+            <div class="decoration-line">
+                <div class="left-line"></div>
+                <div class="right-line"></div>
+            </div>
+        </nav>
+
+        <!-- Slide Menu -->
+        <div class="slidemenu">
+
+            <div class="logo-slidemenu">
+                <button id="close-slidemenu"><i class='bx bxs-chevrons-left'></i></button>
+                <img class="nav-img" src="/img/mangahana-logo.png" alt="MangaHana-logo">
+            </div>
+
+            <div class="ligne-transition"></div>
+
+            <!-- Options slide menu -->
+            <div class="options-slidemenu">
+                <div class="flexbox">
+                <div class="flex-pour-centrer"></div>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-home'></i></div>
+                    <div class="a-container">Acc<span class="green-text">ueil</span></div>
+                    <div class="ligne-style"></div>
+                </a>
+                </div>
+                <div class="flexbox">
+                <div class="flex-pour-centrer"></div>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
+                    <div class="a-container">Cata<span class="green-text">logue</span></div>
+                    <div class="ligne-style"></div>
+                </a>
+                </div>
+                <div class="flexbox">
+                <div class="flex-pour-centrer"></div>
+                <a href="" class="flex-container">    
+                    <div class="bx-container"><i class='bx bx-shuffle'></i></div>
+                    <div class="a-container">Se lan<span class="green-text">cer</span></div>
+                    <div class="ligne-style"></div>
+                </a>
+                </div>
+                <div class="flexbox">
+                <div class="flex-pour-centrer"></div>
+                <a href="" class="flex-container">
+                    <div class="bx-container"><i class='bx bx-street-view'></i></div>
+                    <div class="a-container">Pro<span class="green-text">fil</span></div>
+                    <div class="ligne-style"></div>
+                </a>
+                </div>
+            </div>
+
+            <p>© 2024 MangaHana - Tous droits réservés.</p>
+        </div>
+
+        <button id="to-top-btn">
+            <i class='bx bx-up-arrow-alt'></i>
+        </button>
+
+
+        <section class="bloc-scan">
+            <div class="parameters">
+                <div class="manga-info">
+                    <h1 id="manga-title"></h1> 
+                    <a id="manga-link" href="">En savoir plus sur <span id="manga-name-link"></span></a> <!-- Ids ajoutés ici -->
+                </div>
+                <div class="menus-options">
+                    <!-- Mettre en plein écran -->
+                    <button id="fullscreen-btn"><i class='bx bx-exit-fullscreen'></i></button>
+                    <button id="lightmode-btn"><i class='bx bxs-moon'></i></button>
+                </div>
+                <div class="pages-option">
+                    <!-- Bouton pour retourner au chapitre précédent -->
+                    <button id="previous-chapter" class="chapter-btn">< Chapitre précédent</button>
+
+                    <!-- Menu déroulant pour le choix du chapitre -->
+                    <select class ="active" id="chapter-menu" name="chapter-menu"></select>
+
+                    <select id="pages-menu"></select>
+
+                    <!-- Choix de l'orientation de la lecture -->
+                    <select class ="active" id="lecture-menu" name="lecture-menu">
+                        <option value="verticale">Lecture verticale</option>
+                        <option value="horizontale">Lecture horizontale</option>
+                    </select>
+
+                    <!-- Bouton pour passer au prochain chapitre -->
+                    <button id="next-chapter" class="chapter-btn">Chapitre suivant ></i></button>
+
+                    <!-- Bouton pour changer de page -->
+                    <div id="flex-page-btn">
+                        <button id="previous-page" class="page-btn">< Précédent</button>
+                        <button id="next-page" class="page-btn">Suivant ></button>
+                    </div>
+                </div>
+            </div>
+            <div id="pages-flex" class="pages-flex-verticale">
+                <div id="btn-over-img">
+                    <button id="previous-on-img"></button>
+                    <button id="next-on-img"></button>
+                </div>
+
+                <button id="go-down-on-img"></button>
+
+                <div id="pages-container"></div>
+            </div>
+
+            <div class="parameters2">
+                <div class="pages-option2">
+                    <button id="previous-chapter2" class="chapter-btn">< Chapitre précédent</button>
+                    <button id="next-chapter2" class="chapter-btn">Chapitre suivant ></i></button>
+                </div>
+            </div>
+        </section>
+
+        <script src="/script/script-slidemenu.js"></script>
+        <script src="/script/script-to-top-btn.js"></script>
+        <script src="/script/script-fullscreen-btn.js"></script>
+
+        <!-- Chargement des chapitres -->
+        <script>
+            // Fonction pour charger les chapitres disponibles
+            async function loadChapters(manga) {
+                const response = await fetch(`/api/${manga}/chapters`);
+                const chapters = await response.json();
+        
+                const chapterMenu = document.getElementById('chapter-menu');
+                chapterMenu.innerHTML = ''; 
+        
+                chapters.forEach(chapter => {
+                    const option = document.createElement('option');
+                    option.value = chapter;
+                    option.textContent = `Chapitre ${chapter}`;
+                    chapterMenu.appendChild(option);
+                });
+        
+                return chapters;
+            }
+        
+            // Fonction pour mettre à jour l'état des boutons de chapitre
+            function updateChapterButtons(chapters) {
+                const currentChapter = parseInt(document.getElementById('chapter-menu').value);
+        
+                document.getElementById('previous-chapter').disabled = (currentChapter <= Math.min(...chapters));
+                document.getElementById('next-chapter').disabled = (currentChapter >= Math.max(...chapters));
+            }
+        
+            async function loadPages(manga, chapter) {
+                const response = await fetch(`/api/${manga}/chapters/${chapter}/pages`);
+                const pages = await response.json();
+
+                const pagesContainer = document.getElementById('pages-container');
+                pagesContainer.innerHTML = '';
+
+                // Ajoute les pages dans l'élément pages-menu 
+                const pagesMenu = document.getElementById('pages-menu');
+                pagesMenu.innerHTML = ''; 
+
+                pages.forEach((page, index) => {
+                    const img = document.createElement('img');
+                    img.src = `/scans/${manga}/${chapter}/${page}`; 
+                    img.alt = `Page ${index + 1}`;
+                    img.loading = "lazy"; 
+                    pagesContainer.appendChild(img);
+
+                    const option = document.createElement('option');
+                    option.value = page;
+                    option.textContent = `Page ${index + 1}`;
+                    pagesMenu.appendChild(option);
+                });
+
+                // Remplace les tirets par des espaces et capitalise chaque mot
+                const formattedMangaName = manga
+                    .replace(/-/g, ' ')  
+                    .replace(/\b\w/g, char => char.toUpperCase()); 
+
+                document.querySelector('.manga-info h1').innerHTML = `${formattedMangaName} : <span class="green">Chapitre ${chapter}</span>`;
+                document.title = `${formattedMangaName} : Chapitre ${chapter} | MangaHana`;
+            }
+
+            window.onload = async function() {
+                const pathParts = window.location.pathname.split('/');
+                const mangaName = pathParts[1];  
+                const chapterFromUrl = pathParts[2]; 
+                
+                const formattedMangaName = mangaName
+                    .replace(/-/g, ' ')  
+                    .replace(/\b\w/g, char => char.toUpperCase()); 
+
+                document.getElementById('manga-title').innerHTML = `${formattedMangaName} : <span class="green">Chapitre ${chapterFromUrl}</span>`;
+                document.getElementById('manga-name-link').innerHTML = `<span class="green">${formattedMangaName}</span>`;
+                document.getElementById('manga-link').setAttribute('href', `/${mangaName}`); 
+
+                // Mets à jour le titre de la page
+                document.title = `${formattedMangaName} : Chapitre ${chapterFromUrl} | MangaHana`;
+
+                // Charge les chapitres et le chapitre par défaut
+                const chapters = await loadChapters(mangaName);  
+                let defaultChapter = chapters.includes(chapterFromUrl) ? chapterFromUrl : chapters[0];
+
+                // Charge les pages du chapitre par défaut ou celui trouvé dans l'URL
+                await handleChapterChange(mangaName, defaultChapter);
+                document.getElementById('chapter-menu').value = defaultChapter; 
+
+                // Mets à jour les boutons de navigation
+                updateChapterButtons(chapters);
+
+                // Masque ou afficher le menu des pages en fonction du mode de lecture initial
+                const lectureMenu = document.getElementById('lecture-menu');
+                togglePagesMenuAndDisplay(lectureMenu.value, mangaName, defaultChapter);
+            };
+
+            async function togglePagesMenuAndDisplay(lectureMode, manga, chapter) {
+                const pagesMenu = document.getElementById('pages-menu');
+                const pageButtons = document.getElementById('flex-page-btn');  
+                const btnOverImg = document.getElementById('btn-over-img');  
+                const goDownOnImg = document.getElementById('go-down-on-img');  
+                const previouschapterButton = document.getElementById('previous-chapter'); 
+                const nextchapterButton = document.getElementById('next-chapter'); 
+                const pagesFlex = document.getElementById('pages-flex'); 
+
+                if (lectureMode === 'verticale') {
+                    pagesMenu.style.display = 'none';  
+                    pageButtons.style.display = 'none';
+                    btnOverImg.style.display = 'none';
+                    goDownOnImg.style.display = 'block';
+                    previouschapterButton.classList.remove('hidden'); 
+                    nextchapterButton.classList.remove('hidden'); 
+                    pagesFlex.classList.remove('pages-flex-horizontale'); 
+                    pagesFlex.classList.add('pages-flex-verticale'); 
+                    await loadPages(manga, chapter);  
+                } else {
+                    pagesMenu.style.display = 'block'; 
+                    pageButtons.style.display = 'flex'; 
+                    btnOverImg.style.display = 'flex';
+                    goDownOnImg.style.display = 'none';
+                    previouschapterButton.classList.add('hidden'); 
+                    nextchapterButton.classList.add('hidden'); 
+                    pagesFlex.classList.remove('pages-flex-verticale'); 
+                    pagesFlex.classList.add('pages-flex-horizontale'); 
+                    await loadSinglePage(manga, chapter, 1);  
+                }
+            }
+
+            // Gère le changement de type de lecture
+            document.getElementById('lecture-menu').addEventListener('change', async function() {
+                const selectedLectureMode = this.value;
+                const mangaFromUrl = window.location.pathname.split('/')[1]; 
+                const selectedChapter = document.getElementById('chapter-menu').value;
+
+                await togglePagesMenuAndDisplay(selectedLectureMode, mangaFromUrl, selectedChapter);
+            });
+
+            // Fonction pour charger une seule page (lecture non-verticale)
+            async function loadSinglePage(manga, chapter, pageNumber) {
+            const response = await fetch(`/api/${manga}/chapters/${chapter}`);
+            const pages = await response.json();
+
+            const pagesContainer = document.getElementById('pages-container');
+            pagesContainer.innerHTML = ''; 
+
+            const page = pages[pageNumber - 1];
+            if (page) {
+                const img = document.createElement('img');
+                img.src = `/scans/${manga}/${chapter}/${page}`; 
+                img.alt = `Page ${page}`;
+                img.loading = "lazy"; 
+                pagesContainer.appendChild(img);
+                
+                // Vérifie si c'est la première page
+                if (pageNumber === 1) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    img.onload = function() {
+                        img.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    };
+                }
+            }
+
+            // Mets à jour le menu des pages
+            const pagesMenu = document.getElementById('pages-menu');
+            pagesMenu.innerHTML = ''; 
+
+            pages.forEach((page, index) => {
+                const option = document.createElement('option');
+                option.value = index + 1; 
+                option.textContent = `Page ${index + 1}`;
+                pagesMenu.appendChild(option);
+            });
+
+            // Sélectionne la page actuelle dans le menu
+            pagesMenu.value = pageNumber;
+        }
+
+
+
+            // Événement lors du changement de page dans le menu des pages
+            document.getElementById('pages-menu').addEventListener('change', async function() {
+                const selectedPage = this.value;
+                const mangaFromUrl = window.location.pathname.split('/')[1]; 
+                const selectedChapter = document.getElementById('chapter-menu').value;
+
+                await loadSinglePage(mangaFromUrl, selectedChapter, selectedPage);
+            });
+
+            // Événement lors du changement de chapitre via le chapter-menu
+            document.getElementById('chapter-menu').addEventListener('change', async function() {
+                const selectedChapter = this.value;
+                const mangaFromUrl = window.location.pathname.split('/')[1];
+                await handleChapterChange(mangaFromUrl, selectedChapter);
+            });
+
+            // Gére le changement de chapitre
+            async function handleChapterChange(manga, chapter) {
+                await loadPages(manga, chapter);
+                const lectureMode = document.getElementById('lecture-menu').value;
+
+                // Gére l'affichage en fonction du mode de lecture
+                if (lectureMode === 'verticale') {
+                    await loadPages(manga, chapter);
+                } else {
+                    await loadSinglePage(manga, chapter, 1);
+                }
+
+                // Mets à jour l'URL pour refléter le chapitre sélectionné
+                window.history.pushState({}, '', `/${manga}/${chapter}`);
+            }
+
+            // Gére les boutons précédent et suivant
+            document.getElementById('previous-chapter').addEventListener('click', async function() {
+                const currentChapter = parseInt(document.getElementById('chapter-menu').value);
+                const mangaFromUrl = window.location.pathname.split('/')[1]; 
+                const chapters = await fetch(`/api/${mangaFromUrl}/chapters`).then(res => res.json());
+
+                if (currentChapter > 1) {
+                    const newChapter = currentChapter - 1;
+                    document.getElementById('chapter-menu').value = newChapter; 
+                    await handleChapterChange(mangaFromUrl, newChapter);
+                }
+
+                updateChapterButtons(chapters);
+            });
+
+            document.getElementById('next-chapter').addEventListener('click', async function() {
+                const currentChapter = parseInt(document.getElementById('chapter-menu').value);
+                const mangaFromUrl = window.location.pathname.split('/')[1]; 
+                const chapters = await fetch(`/api/${mangaFromUrl}/chapters`).then(res => res.json());
+
+                if (currentChapter < Math.max(...chapters)) {
+                    const newChapter = currentChapter + 1;
+                    document.getElementById('chapter-menu').value = newChapter; 
+                    await handleChapterChange(mangaFromUrl, newChapter);
+                }
+
+                updateChapterButtons(chapters);
+            });
+
+            // Gére les boutons précédent et suivant
+            document.getElementById('previous-chapter2').addEventListener('click', async function() {
+                const currentChapter = parseInt(document.getElementById('chapter-menu').value);
+                const mangaFromUrl = window.location.pathname.split('/')[1]; 
+                const chapters = await fetch(`/api/${mangaFromUrl}/chapters`).then(res => res.json());
+
+                if (currentChapter > 1) {
+                    const newChapter = currentChapter - 1;
+                    document.getElementById('chapter-menu').value = newChapter; 
+                    await handleChapterChange(mangaFromUrl, newChapter);
+                }
+
+                updateChapterButtons(chapters);
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            document.getElementById('next-chapter2').addEventListener('click', async function() {
+                const currentChapter = parseInt(document.getElementById('chapter-menu').value);
+                const mangaFromUrl = window.location.pathname.split('/')[1]; 
+                const chapters = await fetch(`/api/${mangaFromUrl}/chapters`).then(res => res.json());
+
+                if (currentChapter < Math.max(...chapters)) {
+                    const newChapter = currentChapter + 1;
+                    document.getElementById('chapter-menu').value = newChapter; 
+                    await handleChapterChange(mangaFromUrl, newChapter);
+                }
+
+                updateChapterButtons(chapters);
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Fonction pour gérer la navigation de page
+            async function handlePageNavigation(direction) {
+                const mangaFromUrl = window.location.pathname.split('/')[1]; 
+                const selectedChapter = document.getElementById('chapter-menu').value;
+                const pagesMenu = document.getElementById('pages-menu');
+
+                const currentPage = parseInt(pagesMenu.value); 
+                const totalPages = pagesMenu.options.length; 
+                let newPage = currentPage;
+
+                // Détermine la nouvelle page
+                if (direction === 'previous') {
+                    if (currentPage > 1) {
+                        newPage = currentPage - 1;
+                    } else {
+                        // Si on est à la première page, passer au chapitre précédent
+                        const currentChapter = parseInt(selectedChapter);
+                        const chapters = await fetch(`/api/${mangaFromUrl}/chapters`).then(res => res.json());
+                        if (currentChapter > Math.min(...chapters)) {
+                            const newChapter = currentChapter - 1; 
+                            document.getElementById('chapter-menu').value = newChapter;
+                            await handleChapterChange(mangaFromUrl, newChapter); 
+                        }
+                        return; 
+                    }
+                } else if (direction === 'next') {
+                    if (currentPage < totalPages) {
+                        newPage = currentPage + 1; 
+                    } else {
+                        // Si on est à la dernière page, passer au chapitre suivant
+                        const currentChapter = parseInt(selectedChapter);
+                        const chapters = await fetch(`/api/${mangaFromUrl}/chapters`).then(res => res.json());
+                        if (currentChapter < Math.max(...chapters)) {
+                            const newChapter = currentChapter + 1; 
+                            document.getElementById('chapter-menu').value = newChapter; 
+                            await handleChapterChange(mangaFromUrl, newChapter); 
+                        }
+                        return; 
+                    }
+                }
+
+                // Mets à jour la sélection du menu et charger la nouvelle page
+                pagesMenu.value = newPage; 
+                await loadSinglePage(mangaFromUrl, selectedChapter, newPage); 
+            }
+
+            // Événement pour le bouton précédent de page
+            document.getElementById('previous-page').addEventListener('click', () => handlePageNavigation('previous'));
+
+            // Événement pour le bouton suivant de page
+            document.getElementById('next-page').addEventListener('click', () => handlePageNavigation('next'));
+
+            document.getElementById('previous-on-img').addEventListener('click', () => handlePageNavigation('previous'));
+            document.getElementById('next-on-img').addEventListener('click', () => handlePageNavigation('next'));
+
+            document.getElementById('go-down-on-img').addEventListener('click', () => {
+                window.scrollBy({ top: 300, behavior: 'smooth' }); // Défilement vers le bas (100px)
+            });
+
+        </script>
+
+        <!-- Flèches du clavier -->
+        <script>
+            let isKeyPressed = false; 
+
+            // Événement pour gérer les touches fléchées gauche et droite
+            window.addEventListener('keydown', async function(event) {
+                if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                    event.preventDefault(); // Empêche le comportement par défaut uniquement pour les flèches
+                }
+
+                // Vérifie si une touche est déjà pressée
+                if (isKeyPressed) return;
+
+                const lectureMode = document.getElementById('lecture-menu').value;
+                isKeyPressed = true; 
+
+                if (lectureMode === 'verticale') {
+                    if (event.key === 'ArrowRight') {
+                        document.getElementById('next-chapter').click(); // Simule un clic sur le bouton suivant pour changer de chapitre
+                    } else if (event.key === 'ArrowLeft'){
+                        document.getElementById('previous-chapter').click(); 
+                    }
+                } else if (lectureMode === 'horizontale') {
+                    if (event.key === 'ArrowRight') {
+                        document.getElementById('next-page').click();
+                    } else if (event.key === 'ArrowLeft'){
+                        document.getElementById('previous-page').click();
+                    }
+                }
+
+                // Délai pour réinitialiser le drapeau après un court instant
+                setTimeout(() => {
+                    isKeyPressed = false; // Réinitialisation le drapeau après 200 ms
+                }, 200);
+            });
+        </script>
+
+        <!-- Bouton plein écran -->
+        <script>
+            document.getElementById("fullscreen-btn").addEventListener("click", function() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            });
+        </script>
+
+        <!-- Cookies dark mode -->
+        <script>
+            // Fonction pour appliquer le thème stocké dans les cookies
+            function applyStoredTheme() {
+                const theme = getCookie('theme');
+                
+                if (theme === 'light') {
+                    document.body.classList.remove('light-mode');
+                    document.getElementById('lightmode-btn').innerHTML = "<i class='bx bxs-moon'></i>";
+                } else {
+                    // Par défaut, appliquer le mode sombre si pas de cookie
+                    document.body.classList.add('light-mode');
+                    document.getElementById('lightmode-btn').innerHTML = "<i class='bx bxs-sun'></i>";
+                }
+            }
+        
+            // Fonction pour basculer entre le mode sombre et clair
+            function toggleDarkMode() {
+                const body = document.body;
+                
+                if (body.classList.contains('light-mode')) {
+                    body.classList.remove('light-mode');
+                    document.getElementById('lightmode-btn').innerHTML = "<i class='bx bxs-moon'></i>";
+                    setCookie('theme', 'light', 365);
+                } else {
+                    body.classList.add('light-mode');
+                    document.getElementById('lightmode-btn').innerHTML = "<i class='bx bxs-sun'></i>";
+                    setCookie('theme', 'dark', 365); 
+                }
+            }
+        
+            function setCookie(name, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                const expires = "expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            }
+        
+            function getCookie(name) {
+                const cookieName = name + "=";
+                const decodedCookie = decodeURIComponent(document.cookie);
+                const cookieArray = decodedCookie.split(';');
+                for (let i = 0; i < cookieArray.length; i++) {
+                    let cookie = cookieArray[i];
+                    while (cookie.charAt(0) === ' ') {
+                        cookie = cookie.substring(1);
+                    }
+                    if (cookie.indexOf(cookieName) === 0) {
+                        return cookie.substring(cookieName.length, cookie.length);
+                    }
+                }
+                return "";
+            }
+        
+            // Applique le thème au chargement de la page
+            document.addEventListener('DOMContentLoaded', applyStoredTheme);
+        
+            // Gére l'événement click sur le bouton darkmode
+            document.getElementById('lightmode-btn').addEventListener('click', toggleDarkMode);
+        </script>
+        
+        <footer>
+            <div class="decoration-line">
+                <div class="left-line"></div>
+                <div class="right-line"></div>
+            </div>
+
+            <div class="flexbox">
+                <div class="flex-container">
+                    <a href="/index.html">Accueil</a>
+                    <div class="footer-line"></div>
+                    <a href="/a-propos.html">À propos de nous</a>
+                    <div class="footer-line"></div>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <div class="footer-line"></div>
+                    <a href="/dmca.html">DMCA</a>
+                </div>
+                <p>©MangaHana - Tous droits réservés.</p>
+            </div>
+        </footer>
+</body>
+</html>

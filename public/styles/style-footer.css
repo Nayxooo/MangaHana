@@ -1,0 +1,98 @@
+footer {
+    position: relative;
+    width: 100%;
+    height: 5em;
+    background-color: var(--black);
+}
+
+footer .decoration-line {
+    position: absolute;
+    display: flex;
+    height: 6px;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+footer .decoration-line .left-line,
+footer .decoration-line .right-line{
+    height: 3px;
+    width: 50%;
+}
+
+footer .decoration-line .left-line{
+    background: linear-gradient(to left, var(--green), var(--black));
+}
+
+footer .decoration-line .right-line{
+    background: linear-gradient(to right, var(--green), var(--black));
+}
+
+footer .flexbox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+footer .flex-container .footer-line {
+    width: 3px;
+    height: 20px;
+    margin: 0 10px;
+}
+
+footer .flexbox .flex-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+footer .flex-container .footer-line {
+    width: 2px;
+    height: 18px;
+    background-color: var(--grey1);
+    border-radius: 4px;
+    margin: 0 10px;
+}
+
+footer .flexbox .flex-container a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--white);
+    transition: color 0.2s ease;
+}
+
+footer .flexbox p {
+    font-family: "Montserrat";
+    font-size: 12px;
+    color: var(--grey2);
+}
+
+footer .flexbox .flex-container a:hover {
+    color: var(--green);
+}
+
+/* Footer Responsive */
+@media (max-width: 500px) {
+    footer {
+        height: 15em;
+    }
+    footer .flexbox .flex-container {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    footer .flex-container .footer-line {
+        width: 40px;
+        height: 2px;
+        margin: 10px 0;
+    }
+    footer .flexbox p {
+        margin-top: 20px;
+    }
+}

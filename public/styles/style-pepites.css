@@ -1,0 +1,153 @@
+/* !!!!!!!!!!!!!!!!
+Contient les mêmes styles que le SLIDER POPULAIRE */
+
+section .pepites {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 20em;
+    margin-bottom: 30px;
+}
+
+section .pepites .mainflex {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    height: 90%;
+}
+
+section .pepites .mainflex .titre-with-box {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+section .pepites .mainflex .titre-with-box i {
+    font-size: 43px;
+}
+
+section .pepites .mainflex .flexbox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 2px 15px;
+}
+
+section .pepites .mainflex .flexbox .flex-content {
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black);
+    overflow: hidden;
+}
+
+section .pepites .mainflex .flexbox .flex-content .gradient-left,
+section .pepites .mainflex .flexbox .flex-content .gradient-right {
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    z-index: 999;
+}
+
+
+section .pepites .mainflex .flexbox .flex-content .gradient-left {
+    left: 0;
+    background: linear-gradient(to right, var(--black), rgba(128, 128, 128, 0));
+}
+
+section .pepites .mainflex .flexbox .flex-content .gradient-right {
+    right: 0;
+    background: linear-gradient(to left, var(--black), rgba(128, 128, 128, 0));
+}
+
+section .pepites .mainflex .flexbox .flex-content .slider-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 9.5em;
+    height: 100%;
+    gap: 10px;
+    transition: gap 0.25s ease;
+}
+
+section .pepites .mainflex .flexbox .flex-content .slider-flex .image-container{
+    display: flex;
+    position: relative;
+    height: 70%;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+section .pepites .mainflex .flexbox .flex-content .slider-flex .image-container img{
+    max-height: 100%;
+}
+
+section .pepites .mainflex .flexbox .flex-content .slider-flex h3{
+    font-family: "Montserrat";
+    color: var(--grey2);
+    font-size: 14px;
+    font-weight: 900;
+    transition: color 0.3s ease;
+}
+
+section .pepites .mainflex .flexbox .flex-content .slider-flex #little-title{
+    font-size: 12px;
+}
+
+section .pepites .mainflex .flexbox .flex-content .slider-flex:hover .image-container{
+    height: 83%;
+}
+section .pepites .mainflex .flexbox .flex-content .slider-flex:hover h3{
+    color: var(--white);
+}
+section .pepites .mainflex .flexbox .flex-content .slider-flex:hover {
+    gap: 2px;
+}
+
+section .pepites .mainflex .flexbox .flex-content .slider-flex .image-container::after {
+    content: ""; 
+    position: absolute; 
+    left: -110px;
+    bottom: -50px;
+    width: 80%; 
+    height: 25em; 
+    background-color: rgb(255, 255, 255); 
+    transform: translate(150%, 100%) rotate(45deg); 
+    transition: transform 0.5s ease-out, filter 0.4s ease; 
+    filter: blur(5px); 
+    opacity: 50%;
+    z-index: 1;
+}
+
+section .pepites .mainflex .flexbox .flex-content .slider-flex:hover .image-container::after {
+    transform: translate(0, -50%) rotate(45deg); 
+}
+
+
+.loop-slider {
+    .inner {
+      display: flex;
+      width: fit-content;
+      animation-name: loop;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: var(--direction);
+      animation-duration: var(--duration);
+    }
+}
+
+@keyframes loop {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}
+
