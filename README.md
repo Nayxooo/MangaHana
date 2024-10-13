@@ -1,5 +1,4 @@
 # MangaHana
-Site de lecture en ligne 
 ![mangahana-icon](https://github.com/user-attachments/assets/dbe10170-fe73-46d5-a771-c295b5016924)
 
 **MangaHana est un projet développé par une seule personne servant la lecture en ligne de bandes dessinées à caractères japonaises, dites de "mangas".**
