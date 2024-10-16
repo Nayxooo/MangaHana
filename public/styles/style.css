@@ -174,7 +174,7 @@ select:focus {
 #tag {
   width: max-content;
   height: max-content;
-  background-color: var(--black);
+  background-color: var(--grey1);
   border: 2px solid var(--grey1);
   border-radius: 10px;
   padding: 5px 8px;
@@ -183,15 +183,15 @@ select:focus {
 }
 #tag p{
   font-size: 16px;
-  color: var(--grey3);
+  color: var(--green);
   transition: color 0.2s ease;
   font-weight: 900;
 }
 #tag:hover {
-  background-color: var(--grey1);
+  background-color: var(--black);
 }
 #tag:hover p{
-  color: var(--green);
+  color: var(--grey3);
 }
 
 /* Transitions */

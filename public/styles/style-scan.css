@@ -191,11 +191,18 @@ body.light-mode #manga-title .green{
     color: #626d61;
 }
 body.light-mode .bloc-scan .parameters .menus-options button {
-    border: solid 2px var(--black);
-    background-color: var(--white);
+    border: solid 2px #ebf0ec;
+    background-color: #ebf0ec;
 }
 body.light-mode .bloc-scan .parameters .menus-options button i {
-    color: var(--black);
+    color: var(--grey2);
+}
+body.light-mode .bloc-scan .parameters .menus-options button:hover {
+    border: solid 2px #fff;
+    background-color: #fff;
+}
+body.light-mode .bloc-scan .parameters .menus-options button:hover i {
+    color: var(--grey1);
 }
 
 body.light-mode .bloc-scan .parameters .pages-options .chapter-btn {
@@ -203,13 +210,29 @@ body.light-mode .bloc-scan .parameters .pages-options .chapter-btn {
 }
 body.light-mode .bloc-scan .parameters .pages-option button,
 body.light-mode .bloc-scan .parameters2 .pages-option2 button{
-    color: var(--dark-white);
-    background-color: var(--black);
+    color: var(--grey3);
+    background-color: #ebf0ec;
+    border: solid 2px #ebf0ec;
 }
 body.light-mode .bloc-scan .parameters .pages-option button:hover,
 body.light-mode .bloc-scan .parameters2 .pages-option2 button:hover{
-    color: var(--white);
-    background-color: var(--grey3);
+    color: var(--grey2);
+    background-color: var(--white);
+}
+
+
+body.light-mode .bloc-scan .parameters .pages-option select {
+    background-color: var(--white);   
+    border: solid 2px #ebf0ec;      
+    color: var(--grey3);
+}
+body.light-mode .bloc-scan .parameters .pages-option select option {
+    color: var(--grey3);
+    background-color: var(--white);    
+}
+body.light-mode .bloc-scan .parameters .pages-option select:focus {  
+    outline: none;  
+    color: var(--grey3);
 }
 
  

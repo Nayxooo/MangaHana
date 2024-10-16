@@ -71,7 +71,7 @@ footer .flexbox .flex-container a {
 footer .flexbox p {
     font-family: "Montserrat";
     font-size: 12px;
-    color: var(--grey2);
+    color: var(--grey3);
 }
 
 footer .flexbox .flex-container a:hover {

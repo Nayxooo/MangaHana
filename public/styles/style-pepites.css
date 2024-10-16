@@ -90,7 +90,7 @@ section .pepites .mainflex .flexbox .flex-content .slider-flex .image-container 
 
 section .pepites .mainflex .flexbox .flex-content .slider-flex h3{
     font-family: "Montserrat";
-    color: var(--grey2);
+    color: var(--grey3);
     font-size: 14px;
     font-weight: 900;
     transition: color 0.3s ease;

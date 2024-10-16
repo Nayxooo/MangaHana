@@ -6,6 +6,7 @@
     height: fit-content;
     border-radius: 8px;
     border: solid 2px var(--grey1);    
+        margin-bottom: 15px;
 }
 .history p {
     padding-top: 5px;

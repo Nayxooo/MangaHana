@@ -1,0 +1,138 @@
+.bloc-entier {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    margin: -15px 0 30px 0;
+}
+
+/* Titre */
+.bloc-entier .catalogue-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 106em;
+    height: fit-content;
+}
+
+.bloc-entier .catalogue-title i{
+    color: var(--green);
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.bloc-entier .catalogue-title h1{
+    font-family: "Poppins";
+    width: 100%;
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+.mainflex {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 106em;
+    height: fit-content;
+}
+
+.mainflex .filters,
+.mainflex .catalogue-flex  {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.mainflex .filters {
+    width: 25%;
+    height: 50em;
+    background-color: var(--grey1);
+    margin-right: 15px;
+}
+.mainflex .catalogue-flex {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    overflow: hidden;
+}
+
+.mainflex .catalogue-flex .mangas-flex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.mainflex .catalogue-flex .mangas-flex a{
+    width: fit-content;
+    height: fit-content;
+}
+.mainflex .catalogue-flex .mangas-flex a .content{
+    width: 12em;
+    height: fit-content;
+    background-color: var(--black);
+    /* border: solid 2px var(--black); */
+    padding-bottom: 5px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background-color 0.2s ease;
+}
+.mainflex .catalogue-flex .mangas-flex a img{
+    width: 100%;
+    border-radius: 8px;
+    opacity: 1;
+    margin-top: 0;
+    transition: opacity 0.2s ease, margin-top 0.2s ease;
+}
+.mainflex .catalogue-flex .mangas-flex a .manga-title{
+    margin-top: -5px;
+    height: fit-content;
+    font-size: smaller;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    text-align: center;
+    color: var(--grey3);
+    transition: color 0.2s ease;
+}
+.mainflex .catalogue-flex .mangas-flex a p{
+    margin-left: 5px;
+    text-align: center;
+    color: var(--grey2);
+    transition: color 0.2s ease;
+}
+
+.mainflex .catalogue-flex .mangas-flex a:hover .content{
+    background-color: var(--light-black);
+}
+.mainflex .catalogue-flex .mangas-flex a:hover img{
+    opacity: 0.8;
+    margin-top: -15px;
+}
+.mainflex .catalogue-flex .mangas-flex a:hover .manga-title{
+    color: var(--white);
+}
+.mainflex .catalogue-flex .mangas-flex a:hover p{
+    color: var(--dark-white);
+}
+
+
+/* Pagination */
+.mainflex .catalogue-flex .pagination {
+    width: 100%;
+    height: 4em;
+    background-color: lightcoral;
+}
+
+@media (max-width: 1700px) {
+    .bloc-entier .catalogue-title {
+        width: 90%;
+    }
+    .bloc-entier .catalogue-separation {
+        width: 90%;
+    }    
+    .mainflex {
+        width: 90%;
+    }
+}

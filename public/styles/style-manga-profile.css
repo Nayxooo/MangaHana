@@ -65,17 +65,28 @@
     border: none;
     width: 100%;
     background-color: var(--grey1);
+    border: solid 2px var(--grey1);
     height: 15%;
     font-family: 'Poppins';
     font-size: 15px;
     font-weight: 900;
     border-radius: 8px;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition: color 0.2s ease, background-color 0.2s ease, border 0.2s ease;
     cursor: pointer;
 }
 .data-section .data .left-flex button:hover{
-    color: var(--grey2);
+    color: var(--grey3);
     background-color: var(--light-black);
+}
+.data-section .data .left-flex .favPut{
+    background-color: var(--green);
+    color: var(--grey1);
+    border: solid 2px var(--green);
+}
+.data-section .data .left-flex .favPut:hover{
+    background-color: var(--grey1);
+    color: var(--white);
+    border: solid 2px var(--grey1);
 }
 
 .data-section .data .much-info  {
@@ -83,6 +94,7 @@
     height: fit-content;
 }
 .data-section .data .much-info  h1 {
+    color: var(--green);
     margin-top: -10px;
 }
 .data-section .data .much-info .separation-info{
@@ -99,7 +111,7 @@
 
 .data-section .data .much-info .synopsis p{
     font-size: 16px;
-    color: var(--grey3);
+    color: var(--white);
 }
 
 .data-section .data .much-info .tags {
@@ -108,7 +120,7 @@
     align-items: center;
     height: 40px;
     gap: 10px;
-    margin: 5px 0;
+    margin-bottom: 10px;
 }
 
 .data-section .data .much-info .caracteristics {

@@ -58,7 +58,6 @@
     .bloc-scan .parameters .pages-option button,
     .bloc-scan .parameters2 .pages-option2 button{
         position: relative;
-        color: var(--dark-white);
     }
 
     /* Options de pages toujours flexibles */
