@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>MangaHana - Profil</title> 
+        <title>Profil | MangaHana</title> 
         <meta charset="UTF-8">
         <meta name="description" content="MangaHana - Lecture de scans">
         <meta name="keywords" content="mangahana, scan, vf, sans pubs, free">
@@ -9,8 +9,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
-        <link rel="stylesheet" href="">
         <link rel="shortcut icon" type="image/png" href="img/mangahana-icon.png">
         <link rel="shortcut icon" sizes="192x192" href="img/mangahana-icon.png">
         <link rel="apple-touch-icon" href="img/mangahana-icon.png">
@@ -18,7 +18,8 @@
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/style-navbar.css">
         <link rel="stylesheet" href="styles/style-footer.css">
-        <link rel="stylesheet" href="styles/style-profile.css">
+        <link rel="stylesheet" href="styles/style-profil.css">
+        <link rel="stylesheet" href="styles/resp-profil.css">    
     </head>
 
     <body>
@@ -50,19 +51,19 @@
 
             <!-- Options navbar -->
             <div class="nav-categories">
-                <a href="" class="flex-container">
+                <a href="/" class="flex-container">
                     <div class="bx-container"><i class='bx bxs-home'></i></div>
                     <div class="a-container">Acc<span class="green-text">ueil</span></div>
                 </a>
-                <a href="" class="flex-container">
+                <a href="/catalogue" class="flex-container">
                     <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
                     <div class="a-container">Cata<span class="green-text">logue</span></div>
                 </a>
-                <a href="" class="flex-container">    
+                <a href="#" id="randomMangaLink" class="flex-container">    
                     <div class="bx-container"><i class='bx bx-shuffle'></i></div>
                     <div class="a-container">Se lan<span class="green-text">cer</span></div>
                 </a>
-                <a href="" class="flex-container">
+                <a href="#" class="flex-container">
                     <div class="bx-container"><i class='bx bx-street-view'></i></div>
                     <div class="a-container">Pro<span class="green-text">fil</span></div>
                 </a>
@@ -127,21 +128,239 @@
             <i class='bx bx-up-arrow-alt'></i>
         </button>
 
-        <section class="profile-bloc">
-            <div class="left-flex">
-                <div class="title"></div>
-                <div class="cookies-info"></div>
-                <div class="waiting-list"></div>
-                <div class="fav-list"></div>
-            </div>
-            <div class="right-flex">
-                <div class="historique"></div>
-                <div class="recommendation"></div>
+        <!-- Section profil -->
+        <section>
+            <div class="profile-bloc">
+                <div class="title">
+                    <h1>Profil</h1>
+                </div>
+
+                <!-- Info. sur les cookies -->
+                <div class="cookies-info">
+                    <div class="left-flex">
+                        <i class='bx bx-error-circle' ></i>
+                    </div>
+                    <div class="right-flex">
+                        <p>
+                        La fonctionnalité de stockage de vos favoris est permise via l'utilisation de cookies. Il est possible de totalement les désactiver dans les paramètres de votre navigateur.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tableau affichant les favoris -->
+                <div class="fav-list">
+                    <div class="favori-title">
+                        <h1>Vos favoris</h1>
+                    </div>
+                    <div class="favori-flex" id="favoriFlex">  
+                    </div>
+
+                    <!-- Boutons de pagination -->
+                    <div class="pagination">
+                        <button id="prevBtn">Précédent</button>
+                        <span id="paginationNumbers"></span>
+                        <button id="nextBtn">Suivant</button>
+                    </div>
+                </div>
+
+                
+                
+                <!-- Historique de lecture -->
+                <div class="manga-history">
+                    <div class="history-title">
+                        <h1>vos dernières lectures</h1>
+                    </div>
+
+                    <div class="sep-line"></div>
+
+                    <div class="history-list"></div>
+                </div>
             </div>
         </section>
 
+        <div class="sup-cookies-flex"></div>
+
         <script src="script/script-slidemenu.js"></script>
         <script src="script/script-to-top-btn.js"></script>
+        <script src="script/script-cookies.js"></script>
+        <script src="script/script-random-manga.js"></script>
+
+        <!-- Gestion des favoris et pagination des favoris -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const itemsPerPage = 14; 
+                let currentPage = 1; 
+
+                const favoriFlex = document.getElementById('favoriFlex');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const paginationNumbers = document.getElementById('paginationNumbers');
+                let totalPages = 1; 
+
+                function updatePagination(favoriteBoxes) {
+                    totalPages = Math.ceil(favoriteBoxes.length / itemsPerPage);
+
+                    function displayPage(page) {
+                        favoriteBoxes.forEach(box => box.style.display = 'none');
+
+                        const start = (page - 1) * itemsPerPage;
+                        const end = page * itemsPerPage;
+                        favoriteBoxes.slice(start, end).forEach(box => box.style.display = 'flex');
+
+                        prevBtn.disabled = page === 1;
+                        nextBtn.disabled = page === totalPages;
+
+                        updatePaginationNumbers(page);
+                    }
+
+                    function updatePaginationNumbers(page) {
+                        paginationNumbers.innerHTML = ''; 
+
+                        for (let i = 1; i <= totalPages; i++) {
+                            const span = document.createElement('span');
+                            span.textContent = i;
+                            if (i === page) {
+                                span.classList.add('active'); 
+                            }
+                            span.addEventListener('click', function() {
+                                currentPage = i;
+                                displayPage(currentPage); 
+                            });
+                            paginationNumbers.appendChild(span);
+                        }
+                    }
+
+                    prevBtn.addEventListener('click', function() {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            displayPage(currentPage);
+                        }
+                    });
+
+                    nextBtn.addEventListener('click', function() {
+                        if (currentPage < totalPages) {
+                            currentPage++;
+                            displayPage(currentPage);
+                        }
+                    });
+
+                    displayPage(currentPage);
+                }
+
+                function removeFromFavorites(mangaName) {
+                    let favorisCookie = getCookie('favManga');
+                    if (favorisCookie) {
+                        let favorisList = favorisCookie.split(',');
+                        favorisList = favorisList.filter(favori => favori.toLowerCase() !== mangaName.toLowerCase());
+                        document.cookie = `favManga=${favorisList.join(',')}; path=/;`;
+                    }
+                }
+
+                const favorisCookie = getCookie('favManga'); 
+                const favorisList = favorisCookie ? favorisCookie.split(',') : [];
+
+                if (favorisList.length === 0) {
+                    favoriFlex.classList.add('center');
+                    const emptyMessage = document.createElement('div');
+                    emptyMessage.classList.add('no-favorites');
+
+                    emptyMessage.innerHTML = `
+                        <p><span class="bolder">Aucun favori</span> en vu ! N'hésitez pas à consulter notre catalogue pour <span class="bolder">plus de découvertes.</span></p>
+                        <a href="/catalogue">Voir le catalogue</a>
+                    `;
+
+                    favoriFlex.appendChild(emptyMessage);
+
+                    const pagination = document.querySelector('.pagination');
+                    pagination.style.display = 'none'; 
+                } else {
+                    fetch('/api/manga-data')
+                        .then(response => response.json())
+                        .then(data => {
+                            const favoriteBoxes = [];
+
+                            favorisList.forEach(favori => {
+                                const mangaInfo = data[favori.toLowerCase()]; 
+                                const mangaName = favori.toLowerCase();
+                                if (mangaInfo) {
+                                    const favoriteBox = document.createElement('div');
+                                    favoriteBox.classList.add('container'); 
+
+                                    favoriteBox.innerHTML = `
+                                        <button class="remove-favorite">X</button>
+                                        <a href="/${mangaName}" class="favoritebox">
+                                            <div class="img-container">
+                                                <div class="img-gradient"></div>
+                                                <img src="${mangaInfo.Image}" alt="tome-${mangaInfo.Alias}">
+                                            </div>
+                                            <div class="title-box">
+                                                <p id="manga-title">${mangaInfo.Nom}</p>
+                                            </div>
+                                        </a>
+                                    `;
+
+                                    const removeButton = favoriteBox.querySelector('.remove-favorite');
+                                    removeButton.addEventListener('click', function(event) {
+                                        event.preventDefault(); 
+                                        favoriteBox.style.display = 'none'; 
+                                        removeFromFavorites(mangaName); 
+                                    });
+
+                                    favoriFlex.appendChild(favoriteBox);
+                                    favoriteBoxes.push(favoriteBox); 
+                                }
+                            });
+
+                            updatePagination(favoriteBoxes);
+                        })
+                        .catch(error => console.error('Erreur lors du chargement des données des mangas:', error));
+                }
+            });
+
+        </script>
+
+        <!-- Historique de lecture -->
+        <script>            
+            async function fetchMangaData() {
+                try {
+                    const response = await fetch('/api/manga-data');
+                    const data = await response.json();
+                    return data; 
+                } catch (error) {
+                    console.error("Erreur lors de la récupération des données de l'API:", error);
+                    return {};
+                }
+            }
+            
+            async function updateHistoryList() {
+                const history = getCookie('lastReadChapters');
+                if (!history) return; 
+            
+                const historyListDiv = document.querySelector('.history-list');
+                if (!historyListDiv) return; 
+
+                historyListDiv.innerHTML = '';
+                const chapters = history.split(',');
+                const mangaData = await fetchMangaData();
+                chapters.reverse();
+                chapters.forEach((chapter) => {
+                    const [mangaSlug, chapterNumber] = chapter.split('/');
+            
+                    const mangaInfo = mangaData[mangaSlug];
+                    if (mangaInfo) {
+                        const mangaTitle = mangaInfo.Nom;
+                        const newLink = document.createElement('a');
+                        newLink.href = `/${mangaSlug}/${chapterNumber}`;
+                        newLink.innerHTML = `<span class="white">${mangaTitle}</span> : Chapitre ${chapterNumber}`;
+                        historyListDiv.appendChild(newLink);
+                    }
+                });
+            }
+            
+            window.onload = function() {
+                updateHistoryList();
+            };
+        </script>
 
         <footer>
             <div class="decoration-line">

@@ -10,7 +10,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
-        <link rel="stylesheet" href="">
         <link rel="shortcut icon" type="image/png" href="/img/mangahana-icon.png">
         <link rel="shortcut icon" sizes="192x192" href="/img/mangahana-icon.png">
         <link rel="apple-touch-icon" href="/img/mangahana-icon.png">
@@ -51,7 +50,7 @@
 
             <!-- Options navbar -->
             <div class="nav-categories">
-                <a href="" class="flex-container">
+                <a href="/" class="flex-container">
                     <div class="bx-container"><i class='bx bxs-home'></i></div>
                     <div class="a-container">Acc<span class="green-text">ueil</span></div>
                 </a>
@@ -63,7 +62,7 @@
                     <div class="bx-container"><i class='bx bx-shuffle'></i></div>
                     <div class="a-container">Se lan<span class="green-text">cer</span></div>
                 </a>
-                <a href="" class="flex-container">
+                <a href="/profil" class="flex-container">
                     <div class="bx-container"><i class='bx bx-street-view'></i></div>
                     <div class="a-container">Pro<span class="green-text">fil</span></div>
                 </a>
@@ -89,7 +88,7 @@
             <div class="options-slidemenu">
                 <div class="flexbox">
                 <div class="flex-pour-centrer"></div>
-                <a href="" class="flex-container">
+                <a href="/" class="flex-container">
                     <div class="bx-container"><i class='bx bxs-home'></i></div>
                     <div class="a-container">Acc<span class="green-text">ueil</span></div>
                     <div class="ligne-style"></div>
@@ -113,7 +112,7 @@
                 </div>
                 <div class="flexbox">
                 <div class="flex-pour-centrer"></div>
-                <a href="" class="flex-container">
+                <a href="/profil" class="flex-container">
                     <div class="bx-container"><i class='bx bx-street-view'></i></div>
                     <div class="a-container">Pro<span class="green-text">fil</span></div>
                     <div class="ligne-style"></div>
@@ -190,6 +189,44 @@
 
         <!-- Chargement des chapitres -->
         <script>
+            // Fonction pour ajouter un chapitre au cookie
+            function addChapterToHistory(chapterUrl) {
+                const maxChapters = 10; // Limite de 30 chapitres stockés dans les cookies
+                let history = getCookie('lastReadChapters'); 
+
+                if (history) {
+                    history = history.split(',');
+                } else {
+                    history = [];
+                }
+
+                if (!history.includes(chapterUrl)) {
+                    history.push(chapterUrl);
+                }
+
+                if (history.length > maxChapters) {
+                    history.shift(); 
+                }
+
+                document.cookie = `lastReadChapters=${history.join(',')}; path=/; max-age=31536000;`; // Cookie valide pour 1 an
+            }
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            function trackCurrentChapter() {
+                const pathParts = window.location.pathname.split('/');
+                const mangaName = pathParts[1]; 
+                const chapter = pathParts[2]; 
+
+                const chapterUrl = `${mangaName}/${chapter}`;
+
+                addChapterToHistory(chapterUrl);
+            }
+
             // Fonction pour charger les chapitres disponibles
             async function loadChapters(manga) {
                 const response = await fetch(`/api/${manga}/chapters`);
@@ -231,7 +268,7 @@
                     const img = document.createElement('img');
                     img.src = `/scans/${manga}/${chapter}/${page}`; 
                     img.alt = `Page ${index + 1}`;
-                    img.loading = "lazy"; 
+                    img.classList.add('lazy');
                     pagesContainer.appendChild(img);
 
                     const option = document.createElement('option');
@@ -279,6 +316,25 @@
                 // Masque ou afficher le menu des pages en fonction du mode de lecture initial
                 const lectureMenu = document.getElementById('lecture-menu');
                 togglePagesMenuAndDisplay(lectureMenu.value, mangaName, defaultChapter);
+
+                // Enregistrement des chapitres lus dans les cookies
+                trackCurrentChapter(); 
+
+                document.getElementById('chapter-menu').addEventListener('change', function() {
+                    trackCurrentChapter(); 
+                });
+
+                document.getElementById('previous-chapter').addEventListener('click', function() {
+                    trackCurrentChapter();
+                });
+                
+                document.getElementById('next-chapter').addEventListener('click', function() {
+                    trackCurrentChapter(); 
+                });
+
+                window.addEventListener('beforeunload', function() {
+                    trackCurrentChapter(); 
+                });
             };
 
             async function togglePagesMenuAndDisplay(lectureMode, manga, chapter) {

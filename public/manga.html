@@ -11,7 +11,6 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
         <meta name="mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="">
         <link rel="shortcut icon" type="image/png" href="img/mangahana-icon.png">
         <link rel="shortcut icon" sizes="192x192" href="img/mangahana-icon.png">
         <link rel="apple-touch-icon" href="img/mangahana-icon.png">
@@ -53,11 +52,11 @@
 
             <!-- Options navbar -->
             <div class="nav-categories">
-                <a href="" class="flex-container">
+                <a href="/" class="flex-container">
                     <div class="bx-container"><i class='bx bxs-home'></i></div>
                     <div class="a-container">Acc<span class="green-text">ueil</span></div>
                 </a>
-                <a href="" class="flex-container">
+                <a href="/catalogue" class="flex-container">
                     <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
                     <div class="a-container">Cata<span class="green-text">logue</span></div>
                 </a>
@@ -65,7 +64,7 @@
                     <div class="bx-container"><i class='bx bx-shuffle'></i></div>
                     <div class="a-container">Se lan<span class="green-text">cer</span></div>
                 </a>
-                <a href="" class="flex-container">
+                <a href="/profil" class="flex-container">
                     <div class="bx-container"><i class='bx bx-street-view'></i></div>
                     <div class="a-container">Pro<span class="green-text">fil</span></div>
                 </a>
@@ -145,8 +144,8 @@
 
                             <!-- image et bouton favori -->
                             <div class="left-flex">
-                                <div class="img-container"><img src="img/couvertures/tome-FRIEREN.jpg" alt="tome-FRIEREN"></div>
-                                <button>AJOUTER AUX FAVORIS</button>
+                                <div class="img-container"><img src="" alt=""></div>
+                                <button id="addtoFav">AJOUTER AUX FAVORIS</button>
                             </div>
 
                             <!-- Autres informations -->
@@ -282,16 +281,6 @@
                     <!-- Historique de lecture -->
                     <div class="history">
                         <p>Vos dernières lectures</p>
-                        <a class="history-line" href="">Kaoru Hana wa Rin to Saku : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
-                        <a class="history-line" href="">Berserk : Chapitre 201</a>
                     </div>
                 </div>
             </div>
@@ -299,10 +288,51 @@
 
         <script src="script/script-slidemenu.js"></script>
         <script src="script/script-to-top-btn.js"></script>
+        <script src="script/script-cookies.js"></script>
 
+        <!-- Historique de lecture -->
+        <script>
+            async function fetchMangaData() {
+                try {
+                    const response = await fetch('/api/manga-data');
+                    const data = await response.json();
+                    return data; 
+                } catch (error) {
+                    console.error("Erreur lors de la récupération des données de l'API:", error);
+                    return {};
+                }
+            }
+            
+            async function updateHistoryList() {
+                const history = getCookie('lastReadChapters');
+                if (!history) return; 
+            
+                const historyListDiv = document.querySelector('.history');
+                if (!historyListDiv) return; 
+
+                const chapters = history.split(',');
+                const mangaData = await fetchMangaData();
+                chapters.reverse();
+                chapters.forEach((chapter) => {
+                    const [mangaSlug, chapterNumber] = chapter.split('/');
+            
+                    const mangaInfo = mangaData[mangaSlug];
+                    if (mangaInfo) {
+                        const mangaTitle = mangaInfo.Nom;
+                        const newLink = document.createElement('a');
+                        newLink.classList.add('history-line');
+                        newLink.href = `/${mangaSlug}/${chapterNumber}`;
+                        newLink.innerHTML = `${mangaTitle} : Chapitre ${chapterNumber}`;
+                        historyListDiv.appendChild(newLink);
+                    }
+                });
+            }
+        </script>
+
+        <!-- Affichage des informations et chapitrage -->
         <script>
             const mangaName = window.location.pathname.split('/')[1]; 
-
+        
             fetch('/api/manga-data')
             .then(response => {
                 if (!response.ok) {
@@ -315,7 +345,7 @@
                 if (!mangaData) {
                     throw new Error('Manga non trouvé');
                 }
-
+        
                 document.getElementById('titre').innerText = mangaData.Nom;
                 document.getElementById('titre2').innerText = mangaData.Nom;
                 document.getElementById('synopsis').innerText = mangaData.Synopsis;
@@ -324,7 +354,7 @@
                 document.getElementById('sortie').innerText = mangaData.Sortie;
                 document.getElementById('statut').innerText = mangaData.Statut;
                 document.getElementById('indispo-name').innerText = mangaData.Nom;
-
+        
                 const tagsContainer = document.getElementById('tags-container');
                 const tags = mangaData.Tags.split(', ');
                 tags.forEach(tag => {
@@ -333,37 +363,95 @@
                     tagDiv.innerHTML = `<div id="tag"><p>${tag}</p></div>`;
                     tagsContainer.appendChild(tagDiv);
                 });
-
+        
                 const imageElement = document.querySelector('.img-container img');
                 imageElement.src = mangaData.Image; 
                 imageElement.alt = mangaData.Nom; 
-
-                const MangaName = mangaData.Nom
+        
+                const MangaName = mangaData.Nom;
                 document.title = `${MangaName} | MangaHana`;
-            })
+        
+                // Initialiser le bouton des favoris en fonction du cookie
+                initFavoriteButton(mangaName);
 
+                updateHistoryList();
+            });
+        
+            // Ajouter ou retirer le manga des favoris
+            function toggleFavorite(mangaName) {
+                let favoriteMangas = getCookie('favManga');
+                favoriteMangas = favoriteMangas ? favoriteMangas.split(',') : [];
+        
+                const index = favoriteMangas.indexOf(mangaName);
+        
+                if (index === -1) {
+                    // Ajouter aux favoris
+                    favoriteMangas.push(mangaName);
+                    setCookie('favManga', favoriteMangas.join(','), 7);
+                    setButtonActive(true);
+                } else {
+                    // Retirer des favoris
+                    favoriteMangas.splice(index, 1);
+                    setCookie('favManga', favoriteMangas.join(','), 7);
+                    setButtonActive(false);
+                }
+            }
+        
+            // Fonction pour définir l'état du bouton (actif ou non)
+            function setButtonActive(isActive) {
+                const addToFavoritesBtn = document.getElementById('addtoFav');
+                if (isActive) {
+                    addToFavoritesBtn.classList.add('favPut');
+                    addToFavoritesBtn.textContent = 'RETIRER DES FAVORIS';
+                } else {
+                    addToFavoritesBtn.classList.remove('favPut');
+                    addToFavoritesBtn.textContent = 'AJOUTER AUX FAVORIS';
+                }
+            }
+        
+            // Fonction pour initialiser l'état du bouton en fonction des favoris
+            function initFavoriteButton(mangaName) {
+                let favoriteMangas = getCookie('favManga');
+                favoriteMangas = favoriteMangas ? favoriteMangas.split(',') : [];
+        
+                const isFavorite = favoriteMangas.includes(mangaName);
+                setButtonActive(isFavorite);
+        
+                // Ajouter un événement au bouton "Ajouter aux favoris"
+                const addToFavoritesBtn = document.getElementById('addtoFav');
+                addToFavoritesBtn.addEventListener('click', function() {
+                    toggleFavorite(mangaName);
+                });
+            }
+        
+            // Charger les chapitres lors du chargement de la page
+            window.onload = async function() {
+                const mangaName = window.location.pathname.split('/')[1]; // Récupérer le nom du manga depuis l'URL
+                await loadChaptersInScrollBox(mangaName); // Charger les chapitres dans la flexbox
+            };
+        
             // Fonction pour charger et afficher les chapitres dans la scroll-flexbox
             async function loadChaptersInScrollBox(manga) {
                 try {
                     const response = await fetch(`/api/${manga}/chapters`);
                     const chapters = await response.json();
-
+        
                     const scrollContainer = document.querySelector('.scroll-flexbox');
                     const explication = document.querySelector('.explication');
                     scrollContainer.innerHTML = ''; // Vider la flexbox avant d'ajouter des chapitres
-
+        
                     if (chapters.length > 0) {
                         // Si des chapitres existent, cacher le message d'explication
                         explication.style.display = 'none';
-
+        
                         chapters.forEach(chapter => {
                             const link = document.createElement('a');
                             const chapterLabel = formatChapterLabel(chapter);
-
+        
                             link.href = `/${manga}/${chapter}`;
                             link.textContent = chapterLabel;
                             link.addEventListener('click', () => handleChapterChange(manga, chapter));
-
+        
                             scrollContainer.appendChild(link);
                         });
                     } else {
@@ -373,28 +461,15 @@
                     console.error('Erreur lors du chargement des chapitres :', error);
                 }
             }
-
-            // Fonction pour formater les labels des chapitres (par ex. Volume au lieu de Chapitre)
+        
+            // Fonction pour formater les labels des chapitres
             function formatChapterLabel(chapter) {
-                // Vérifie si le chapitre contient "Volume"
                 if (chapter.toLowerCase().includes('volume')) {
-                    return chapter; // Utiliser le nom du volume
+                    return chapter;
                 } else {
-                    return `Chapitre ${chapter}`; // Sinon, afficher "Chapitre X"
+                    return `Chapitre ${chapter}`;
                 }
             }
-
-            // Fonction à appeler lors du changement de chapitre (tu devrais déjà avoir cette fonction)
-            function handleChapterChange(manga, chapter) {
-                console.log(`Chargement du chapitre ${chapter} pour le manga ${manga}`);
-                // Logique pour charger le chapitre sélectionné
-            }
-
-            // Appel à la fonction loadChaptersInScrollBox lors du chargement de la page
-            window.onload = async function() {
-                const mangaName = window.location.pathname.split('/')[1]; // Récupérer le nom du manga depuis l'URL
-                await loadChaptersInScrollBox(mangaName); // Charger les chapitres dans la flexbox
-            };
         </script>
 
         <footer>
