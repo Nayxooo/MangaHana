@@ -1,9 +1,30 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+// const rateLimit = require('express-rate-limit'); 
 
 const app = express();
 const PORT = 3000;
+
+// Limite de requête par IP à 120 par fenêtre de 15 minutes
+// const limiter = rateLimit({
+//     windowMs: 15 * 60 * 1000, 
+//     max: 120, 
+//     message: 'Trop de requêtes, veuillez réessayer plus tard.', 
+// });
+
+// // Application du middleware à toutes les routes API
+// app.use('/api/', limiter);
+
+// Route pour la page profil.html
+app.get('/profil', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'profil.html')); 
+});
+
+// Route pour la page catalogue.html
+app.get('/catalogue', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'catalogue.html')); 
+});
 
 // Route pour obtenir les données des mangas
 app.get('/api/manga-data', (req, res) => {
@@ -24,7 +45,16 @@ app.get('/api/manga-data', (req, res) => {
 // Route pour afficher la page manga.html avec les données du manga
 app.get('/:manga', (req, res) => {
     const manga = req.params.manga;
-    res.sendFile(path.join(__dirname, 'public', 'manga.html')); // Charger manga.html
+    const mangaDir = path.join(__dirname, 'scans', manga);
+
+    // Vérifier si le répertoire du manga existe dans le dossier "scans"
+    fs.access(mangaDir, fs.constants.F_OK, (err) => {
+        if (err) {
+            return res.redirect('/');
+        }
+        // Si le manga existe, renvoyer la page manga.html
+        res.sendFile(path.join(__dirname, 'public', 'manga.html'));
+    });
 });
 
 // API pour obtenir la liste des chapitres disponibles d'un manga
@@ -94,9 +124,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Servir le dossier 'scans' pour accéder aux images
 app.use('/scans', express.static(path.join(__dirname, 'scans')));
 
-// Route pour les chapitres d'un manga donné
+// Route pour afficher les chapitres d'un manga donné
 app.get('/:manga/:chapter', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'scan.html')); // Charger directement le fichier scan.html
+    const manga = req.params.manga;
+    const chapter = req.params.chapter;
+    const mangaDir = path.join(__dirname, 'scans', manga); 
+    const chapterDir = path.join(mangaDir, chapter); 
+
+    // Vérifie si le répertoire du manga existe
+    fs.access(mangaDir, fs.constants.F_OK, (err) => {
+        if (err) {
+            // Renvoie vers l'accueil si le manga n'existe pas
+            return res.redirect('/');
+        }
+
+        fs.access(chapterDir, fs.constants.F_OK, (chapterErr) => {
+            if (chapterErr) {
+                console.error(`Chapitre non trouvé : ${chapter} pour le manga ${manga}`);
+                // Renvoie vers la page du manga s'il existe mais n'a pas encore de chapitres
+                return res.redirect(`/${manga}`);
+            }
+
+            // Renvoie vers la page si le lien est bon
+            res.sendFile(path.join(__dirname, 'public', 'scan.html'));
+        });
+    });
 });
 
 // Route d'accueil
