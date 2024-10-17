@@ -45,7 +45,96 @@
                     <i class='bx bx-search'></i>
                     <input name="search_text" id="search_text" type="search" class="search-input" placeholder="Rechercher..." autocomplete="off">
                 </div>
+                <!-- Résultats de recherche -->
+                <div id="search-results" class="search-results"></div>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const searchInput = document.getElementById('search_text');
+                    const searchResults = document.getElementById('search-results');
+
+                    // Fonction pour afficher ou masquer les résultats en fonction de la longueur de la requête
+                    function handleSearchInput() {
+                        const searchQuery = searchInput.value.toLowerCase();
+                        searchResults.innerHTML = ''; // Clear previous results
+
+                        if (searchQuery.length < 3) {
+                            searchResults.style.display = 'none'; // Recherche à partir de 3 caractères
+                            return;
+                        }
+
+                        fetch('/api/manga-data')
+                            .then(response => response.json())
+                            .then(data => {
+                                const filteredResults = Object.keys(data).filter(key => 
+                                    data[key].Nom.toLowerCase().includes(searchQuery) ||
+                                    data[key].Alias.toLowerCase().includes(searchQuery)
+                                );
+
+                                if (filteredResults.length > 0) {
+                                    searchResults.style.display = 'flex'; 
+                                    filteredResults.forEach((key, index) => {
+                                        const manga = data[key];
+                                        const resultItem = document.createElement('a');
+                                        resultItem.href = `/${key}`; 
+                                        resultItem.classList.add('search-result-item');
+
+                                        // Create a container for the manga details
+                                        const mangaDetails = document.createElement('div');
+                                        mangaDetails.classList.add('manga-details');
+
+                                        const mangaImage = document.createElement('img');
+                                        mangaImage.src = manga.Image; 
+                                        mangaImage.alt = `tome-${key}`; 
+                                        mangaImage.classList.add('img');
+
+                                        const mangaInfo = document.createElement('div');
+                                        mangaInfo.classList.add('infos');
+                                        const mangaName = document.createElement('p');
+                                        mangaName.textContent = manga.Nom; 
+                                        const mangaTags = document.createElement('p');
+                                        const tags = manga.Tags;
+                                        mangaTags.textContent = `Genres : ${tags}`; 
+
+                                        mangaInfo.appendChild(mangaName);
+                                        mangaInfo.appendChild(mangaTags);
+                                        mangaDetails.appendChild(mangaImage);
+                                        mangaDetails.appendChild(mangaInfo);
+
+                                        resultItem.appendChild(mangaDetails);
+                                        searchResults.appendChild(resultItem);
+
+                                        // Border radius pour le dernier item
+                                        if (index === filteredResults.length - 1) {
+                                            resultItem.style.borderBottomLeftRadius = '8px';
+                                            resultItem.style.borderBottomRightRadius = '8px';
+                                        }
+                                    });
+                                } else {
+                                    searchResults.style.display = 'none'; 
+                                }
+                            })
+                            .catch(error => console.error('Erreur lors du chargement des données des mangas:', error));
+                    }
+
+                    searchInput.addEventListener('input', handleSearchInput);
+
+                    // Masque les résultats en cliquant à l'extérieur de la searchbar ou des résultats
+                    document.addEventListener('click', (event) => {
+                        if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+                            searchResults.style.display = 'none'; 
+                        }
+                    });
+
+                    // Réaffiche les résultats en cliquant sur la searchbar (si au moins 3 lettres ont été saisies)
+                    searchInput.addEventListener('focus', () => {
+                        if (searchInput.value.length >= 3) {
+                            searchResults.style.display = 'flex'; 
+                        }
+                    });
+                });
+            </script>
             
             <!-- Logo icone-->
             <a class ="nav-img-2" href=""><img src="img/mangahana-icon.png" alt="MangaHana-logo"></a>
