@@ -142,6 +142,140 @@
                         </div>
                     </div>
 
+                    <div class="filter-title">
+                        <h1>Genres</h1>
+                    </div>
+                    <div class="filter-tags">
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Action</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Aventure</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Comédie</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Drame</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Ecchi</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Fantaisie</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Horreur</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Mystere</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Romance</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Science-Fiction</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Slice of Life</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Sports</p>
+                        </div>
+                        <div class="tag-checkbox">
+                            <div class="checkbox" id="action"></div>
+                            <p>Suspense</p>
+                        </div>
+                    </div>
+
+                    <style>
+                        .tag-checkbox {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            height: 2em;
+                            width: fit-content;
+                            padding-left: 10px;
+                            margin-bottom: 10px;
+                        }
+                    
+                        .checkbox {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 1.1em;
+                            height: 1.1em;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            background-size: contain;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            margin-right: 10px;
+                        }
+
+                        .tag-checkbox p {
+                            font-weight: 900;
+                            font-size: 16px;
+                        }
+                    
+                        .checkbox.neutral {
+                            background-color: var(--grey1);
+                        }
+                    
+                        .checkbox.cross {
+                            background-image: url('img/cursors/not.avif');
+                        }
+                    
+                        .checkbox.check {
+                            background-image: url('img/cursors/check.avif');
+                        }
+                    </style>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            const checkboxes = document.querySelectorAll('.checkbox');
+                            const genre = document.querySelectorAll('.checkbox');
+                            
+                            checkboxes.forEach(checkbox => {
+                                let state = 0;
+
+                                function updateCheckbox() {
+                                    checkbox.classList.remove('neutral', 'cross', 'check');
+                                    if (state === 0) {
+                                        checkbox.classList.add('neutral');
+                                    } else if (state === 1) {
+                                        checkbox.classList.add('cross');
+                                    } else if (state === 2) {
+                                        checkbox.classList.add('check');
+                                    }
+                                }
+
+                                checkbox.addEventListener('click', () => {
+                                    state = (state + 1) % 3;
+                                    updateCheckbox();
+                                });
+
+                                // Initialize the checkbox
+                                updateCheckbox();
+                            });
+                        });
+                    </script>
+
+                    <div class="filter-title">
+                        <h1>Filtrer par lettre</h1>
+                    </div>
                     <div class="filter-letters">
                         <button id="a">A</button>
                         <button id="b">B</button>
@@ -170,65 +304,14 @@
                         <button id="y">Y</button>
                         <button id="z">Z</button>
                     </div>
-                    <div class="filter-tags">
-                        <div class="checkbox" id="action"></div>
+
+                    <div class="filter-title">
+                        <h1>Tri</h1>
                     </div>
 
-                    <style>
-                        .checkbox {
-                            width: 50px;
-                            height: 50px;
-                            border: 2px solid #ccc;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            cursor: pointer;
-                            background-size: contain;
-                            background-position: center;
-                        }
-
-                        .checkbox.neutral {
-                            background-color: var(--black);
-                        }
-
-                        .checkbox.cross {
-                            background-image: url('img/cursors/down-arrow.png');
-                            background-color: red;
-                        }
-
-                        .checkbox.check {
-                            background-image: url('img/cursors/up-arrow.png');
-                            background-color: green;
-                        }
-                    </style>
-
-                    <script>
-                        document.addEventListener('DOMContentLoaded', () => {
-                        const checkbox = document.getElementById('action');
-                        
-                        let state = 0;
-
-                        function updateCheckbox() {
-                            checkbox.classList.remove('neutral', 'cross', 'check');
-                            if (state === 0) {
-                                checkbox.classList.add('neutral');
-                            } else if (state === 1) {
-                                checkbox.classList.add('cross');
-                            } else if (state === 2) {
-                                checkbox.classList.add('check');
-                            }
-                        }
-
-                        checkbox.addEventListener('click', () => {
-                            state = (state + 1) % 3; 
-                            updateCheckbox();
-                        });
-
-                        // Initialize the checkbox
-                        updateCheckbox();
-                    });
-
-                    </script>
+                    <div class="filter-title">
+                        <h1>Contact</h1>
+                    </div>
                 </div>
 
                 <div class="catalogue-flex">
