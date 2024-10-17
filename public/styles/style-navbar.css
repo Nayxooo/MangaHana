@@ -15,6 +15,7 @@ nav .nav-searchbar, nav .nav-categories {
 }
 
 nav .nav-searchbar {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -22,6 +23,31 @@ nav .nav-searchbar {
     padding: 10px;
     margin-right: 20px;
 }
+
+/* Conteneur des résultats */
+#search-results {
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
+    height: fit-content; 
+    overflow: hidden;
+}
+
+/* Style des items de résultats */
+.search-result-item {
+    display: block;
+    background-color: var(--grey1);
+    transition: background-color 0.2s ease;
+}
+
+/* Style survolé des items de résultats */
+.search-result-item:hover {
+    background-color: var(--black);
+}  
 
 nav .nav-searchbar .flexbox{
     display: flex;
