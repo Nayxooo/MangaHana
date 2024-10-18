@@ -94,6 +94,27 @@
     background-color: var(--grey2);
     color: var(--green);
 }
+.mainflex .filters .filter-letters .active-letter{
+    background-color: var(--grey1);
+    color: var(--green);
+    cursor: auto;
+}
+.mainflex .filters .filter-letters .active-letter:hover{
+    background-color: var(--grey1);
+    color: var(--green);
+}
+.mainflex .filters .filter-letters .non-active{
+    background-color: var(--light-black);
+    color: var(--grey3);
+}
+.mainflex .filters .filter-letters .non-active:hover{
+    background-color: var(--grey1);
+    color: var(--white);
+}
+
+
+
+
 .mainflex .filters .filter-tags{
     display: flex;
     flex-direction: row;
@@ -105,6 +126,80 @@
     border-radius: 8px;
     padding-top: 5px;
     margin-bottom: 15px;
+}
+
+.tag-checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 2em;
+    width: fit-content;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.1em;
+    height: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+.tag-checkbox p {
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.checkbox.neutral {
+    background-color: var(--grey1);
+}
+
+.checkbox.cross {
+    background-image: url('/img/cursors/not.avif');
+}
+
+.checkbox.check {
+    background-image: url('/img/cursors/check.avif');
+}
+
+.mainflex .filters .filter-sort{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+    border-radius: 8px;
+    gap: 5px;
+    margin-bottom: 15px;
+    padding-top: 5px;
+}
+.mainflex .filters .filter-sort button{
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: var(--black);
+    border: solid 2px var(--grey1);
+    color: var(--white);
+    font-family: "Montserrat";
+    font-weight: 900;
+    cursor: pointer;
+}
+.mainflex .filters .filter-sort button:hover{
+    background-color: var(--grey1);
+    color: var(--green);
+}
+.mainflex .filters .filter-sort .active-sort{
+    color: var(--grey2);
+    cursor: auto;
+}
+.mainflex .filters .filter-sort .active-sort:hover{
+    background-color: var(--black);
+    color: var(--grey2);
 }
 
 
