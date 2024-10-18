@@ -200,49 +200,6 @@
                         </div>
                     </div>
 
-                    <style>
-                        .tag-checkbox {
-                            display: flex;
-                            flex-direction: row;
-                            align-items: center;
-                            height: 2em;
-                            width: fit-content;
-                            padding-left: 10px;
-                            margin-bottom: 10px;
-                        }
-                    
-                        .checkbox {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            width: 1.1em;
-                            height: 1.1em;
-                            border-radius: 5px;
-                            cursor: pointer;
-                            background-size: contain;
-                            background-position: center;
-                            background-repeat: no-repeat;
-                            margin-right: 10px;
-                        }
-
-                        .tag-checkbox p {
-                            font-weight: 900;
-                            font-size: 16px;
-                        }
-                    
-                        .checkbox.neutral {
-                            background-color: var(--grey1);
-                        }
-                    
-                        .checkbox.cross {
-                            background-image: url('img/cursors/not.avif');
-                        }
-                    
-                        .checkbox.check {
-                            background-image: url('img/cursors/check.avif');
-                        }
-                    </style>
-
                     <script>
                         document.addEventListener('DOMContentLoaded', () => {
                             const checkboxes = document.querySelectorAll('.checkbox');
@@ -307,6 +264,11 @@
 
                     <div class="filter-title">
                         <h1>Tri</h1>
+                    </div>
+                    <div class="filter-sort">
+                        <button class="active-sort">A - Z</button>
+                        <button>Z - A</button>
+                        <button>Dernières sorties</button>
                     </div>
 
                     <div class="filter-title">
