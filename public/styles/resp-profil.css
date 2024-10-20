@@ -1,0 +1,82 @@
+@media (max-width: 1200px) {
+    .profile-bloc .cookies-info .left-flex{
+        width: 10%;
+    }
+    .profile-bloc .cookies-info .right-flex{
+        width: 90%;
+        height: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Informations de cookies */
+    .profile-bloc .cookies-info{
+        flex-direction: column;
+        padding: 10px;
+        border: solid 2px var(--grey2)
+    }
+    .profile-bloc .cookies-info .left-flex{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .profile-bloc .cookies-info .right-flex{
+        width: 100%;
+        height: auto;
+        text-align: center;
+    }
+
+
+    /* Favoris */
+    .profile-bloc .favori-title{
+        display: flex;
+        justify-content: center;
+        padding: 0;
+    }
+    .profile-bloc .favori-title h1{
+        color: var(--green);
+    }
+    
+    .profile-bloc .favori-flex{
+        justify-content: center;
+        padding-left: 2%;
+    }
+    .profile-bloc .favori-flex button{
+        top: 6%;
+        left: 3%;
+    }
+
+    .profile-bloc .favori-flex .favoritebox{
+        margin-bottom: -20px;
+    }
+
+    .profile-bloc .favori-flex .favoritebox .img-gradient{
+        opacity: 1 !important;
+    }
+
+    .profile-bloc .favori-flex .favoritebox .title-box{
+        bottom: 15px !important;
+    }
+
+    .profile-bloc .favori-flex .favoritebox .title-box p{
+        color: var(--white);
+    }
+
+    .pagination {
+        margin: 25px 0 10px 0;
+    }
+    .pagination button {
+        display: none;
+    }
+
+    .profile-bloc .history-title{
+        margin-bottom: 10px;
+    }
+
+    .profile-bloc .history-title h1{
+        font-size: 22px;
+    }
+
+    .profile-bloc .manga-history .sep-line {
+        background: linear-gradient(to right, var(--green), var(--black));
+    }
+}

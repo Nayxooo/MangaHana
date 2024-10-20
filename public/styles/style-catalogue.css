@@ -1,0 +1,454 @@
+.bloc-entier {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    margin: -15px 0 30px 0;
+}
+
+/* Titre */
+.bloc-entier .catalogue-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 106em;
+    height: fit-content;
+}
+
+.bloc-entier .catalogue-title i{
+    color: var(--green);
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.bloc-entier .catalogue-title h1{
+    font-family: "Poppins";
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+.mainflex {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 106em;
+    height: fit-content;
+}
+
+.mainflex .show-filters{
+    display: none;
+    font-family: 'Poppins';
+    font-weight: 900;
+    font-size: 16px;
+    border-radius: 8px;
+    border: solid 2px var(--grey2);
+    background-color: var(--light-black);
+    color: var(--grey3);
+    width: 10em;
+    padding: 5px 0;
+    margin: 5px 0 15px 0;
+    cursor: pointer;
+}
+
+.mainflex .filters,
+.mainflex .catalogue-flex  {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+
+
+/* FILTRES */
+.mainflex .filters {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 25%;
+    height: fit-content;
+    margin-right: 15px;
+    background-color: var(--light-black);
+    padding: 10px;
+    padding-top: 0;
+}
+.mainflex .filters .filter-searchbar{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 2.2em;
+    border-radius: 8px;
+    background-color: var(--grey1);
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+.filter-searchbar .flexbox .search-input {
+    position: absolute;
+    left: 10px;
+    top: 0.4em;
+    background-color: transparent; 
+    border: none; 
+    outline: none; 
+    font-family: 'Poppins';
+    font-size: 15px; 
+    width: 95%;
+    color: var(--dark-white);
+}
+.filter-searchbar .flexbox .search-input::placeholder {
+    text-transform: uppercase; 
+    color: var(--grey3);
+}
+
+.mainflex .filters .filter-title{
+    width: 100%;
+    font-size: 18px;
+}
+
+
+.mainflex .filters .filter-tags{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+    background-color: var(--light-black);
+    margin-bottom: 5px;
+    border-radius: 8px;
+    border: solid 2px var(--grey1);
+    transition: background-color 0.2s ease;
+    padding-top: 5px;
+}
+.mainflex .filters .filter-tags:hover{
+    background-color: #171a17;
+}
+
+.tag-checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 2em;
+    width: fit-content;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.1em;
+    height: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+.tag-checkbox p {
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.checkbox.neutral {
+    background-color: var(--grey1);
+    transition: background-color 0.2s ease;
+}
+
+.checkbox.cross {
+    background-image: url('/img/cursors/not.avif');
+}
+
+.checkbox.check {
+    background-image: url('/img/cursors/check.avif');
+}
+
+
+
+.mainflex .filters .filter-letters{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    border: solid 2px var(--grey1);
+    transition: background-color 0.2s ease;
+    gap: 12px;
+    padding: 10px 0 10px 10px;
+}
+
+.mainflex .filters .filter-letters button{
+    border: none;
+    background-color: var(--grey1);
+    color: var(--white);
+    width: 2em;
+    height: 2em;
+    border-radius: 3px;
+    font-family: 'Poppins';
+    font-weight: 900;
+    cursor: pointer;
+}
+.mainflex .filters .filter-letters button:hover{
+    background-color: #171a17;
+    color: var(--green);
+}
+.mainflex .filters .filter-letters .active-letter{
+    background-color: var(--grey1);
+    color: var(--green);
+    cursor: auto;
+}
+.mainflex .filters .filter-letters .active-letter:hover{
+    background-color: var(--grey1);
+    color: var(--green);
+}
+.mainflex .filters .filter-letters .non-active{
+    background-color: var(--light-black);
+    color: var(--grey3);
+}
+.mainflex .filters .filter-letters .non-active:hover{
+    background-color: var(--grey1);
+    color: var(--white);
+}
+
+
+/* Filtres de tri enlevés */
+/* .mainflex .filters .filter-sort{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+    gap: 5px;
+    padding-bottom: 10px;
+}
+.mainflex .filters .filter-sort button{
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: var(--grey1);
+    border: solid 2px var(--grey1);
+    color: var(--white);
+    font-family: "Montserrat";
+    font-weight: 900;
+    cursor: pointer;
+}
+.mainflex .filters .filter-sort button:hover{
+    background-color: var(--light-black);
+    color: var(--grey3);
+}
+.mainflex .filters .filter-sort .active-sort{
+    color: var(--grey2);
+    background-color: var(--black);
+    cursor: auto;
+}
+.mainflex .filters .filter-sort .active-sort:hover{
+    background-color: var(--black);
+    color: var(--grey2);
+} */
+
+.mainflex .filters .search-btn,
+.mainflex .filters #reset-filters{
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-weight: 900;
+    font-family: "Poppins";
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.mainflex .filters .search-btn{
+    height: 4em;
+    background-color: var(--black);
+    color: var(--grey2);
+    border: solid 2px var(--grey1);
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+.mainflex .filters .search-btn .i-ctn{
+    width: fit-content;
+    margin-right: 5px;
+}
+.mainflex .filters .search-btn .i-ctn i{
+    font-weight: 900;
+    font-size: 18px;
+    margin-top: 0.1em;
+}
+.mainflex .filters .search-btn:hover{
+    background-color: var(--grey1);
+    color: var(--green);
+}
+
+.mainflex .filters #reset-filters{
+    height: 2.2em;
+    margin: 10px 0;
+    border: none;
+    background-color: var(--grey1);
+    color: var(--grey3);
+    transition: color 0.1s ease, background-color 0.1s ease;
+}
+.mainflex .filters #reset-filters:hover{
+    color: var(--white);
+    background-color: var(--light-black);
+}
+
+
+/* CATALOGUE */
+.mainflex .catalogue-flex {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    overflow: hidden;
+}
+
+.mainflex .catalogue-flex .mangas-flex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    gap: 10px;
+}
+/* Animation d'entrée */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); 
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+
+.mainflex .catalogue-flex .mangas-flex .content{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 10.5em;
+    height: 19em;
+    padding-bottom: 5px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background-color 0.2s ease;
+    opacity: 0; /* Masquer initialement l'élément */
+    animation: fadeIn 0.5s forwards; /* Lancer l'animation */
+    transition: opacity 0.5s ease-in-out; /* Transition en douceur */
+}
+.mainflex .catalogue-flex .mangas-flex .img-container{
+    position: relative;
+    height: 14.5em;
+    width: 9.5em;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: height 0.2s ease;
+}
+.mainflex .catalogue-flex .mangas-flex .img-container img{
+    height: 100%;
+    width: auto;
+    transition: scale 0.3s ease;
+}
+.mainflex .catalogue-flex .mangas-flex .content:hover .img-container img{
+    scale: 1.1;
+}
+
+.mainflex .catalogue-flex .mangas-flex .infos{
+    position: absolute;
+    width: 100%;
+    bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+    height: 3em;
+    font-size: 16px;
+    color: var(--white);
+    padding-left: 0.5em;
+}
+.mainflex .catalogue-flex .mangas-flex .infos a{
+    text-decoration: none;
+    color: var(--white);
+    font-family: 'Poppins';
+    font-weight: 900;
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+.mainflex .catalogue-flex .mangas-flex .infos .chap-link{
+    text-decoration: none;
+    color: var(--grey3) !important;
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 100;
+    transition: color 0.2s ease;
+}
+.mainflex .catalogue-flex .mangas-flex .infos .chap-link:hover{
+    color: var(--grey2) !important;
+}
+.mainflex .catalogue-flex .mangas-flex .content:hover .infos a{
+    color: var(--green);
+}
+
+.mainflex .catalogue-flex .mangas-flex .content .img-container::after {
+    content: ""; 
+    position: absolute; 
+    left: -1em;
+    bottom: 8em;
+    width: 60%; 
+    height: 25em; 
+    background-color: rgb(255, 255, 255); 
+    transform: translate(150%, 100%) rotate(45deg); 
+    transition: transform 0.65s ease, opacity 0.3s ease-out; 
+    filter: blur(5px); 
+    opacity: 8%;
+    z-index: 1;
+}
+
+.mainflex .catalogue-flex .mangas-flex .content:hover .img-container::after {
+    transform: translate(0, -15%) rotate(45deg);  
+    opacity: 45%;
+}
+
+
+/* Pagination */
+.mainflex .catalogue-flex .pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 2em;
+    gap: 10px;
+}
+.mainflex .catalogue-flex .pagination button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4em;
+    height: 100%;
+    background-color: var(--grey1);
+    color: var(--green);
+    border: solid 2px var(--grey1);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.mainflex .catalogue-flex .pagination button i{
+    font-weight: 900;
+    font-size: 20px;
+}
+.mainflex .catalogue-flex .pagination button:hover{
+    background-color: var(--black);
+    color: var(--grey3);
+    border: solid 2px var(--grey1);
+}
+.mainflex .catalogue-flex .pagination .inactive{
+    background-color: var(--black);
+    color: var(--grey1);
+    border: solid 2px var(--black);
+    cursor: auto;
+}
+.mainflex .catalogue-flex .pagination .inactive:hover{
+    color: var(--grey1);
+    border: solid 2px var(--black);
+}

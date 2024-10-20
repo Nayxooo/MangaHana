@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="description" content="MangaHana - Lecture de scans">
         <meta name="keywords" content="mangahana, scan, vf, sans pubs, free">
-        <link rel="canonical" href="https://mangahana-scan.fr/">
+        <link rel="canonical" href="https://mangahana.fr/">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,8 +16,7 @@
         <link rel="apple-touch-icon" href="img/mangahana-icon.png">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/style-navbar.css">
-        <link rel="stylesheet" href="styles/style-footer.css">
+        <link rel="stylesheet" href="styles/navbar-footer.css">
         <link rel="stylesheet" href="styles/style-catalogue.css">
         <link rel="stylesheet" href="styles/resp-catalogue.css">    
     </head>
@@ -36,18 +35,23 @@
             </div>
 
             <!-- Logo -->
-            <a class="nav-img" href=""><img src="img/mangahana-logo.png" alt="MangaHana-logo"></a>
+            <a class="nav-img" href="/"><img src="img/mangahana-logo.png" alt="MangaHana-logo"></a>
             
             <!-- Barre de recherche -->
             <div class="nav-searchbar">
                 <div class="flexbox">
                     <i class='bx bx-search'></i>
                     <input name="search_text" id="search_text" type="search" class="search-input" placeholder="Rechercher..." autocomplete="off">
+                    <button type="button" class="clear-button" id="clear-button">
+                        <img src="img/cursors/cross.avif" alt="Clear search" class="clear-icon">
+                    </button>
                 </div>
+                <!-- Résultats de recherche -->
+                <div id="search-results" class="search-results"></div>
             </div>
-            
+        
             <!-- Logo icone-->
-            <a class ="nav-img-2" href=""><img src="img/mangahana-icon.png" alt="MangaHana-logo"></a>
+            <a class ="nav-img-2" href="/"><img src="img/mangahana-icon.png" alt="MangaHana-logo"></a>
 
             <!-- Options navbar -->
             <div class="nav-categories">
@@ -55,11 +59,11 @@
                     <div class="bx-container"><i class='bx bxs-home'></i></div>
                     <div class="a-container">Acc<span class="green-text">ueil</span></div>
                 </a>
-                <a href="#" class="flex-container">
+                <a href="/catalogue" class="flex-container">
                     <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
                     <div class="a-container">Cata<span class="green-text">logue</span></div>
                 </a>
-                <a href="" class="flex-container">    
+                <a href="#" class="flex-container randomMangaLink">    
                     <div class="bx-container"><i class='bx bx-shuffle'></i></div>
                     <div class="a-container">Se lan<span class="green-text">cer</span></div>
                 </a>
@@ -77,51 +81,41 @@
 
         <!-- Slide Menu -->
         <div class="slidemenu">
-
-            <div class="logo-slidemenu">
-                <button id="close-slidemenu"><i class='bx bxs-chevrons-left'></i></button>
-                <img class="nav-img" src="img/mangahana-logo.png" alt="MangaHana-logo">
+            <div class="top-section">
+                <button id="close-slidemenu"><i class='bx bx-x'></i></button>
+                <a class="logoLink" href="/"><img class="nav-img" src="img/mangahana-logo.png" alt="MangaHana-logo"></a>
+                <div class="sep-section"></div>
             </div>
 
-            <div class="ligne-transition"></div>
+            <a href="/">
+                <div class="options">
+                    <i class='bx bxs-home'></i>
+                    <p>Acc<span class="green">ueil</span></p>
+                </div>
+            </a>
 
-            <!-- Options slide menu -->
-            <div class="options-slidemenu">
-                <div class="flexbox">
-                <div class="flex-pour-centrer"></div>
-                <a href="" class="flex-container">
-                    <div class="bx-container"><i class='bx bxs-home'></i></div>
-                    <div class="a-container">Acc<span class="green-text">ueil</span></div>
-                    <div class="ligne-style"></div>
-                </a>
+            <a href="/catalogue">
+                <div class="options">
+                    <i class='bx bxs-bookmarks'></i>
+                    <p>Cata<span class="green">logue</span></p>
                 </div>
-                <div class="flexbox">
-                <div class="flex-pour-centrer"></div>
-                <a href="" class="flex-container">
-                    <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
-                    <div class="a-container">Cata<span class="green-text">logue</span></div>
-                    <div class="ligne-style"></div>
-                </a>
-                </div>
-                <div class="flexbox">
-                <div class="flex-pour-centrer"></div>
-                <a href="" class="flex-container">    
-                    <div class="bx-container"><i class='bx bx-shuffle'></i></div>
-                    <div class="a-container">Se lan<span class="green-text">cer</span></div>
-                    <div class="ligne-style"></div>
-                </a>
-                </div>
-                <div class="flexbox">
-                <div class="flex-pour-centrer"></div>
-                <a href="" class="flex-container">
-                    <div class="bx-container"><i class='bx bx-street-view'></i></div>
-                    <div class="a-container">Pro<span class="green-text">fil</span></div>
-                    <div class="ligne-style"></div>
-                </a>
-                </div>
-            </div>
+            </a>
 
-            <p>© 2024 MangaHana - Tous droits réservés.</p>
+            <a href="#" class="randomMangaLink">
+                <div class="options">
+                    <i class='bx bx-shuffle'></i>
+                    <p>Se lan<span class="green">cer</span></p>
+                </div>
+            </a>
+
+            <a href="/profil">
+                <div class="options">
+                    <i class='bx bx-street-view'></i>
+                    <p>Pro<span class="green">fil</span></p>
+                </div>
+            </a>
+
+            <p class="bottom">© 2024 MangaHana - Tous droits réservés.</p>
         </div>
 
         <button id="to-top-btn">
@@ -135,10 +129,12 @@
             </div>
 
             <div class="mainflex">
+                <button class="show-filters">Afficher les filtres</button>
+
                 <div class="filters">
                     <div class="filter-searchbar">
                         <div class="flexbox">
-                            <input name="search_text" id="search_text" type="search" class="search-input" placeholder="Rechercher..." autocomplete="off">
+                            <input name="searched_text" id="searched_text" type="search" class="search-input" placeholder="Rechercher..." autocomplete="off">
                         </div>
                     </div>
 
@@ -147,60 +143,60 @@
                     </div>
                     <div class="filter-tags">
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Action"></div>
                             <p>Action</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Aventure"></div>
                             <p>Aventure</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Comédie"></div>
                             <p>Comédie</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Drame"></div>
                             <p>Drame</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Ecchi"></div>
                             <p>Ecchi</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Fantaisie"></div>
                             <p>Fantaisie</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Horreur"></div>
                             <p>Horreur</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
-                            <p>Mystere</p>
+                            <div class="checkbox" data-tag="Mystere"></div>
+                            <p>Mystère</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Romance"></div>
                             <p>Romance</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Science-Fiction"></div>
                             <p>Science-Fiction</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Slice of Life"></div>
                             <p>Slice of Life</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Sports"></div>
                             <p>Sports</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" id="action"></div>
+                            <div class="checkbox" data-tag="Suspense"></div>
                             <p>Suspense</p>
                         </div>
                     </div>
 
-                    <script>
+                    <!-- <script>
                         document.addEventListener('DOMContentLoaded', () => {
                             const checkboxes = document.querySelectorAll('.checkbox');
                             const genre = document.querySelectorAll('.checkbox');
@@ -228,7 +224,7 @@
                                 updateCheckbox();
                             });
                         });
-                    </script>
+                    </script> -->
 
                     <div class="filter-title">
                         <h1>Filtrer par lettre</h1>
@@ -262,351 +258,290 @@
                         <button id="z">Z</button>
                     </div>
 
-                    <div class="filter-title">
-                        <h1>Tri</h1>
-                    </div>
-                    <div class="filter-sort">
-                        <button class="active-sort">A - Z</button>
-                        <button>Z - A</button>
-                        <button>Dernières sorties</button>
-                    </div>
+                    <button id="reset-filters">Réinitialiser les filtres</button>
 
-                    <div class="filter-title">
-                        <h1>Contact</h1>
-                    </div>
+                    <button id="apply-filters" class="search-btn">
+                        <div class="i-ctn">
+                            <i class='bx bx-search'></i>
+                        </div>
+                        Appliquer les filtres
+                    </button>
                 </div>
 
                 <div class="catalogue-flex">
-                    <div class="mangas-flex">
-                        <a href="/frieren">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-FRIEREN.jpg" alt="tome-frieren">
-                                </div>
-                                <div class="infos">
-                                    <h3>Frieren</h3>
-                                    <p>Chapitre 134</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/kaoru-hana-wa-rin-to-saku">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-KAORU-HANA.jpg" alt="tome-KAORU">
-                                </div>
-                                <div class="infos">
-                                    <h3>Kaoru hana Wa rin to saku</h3>
-                                    <p>Chapitre 128</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/kaoru-hana-wa-rin-to-saku">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-KAORU-HANA.jpg" alt="tome-KAORU">
-                                </div>
-                                <div class="infos">
-                                    <h3>Kaoru hana Wa rin to saku</h3>
-                                    <p>Chapitre 128</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/kaoru-hana-wa-rin-to-saku">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-KAORU-HANA.jpg" alt="tome-KAORU">
-                                </div>
-                                <div class="infos">
-                                    <h3>Kaoru hana Wa rin to saku</h3>
-                                    <p>Chapitre 128</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/gannibal">
-                            <div class="content">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-GANNIBAL.jpg" alt="tome-GANNIBAL">
-                                </div>
-                                <div class="infos">
-                                    <h3>Gannibal</h3>
-                                    <p>Chapitre 79</p>
-                                </div>
-                            </div>
-                        </a>
+                    <div class="mangas-flex"></div>
+                    <div class="pagination">
+                        <button class="prev-btn inactive"><i class='bx bx-left-arrow-circle'></i></button>
+                        <button class="next-btn"><i class='bx bx-right-arrow-circle'></i></button>
                     </div>
-                    <div class="pagination"></div>
                 </div>
             </div>
         </section>
 
-        <script src="script/script-slidemenu.js"></script>
-        <script src="script/script-to-top-btn.js"></script>
-        <script src="script/script-cookies.js"></script>
+        <script src="script/script-main.js"></script>
+
+        <!-- Gestion des filtres et affichage mangas -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const searchedInput = document.getElementById('searched_text');
+                let allMangas = {}; // Variable pour stocker tous les mangas
+        
+                // Charger tous les mangas et les stocker dans la variable
+                fetch('/api/manga-data')
+                    .then(response => response.json())
+                    .then(mangas => {
+                        allMangas = mangas; // Stocker les mangas
+                        afficherMangas(allMangas); // Afficher tous les mangas au début
+                    })
+                    .catch(error => console.error('Erreur lors du chargement des mangas:', error));
+        
+                // Filtrer les mangas par tags
+                function filtrerMangasParTags(mangas, selectedTags, excludedTags) {
+                    const filteredMangas = {};
+                    Object.keys(mangas).forEach(mangaKey => {
+                        const manga = mangas[mangaKey];
+        
+                        // Convertir les tags en tableau
+                        const mangaTags = manga.Tags.split(',').map(tag => tag.trim());
+        
+                        // Vérifier les tags
+                        const hasSelectedTags = selectedTags.length === 0 || selectedTags.every(tag => mangaTags.includes(tag));
+                        const hasExcludedTags = excludedTags.length > 0 && excludedTags.some(tag => mangaTags.includes(tag));
+        
+                        // Ajouter le manga si les conditions sont remplies
+                        if (hasSelectedTags && !hasExcludedTags) {
+                            filteredMangas[mangaKey] = manga;
+                        }
+                    });
+                    return filteredMangas;
+                }
+        
+                // Filtrer les mangas
+                function filtrerMangas(query) {
+                    const filteredMangas = {};
+                    Object.keys(allMangas).forEach(mangaKey => {
+                        const manga = allMangas[mangaKey];
+                        if (manga.Nom && manga.Alias && manga.Tags) {
+                            if (manga.Nom.toLowerCase().includes(query) || manga.Alias.toLowerCase().includes(query)) {
+                                filteredMangas[mangaKey] = manga;
+                            }
+                        }
+                    });
+                    return filteredMangas;
+                }
+        
+                // Fonction pour trier les mangas par ordre alphabétique
+                function trierMangas(mangas) {
+                    return Object.keys(mangas)
+                        .map(mangaKey => ({
+                            key: mangaKey,
+                            ...mangas[mangaKey]
+                        }))
+                        .sort((a, b) => a.Nom.localeCompare(b.Nom)); // Tri par ordre alphabétique
+                }
+        
+                // Fonction pour afficher les mangas
+                function afficherMangas(mangas) {
+                    const mangaFlex = document.querySelector('.mangas-flex');
+                    mangaFlex.innerHTML = ''; // Réinitialiser la liste avant de réafficher
+
+                    // Vérifier s'il n'y a pas de mangas filtrés
+                    if (Object.keys(mangas).length === 0) {
+                        mangaFlex.innerHTML = '<div class="content">Aucun résultat trouvé.</div>';
+                        return; // Si aucun manga ne correspond, arrêter la fonction
+                    }
+
+                    // Trier les mangas avant de les afficher
+                    const sortedMangas = trierMangas(mangas);
+
+                    // Afficher les mangas triés avec un délai
+                    sortedMangas.forEach((manga, index) => {
+                        // Appel à l'API pour obtenir le dernier chapitre
+                        fetch(`/api/${manga.key}/last-chapter`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const lastChapter = data.dernierChapitre ? `Chapitre ${data.dernierChapitre}` : 'Bientôt disponible';
+                                const numChap = data.dernierChapitre ? `${data.dernierChapitre}` : 'null';
+
+                                const mangaHTML = `
+                                    <div class="content" style="animation-delay: ${index * 100}ms;"> <!-- Délai d'animation -->
+                                        <a href="/${manga.key}" class="img-container">
+                                            <img src="${manga.Image}" alt="tome-${manga.Nom}">
+                                        </a>
+                                        <div class="infos">
+                                            <a href="/${manga.key}">${manga.Nom}</a>
+                                            <a class="chap-link" href="/${manga.key}/${numChap}">${lastChapter}</a>
+                                        </div>
+                                    </div>
+                                `;
+
+                                // Ajouter le manga au DOM
+                                mangaFlex.insertAdjacentHTML('beforeend', mangaHTML);
+                            })
+                            .catch(error => console.error('Erreur lors de la récupération du dernier chapitre:', error));
+                    });
+                }
+        
+                // Fonction de debounce
+                function debounce(func, delay) {
+                    let timeoutId;
+                    return function(...args) {
+                        if (timeoutId) {
+                            clearTimeout(timeoutId);
+                        }
+                        timeoutId = setTimeout(() => {
+                            func.apply(null, args);
+                        }, delay);
+                    };
+                }
+        
+                // Écouter l'événement 'input' pour la recherche avec debounce
+                searchedInput.addEventListener('input', debounce(() => {
+                    const query = searchedInput.value.trim().toLowerCase();
+                    if (query.length >= 3) {
+                        const resultatsFiltres = filtrerMangas(query);
+                        afficherMangas(resultatsFiltres); // Afficher les résultats filtrés
+                    } else {
+                        afficherMangas(allMangas); // Réafficher tous les mangas
+                    }
+                }, 700)); // 700 millisecondes pour le debounce
+        
+                // Gestion des filtres de tags
+                const checkboxes = document.querySelectorAll('.checkbox');
+                const applyFiltersButton = document.getElementById('apply-filters');
+                const resetFiltersButton = document.getElementById('reset-filters');
+        
+                applyFiltersButton.addEventListener('click', () => {
+                    const selectedTags = [];
+                    const excludedTags = [];
+
+                    checkboxes.forEach(checkbox => {
+                        const tag = checkbox.getAttribute('data-tag');
+                        const state = checkbox.classList.contains('check') ? 'check' : (checkbox.classList.contains('cross') ? 'cross' : 'neutral');
+
+                        if (state === 'check') {
+                            selectedTags.push(tag);
+                        } else if (state === 'cross') {
+                            excludedTags.push(tag);
+                        }
+                    });
+
+                    const query = searchedInput.value.trim().toLowerCase();
+                    const filteredBySearch = query.length >= 3 ? filtrerMangas(query) : allMangas;
+                    const filteredByTags = filtrerMangasParTags(filteredBySearch, selectedTags, excludedTags);
+
+                    // Si une lettre est sélectionnée, filtrer par lettre aussi
+                    const finalFilteredMangas = selectedLetter ? filtrerMangasParLettre(filteredByTags, selectedLetter) : filteredByTags;
+
+                    afficherMangas(finalFilteredMangas);
+                });
+        
+                // Réinitialiser les filtres
+                resetFiltersButton.addEventListener('click', () => {
+                    searchedInput.value = ''; // Réinitialiser la recherche
+                    
+                    // Réinitialiser tous les checkboxes
+                    checkboxes.forEach(checkbox => {
+                        checkbox.classList.remove('check', 'cross'); // Réinitialiser tous les checkboxes
+                        checkbox.classList.add('neutral'); // Mettre tous les checkboxes en état neutre
+                    });
+                    
+                    // Réinitialiser l'état des boutons de lettres
+                    letterButtons.forEach(button => {
+                        button.classList.remove('active-letter', 'non-active'); // Supprimer les classes active et non-active
+                        // Si vous voulez également ajouter une classe de base (par exemple 'letter-button') pour styliser les boutons
+                        button.classList.add('letter-button'); // Ajoutez la classe de base pour tous les boutons (optionnel)
+                    });
+
+                    // Réafficher tous les mangas
+                    afficherMangas(allMangas); 
+                });
+
+        
+                // Init des checkboxes
+                checkboxes.forEach(checkbox => {
+                    let state = 0; // 0: neutral, 1: cross, 2: check
+        
+                    function updateCheckbox() {
+                        checkbox.classList.remove('neutral', 'cross', 'check');
+                        if (state === 0) {
+                            checkbox.classList.add('neutral');
+                        } else if (state === 1) {
+                            checkbox.classList.add('cross');
+                        } else if (state === 2) {
+                            checkbox.classList.add('check');
+                        }
+                    }
+        
+                    checkbox.addEventListener('click', () => {
+                        state = (state + 1) % 3; // Change l'état du checkbox
+                        updateCheckbox();
+                    });
+        
+                    // Initialize the checkbox
+                    updateCheckbox();
+                });
+            });
+
+            const letterButtons = document.querySelectorAll('.filter-letters button');
+            let selectedLetter = null; // Pour stocker la lettre sélectionnée
+
+            // Fonction pour afficher les mangas filtrés par lettre
+            function filtrerMangasParLettre(mangas, letter) {
+                const filteredMangas = {};
+                Object.keys(mangas).forEach(mangaKey => {
+                    const manga = mangas[mangaKey];
+                    if (manga.Nom && manga.Nom.charAt(0).toLowerCase() === letter.toLowerCase()) {
+                        filteredMangas[mangaKey] = manga;
+                    }
+                });
+                return filteredMangas;
+            }
+
+            // Écouter les clics sur les lettres
+            letterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const letter = button.id; // Récupérer la lettre à partir de l'id du bouton
+                    selectedLetter = letter; // Mettre à jour la lettre sélectionnée
+
+                    // Activer le bouton et désactiver les autres
+                    letterButtons.forEach(btn => {
+                        btn.classList.remove('active-letter'); // Supprimer la classe active de tous les boutons
+                        btn.classList.add('non-active'); // Ajouter la classe non-active à tous les boutons
+                    });
+                    button.classList.add('active-letter'); // Ajouter la classe active au bouton cliqué
+                    button.classList.remove('non-active'); // Retirer la classe non-active du bouton cliqué
+                });
+            });
+        </script>
+        
+        <!-- Affichage des filtres pour téléphone -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const filters = document.querySelector('.filters');
+                const showFiltersBtn = document.querySelector('.show-filters');
+
+                showFiltersBtn.addEventListener('click', () => {
+                    if (!filters.classList.contains('show') && !filters.classList.contains('hide')) {
+                        filters.classList.add('show');
+                    } else if (filters.classList.contains('show')) {
+                        filters.classList.remove('show');
+                        filters.classList.add('hide');
+                    } else if (filters.classList.contains('hide')) {
+                        filters.classList.remove('hide');
+                        filters.classList.add('show');
+                    }
+
+                    showFiltersBtn.classList.toggle('active');
+
+                    if (showFiltersBtn.classList.contains('active')) {
+                        showFiltersBtn.textContent = 'Cacher les filtres';
+                    } else {
+                        showFiltersBtn.textContent = 'Afficher les filtres';
+                    }
+                });
+            });
+        </script>
 
         <footer>
             <div class="decoration-line">
@@ -616,13 +551,13 @@
 
             <div class="flexbox">
                 <div class="flex-container">
-                    <a href="">Accueil</a>
+                    <a href="/">Accueil</a>
                     <div class="footer-line"></div>
-                    <a href="">À propos de nous</a>
+                    <a href="/about-us">À propos de nous</a>
                     <div class="footer-line"></div>
-                    <a href="">Privacy Policy</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
                     <div class="footer-line"></div>
-                    <a href="">DMCA</a>
+                    <a href="/dmca">DMCA</a>
                 </div>
                 <p>©MangaHana - Tous droits réservés.</p>
             </div>

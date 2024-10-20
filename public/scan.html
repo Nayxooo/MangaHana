@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>MangaHana - Lecture de scans</title> 
+        <title></title> 
         <meta charset="UTF-8">
-        <meta name="description" content="MangaHana - Lecture de scans" id="meta-description">
+        <meta name="description" content="MangaHana - Lecture de scans">
         <meta name="keywords" content="mangahana, scan, vf, sans pubs, free">
-        <link rel="canonical" href="https://mangahana-scan.fr/">
+        <link rel="canonical" href="https://mangahana.fr/">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
         <link rel="shortcut icon" type="image/png" href="/img/mangahana-icon.png">
         <link rel="shortcut icon" sizes="192x192" href="/img/mangahana-icon.png">
         <link rel="apple-touch-icon" href="/img/mangahana-icon.png">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="/styles/style.css">
-        <link rel="stylesheet" href="/styles/style-navbar.css">
-        <link rel="stylesheet" href="/styles/style-footer.css">
+        <link rel="stylesheet" href="/styles/navbar-footer.css">
         <link rel="stylesheet" href="/styles/style-scan.css">
         <link rel="stylesheet" href="/styles/resp-scan.css">
     </head>
@@ -35,18 +35,23 @@
             </div>
 
             <!-- Logo -->
-            <a class="nav-img" href=""><img src="/img/mangahana-logo.png" alt="MangaHana-logo"></a>
+            <a class="nav-img" href="/"><img src="/img/mangahana-logo.png" alt="MangaHana-logo"></a>
             
             <!-- Barre de recherche -->
             <div class="nav-searchbar">
                 <div class="flexbox">
                     <i class='bx bx-search'></i>
                     <input name="search_text" id="search_text" type="search" class="search-input" placeholder="Rechercher..." autocomplete="off">
+                    <button type="button" class="clear-button" id="clear-button">
+                        <img src="img/cursors/cross.avif" alt="Clear search" class="clear-icon">
+                    </button>
                 </div>
+                <!-- Résultats de recherche -->
+                <div id="search-results" class="search-results"></div>
             </div>
-            
+        
             <!-- Logo icone-->
-            <a class ="nav-img-2" href=""><img src="/img/mangahana-icon.png" alt="MangaHana-logo"></a>
+            <a class ="nav-img-2" href="/"><img src="/img/mangahana-icon.png" alt="MangaHana-logo"></a>
 
             <!-- Options navbar -->
             <div class="nav-categories">
@@ -54,11 +59,11 @@
                     <div class="bx-container"><i class='bx bxs-home'></i></div>
                     <div class="a-container">Acc<span class="green-text">ueil</span></div>
                 </a>
-                <a href="" class="flex-container">
+                <a href="/catalogue" class="flex-container">
                     <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
                     <div class="a-container">Cata<span class="green-text">logue</span></div>
                 </a>
-                <a href="" class="flex-container">    
+                <a href="#" class="flex-container randomMangaLink">    
                     <div class="bx-container"><i class='bx bx-shuffle'></i></div>
                     <div class="a-container">Se lan<span class="green-text">cer</span></div>
                 </a>
@@ -76,51 +81,41 @@
 
         <!-- Slide Menu -->
         <div class="slidemenu">
-
-            <div class="logo-slidemenu">
-                <button id="close-slidemenu"><i class='bx bxs-chevrons-left'></i></button>
-                <img class="nav-img" src="/img/mangahana-logo.png" alt="MangaHana-logo">
+            <div class="top-section">
+                <button id="close-slidemenu"><i class='bx bx-x'></i></button>
+                <a class="logoLink" href="/"><img class="nav-img" src="/img/mangahana-logo.png" alt="MangaHana-logo"></a>
+                <div class="sep-section"></div>
             </div>
 
-            <div class="ligne-transition"></div>
+            <a href="/">
+                <div class="options">
+                    <i class='bx bxs-home'></i>
+                    <p>Acc<span class="green">ueil</span></p>
+                </div>
+            </a>
 
-            <!-- Options slide menu -->
-            <div class="options-slidemenu">
-                <div class="flexbox">
-                <div class="flex-pour-centrer"></div>
-                <a href="/" class="flex-container">
-                    <div class="bx-container"><i class='bx bxs-home'></i></div>
-                    <div class="a-container">Acc<span class="green-text">ueil</span></div>
-                    <div class="ligne-style"></div>
-                </a>
+            <a href="/catalogue">
+                <div class="options">
+                    <i class='bx bxs-bookmarks'></i>
+                    <p>Cata<span class="green">logue</span></p>
                 </div>
-                <div class="flexbox">
-                <div class="flex-pour-centrer"></div>
-                <a href="" class="flex-container">
-                    <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
-                    <div class="a-container">Cata<span class="green-text">logue</span></div>
-                    <div class="ligne-style"></div>
-                </a>
-                </div>
-                <div class="flexbox">
-                <div class="flex-pour-centrer"></div>
-                <a href="" class="flex-container">    
-                    <div class="bx-container"><i class='bx bx-shuffle'></i></div>
-                    <div class="a-container">Se lan<span class="green-text">cer</span></div>
-                    <div class="ligne-style"></div>
-                </a>
-                </div>
-                <div class="flexbox">
-                <div class="flex-pour-centrer"></div>
-                <a href="/profil" class="flex-container">
-                    <div class="bx-container"><i class='bx bx-street-view'></i></div>
-                    <div class="a-container">Pro<span class="green-text">fil</span></div>
-                    <div class="ligne-style"></div>
-                </a>
-                </div>
-            </div>
+            </a>
 
-            <p>© 2024 MangaHana - Tous droits réservés.</p>
+            <a href="#" class="randomMangaLink">
+                <div class="options">
+                    <i class='bx bx-shuffle'></i>
+                    <p>Se lan<span class="green">cer</span></p>
+                </div>
+            </a>
+
+            <a href="/profil">
+                <div class="options">
+                    <i class='bx bx-street-view'></i>
+                    <p>Pro<span class="green">fil</span></p>
+                </div>
+            </a>
+
+            <p class="bottom">© 2024 MangaHana - Tous droits réservés.</p>
         </div>
 
         <button id="to-top-btn">
@@ -183,8 +178,7 @@
             </div>
         </section>
 
-        <script src="/script/script-slidemenu.js"></script>
-        <script src="/script/script-to-top-btn.js"></script>
+        <script src="/script/script-main.js"></script>
         <script src="/script/script-fullscreen-btn.js"></script>
 
         <!-- Chargement des chapitres -->
@@ -632,11 +626,12 @@
             function applyStoredTheme() {
                 const theme = getCookie('theme');
                 
-                if (theme === 'light') {
+                if (theme === 'dark' || theme === '') {
+                    // Si pas de cookie ou si le cookie est "dark", on applique le mode sombre
                     document.body.classList.remove('light-mode');
                     document.getElementById('lightmode-btn').innerHTML = "<i class='bx bxs-moon'></i>";
                 } else {
-                    // Par défaut, appliquer le mode sombre si pas de cookie
+                    // Si le cookie est "light", on applique le mode clair
                     document.body.classList.add('light-mode');
                     document.getElementById('lightmode-btn').innerHTML = "<i class='bx bxs-sun'></i>";
                 }
@@ -647,16 +642,19 @@
                 const body = document.body;
                 
                 if (body.classList.contains('light-mode')) {
+                    // Activer le mode sombre
                     body.classList.remove('light-mode');
                     document.getElementById('lightmode-btn').innerHTML = "<i class='bx bxs-moon'></i>";
-                    setCookie('theme', 'light', 365);
+                    setCookie('theme', 'dark', 365);
                 } else {
+                    // Activer le mode clair
                     body.classList.add('light-mode');
                     document.getElementById('lightmode-btn').innerHTML = "<i class='bx bxs-sun'></i>";
-                    setCookie('theme', 'dark', 365); 
+                    setCookie('theme', 'light', 365);
                 }
             }
         
+            // Fonction pour définir un cookie
             function setCookie(name, value, days) {
                 const date = new Date();
                 date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -664,6 +662,7 @@
                 document.cookie = name + "=" + value + ";" + expires + ";path=/";
             }
         
+            // Fonction pour récupérer un cookie
             function getCookie(name) {
                 const cookieName = name + "=";
                 const decodedCookie = decodeURIComponent(document.cookie);
@@ -683,9 +682,10 @@
             // Applique le thème au chargement de la page
             document.addEventListener('DOMContentLoaded', applyStoredTheme);
         
-            // Gére l'événement click sur le bouton darkmode
+            // Gère l'événement click sur le bouton darkmode
             document.getElementById('lightmode-btn').addEventListener('click', toggleDarkMode);
         </script>
+        
         
         <footer>
             <div class="decoration-line">
@@ -695,16 +695,17 @@
 
             <div class="flexbox">
                 <div class="flex-container">
-                    <a href="/index.html">Accueil</a>
+                    <a href="/">Accueil</a>
                     <div class="footer-line"></div>
-                    <a href="/a-propos.html">À propos de nous</a>
+                    <a href="/about-us">À propos de nous</a>
                     <div class="footer-line"></div>
-                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
                     <div class="footer-line"></div>
-                    <a href="/dmca.html">DMCA</a>
+                    <a href="/dmca">DMCA</a>
                 </div>
                 <p>©MangaHana - Tous droits réservés.</p>
             </div>
+
         </footer>
 </body>
 </html>

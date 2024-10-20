@@ -1,0 +1,370 @@
+.bloc-entier {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;   
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    /* background-color: lightblue; */
+}
+.bloc-entier .flexbox{
+    display: flex;
+    flex-direction: row;   
+    width: 80%;
+    height: fit-content;
+    gap: 20px;
+}
+
+.bloc-entier .flexbox .left-flex {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+}
+.bloc-entier .flexbox .right-flex {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+    gap: 20px;  
+}
+
+/* !!!!! DATA SECTION !!!!! */
+.data-section{
+    width: 100%;
+    border: solid 3px var(--black);
+}
+
+.data-section .data{
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0 0 20px;
+    width: 100%;
+    height: 100%;
+}
+.data-section .data .left-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 26.5em;
+    gap: 10px;
+}
+
+.data-section .data .left-flex .img-container{
+    width: fit-content;
+    height: 85%;
+}
+
+.data-section .data .left-flex .img-container img{
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.data-section .data .left-flex button{
+    color: var(--green);
+    border: none;
+    width: 100%;
+    background-color: var(--grey1);
+    border: solid 2px var(--grey1);
+    height: 15%;
+    font-family: 'Poppins';
+    font-size: 15px;
+    font-weight: 900;
+    border-radius: 8px;
+    transition: color 0.2s ease, background-color 0.2s ease, border 0.2s ease;
+    cursor: pointer;
+}
+.data-section .data .left-flex button:hover{
+    color: var(--grey3);
+    background-color: var(--light-black);
+}
+.data-section .data .left-flex .favPut{
+    background-color: var(--green);
+    color: var(--grey1);
+    border: solid 2px var(--green);
+}
+.data-section .data .left-flex .favPut:hover{
+    background-color: var(--grey1);
+    color: var(--white);
+    border: solid 2px var(--grey1);
+}
+
+.data-section .data .much-info  {
+    padding: 0 30px;
+    height: fit-content;
+}
+.data-section .data .much-info  h1 {
+    color: var(--green);
+    margin-top: -10px;
+}
+.data-section .data .much-info .separation-info{
+    height: 3px;
+    width: 80%;
+    background: linear-gradient(to right, var(--grey2), var(--black));
+    border-radius: 3px;
+}
+
+.data-section .data .much-info .synopsis {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.data-section .data .much-info .synopsis p{
+    font-size: 16px;
+    color: var(--white);
+}
+
+.data-section .data .much-info .tags {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.data-section .data .much-info .caracteristics {
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    margin-top: 10px;
+    gap: 100px;
+}
+
+.data-section .auteur-sortie,
+.data-section .dessinateur-statut {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.data-section .data .much-info .caracteristics .carac-box {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    gap: 5px;
+    color: var(--grey3);
+}
+
+/* !!!!! RECOMMENDATION SECTION !!!!! */
+.reco-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 42em;
+    background-color: var(--light-black);
+    border-radius: 8px;
+}
+.reco-section .titre-bloc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat';
+    font-size: 10px;
+    color: var(--green);
+    background-color: var(--grey1); 
+    padding: 7px 15px; 
+    border-radius: 8px;
+    margin: 10px auto; 
+    width: fit-content; 
+}
+
+.reco-section .random-manga a {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    color: var(--white);
+    width: 100%;
+}
+.random-manga {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0 10px 10px;
+    height: 18%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /* background-color: var(--black); */
+    transition: padding 0.3s ease;
+}
+.random-manga .infos{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1%;
+    margin-left: 3%;
+    transition: margin-top 0.3s ease;
+    overflow: hidden;
+}
+.random-manga h1 {
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+.random-manga p {
+    font-size: 14px;
+}
+.random-manga .infos p {
+    color: var(--grey3);
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+.random-manga .recommendation-tag {
+    font-weight: 600;
+}
+.random-manga a .img-container{
+    width: fit-content;
+    height: 100%;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: margin-left 0.4s ease;
+}
+.random-manga .img-container img{
+    max-height: 100%;
+}
+
+.reco-section a:hover .random-manga {
+    padding: 50px 0 10px 10px;
+}
+.reco-section .random-manga a:hover .infos h1 {
+    color: var(--green);
+}
+.reco-section .random-manga a:hover .infos p {
+    color: var(--white);
+}
+.random-manga a:hover .img-container {
+    margin-left: 4%;
+}
+.random-manga a .img-container::after {
+    content: ""; 
+    position: absolute; 
+    left: 10px;
+    width: 60%; 
+    height: 150px; 
+    background-color: rgb(255, 255, 255); 
+    transform: translate(20%, 100%) rotate(45deg); 
+    transition: transform 0.7s ease, filter 1s ease; 
+    filter: blur(2px); 
+    opacity: 50%;
+    z-index: 1;
+}
+
+.random-manga a:hover .img-container::after {
+    transform: translate(0, -100%) rotate(45deg); 
+}
+
+/* !!!!! CHAPTER SECTION !!!!! */
+.chapter-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.chapter-section .chapter-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: var(--white);
+    width: 100%;
+    height: 3.5em;
+    z-index: 10;
+}
+.chapter-section .chapter-title a{
+    position: absolute;
+    right: 0;
+    bottom: 0.8em;
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--dark-white);
+    padding: 5px 10px;
+    border: solid 2px var(--grey1);
+    border-radius: 8px;
+    font-weight: 900;
+    transition: color 0.1s ease, border 0.1s ease;
+}
+.chapter-section .chapter-title a:hover{
+    color: var(--white);
+    border: solid 2px var(--black);
+}
+.chapter-section .sep-line {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    border-radius: 5px;
+    background: linear-gradient(to right, var(--green), var(--light-black));
+}
+
+.chapter-section .scroll-flexbox {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; 
+    width: 100%; 
+    height: fit-content; 
+    max-height: 35em;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    padding: 20px;
+    padding-left: 4%;
+    gap: 10px;
+}
+
+.chapter-section .scroll-flexbox a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8em;
+    font-family: "Poppins";
+    color: var(--grey3);
+    font-weight: 900;
+    background-color: var(--grey1);
+    padding: 5px 0;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+.chapter-section .scroll-flexbox a:hover {
+    color: var(--green);
+    background-color: var(--black);
+}
+
+.chapter-section .explication {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+.chapter-section .explication p {
+    padding: 10px;
+    font-size: 15px;
+    color: var(--white);
+    background-color: var(--black);
+    border: solid 2px var(--grey1);
+    border-radius: 8px;
+    width: 45%;
+}
+
+
+.chapter-section .scroll-flexbox::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent; 
+}
+
+.chapter-section .scroll-flexbox::-webkit-scrollbar-thumb {
+    background-color: var(--grey1);
+    border-radius: 10px;
+}
+
+.chapter-section .scroll-flexbox::-webkit-scrollbar-thumb:hover {
+    background-color: var(--grey2);
+}
+
+.chapter-section .scroll-flexbox::-webkit-scrollbar-track {
+    background-color: transparent; 
+}
+

@@ -1,0 +1,315 @@
+body::-webkit-scrollbar {
+    background-color: black;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--grey2);
+}
+body.light-mode::-webkit-scrollbar {
+    background-color: white;
+} 
+body.light-mode::-webkit-scrollbar-thumb {
+    background-color: var(--dark-white) !important;
+}
+
+.bloc-scan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -10em;
+    padding-top: 10em;
+    width: 100%;
+    min-height: 50em;
+    background-color: #000;
+    transition: background-color 0.4s ease;
+    overflow-x: hidden;
+}
+
+/* !!!!! Paramètres !!!!! */
+.bloc-scan .parameters,
+.bloc-scan .parameters2  {
+    display: flex;
+    flex-direction: column;
+    width: 62em;
+    height: 11.5em;
+    overflow: hidden;
+    background-color: #000;
+    border-radius: 8px;
+    padding: 0 1em;
+    transition: background-color 0.4s ease;
+}
+.bloc-scan .parameters2 {
+    margin-top: 10px;
+    height: 5em;
+}
+
+.bloc-scan .parameters .manga-info, 
+.bloc-scan .parameters .menus-options
+.bloc-scan .parameters .page-options {
+    width: 100%;
+}
+.bloc-scan .parameters .manga-info {
+    padding: 10px 0 0 10px;
+    height: 6em;
+}
+.bloc-scan .parameters .manga-info h1{
+    font-size: 30px;
+}
+.bloc-scan .parameters .manga-info a{
+    font-family: 'Montserrat';
+    color: var(--grey3);
+    transition: color 0.2s ease;
+}
+body.light-mode .bloc-scan .parameters .manga-info a .green{
+    color: var(--grey3);
+}
+body.light-mode .bloc-scan .parameters .manga-info a:hover,
+body.light-mode .bloc-scan .parameters .manga-info a:hover .green{
+    color: var(--black);
+    text-decoration: underline;
+}
+.bloc-scan .parameters .manga-info a .green{
+    transition: color 0.2s ease;
+}
+.bloc-scan .parameters .manga-info a:hover .green{
+    color: var(--grey3);
+}
+.bloc-scan .parameters .menus-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    position: relative;
+    height: 2.2em;
+    gap: 10px;
+    margin-bottom: 0.5em;
+}
+.bloc-scan .parameters .menus-options button,
+.bloc-scan .parameters .pages-option button,
+.bloc-scan .parameters2 .pages-option2 button {
+    height: 100%;
+    border-radius: 8px;
+    border: solid 2px var(--grey1);
+    transition: color 0.2s ease, background-color 0.2s ease, border 0.2s ease;
+    cursor: pointer;
+}
+.bloc-scan .parameters .menus-options button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    height: 100%;
+    width: 3em;
+    background-color: var(--black);
+    cursor: pointer;
+}
+.bloc-scan .parameters .menus-options button i {
+    font-size:  20px;
+    font-weight: 900;
+    color: var(--grey3);
+    transition : color 0.1s ease;
+}
+
+.bloc-scan .parameters .pages-option{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    position: relative;
+    gap: 15px;
+    height: 2.2em;  
+}
+.bloc-scan .parameters2 .pages-option2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    gap: 10px;
+    height: 2.2em;  
+    margin-top: 10px;
+}
+
+.bloc-scan .parameters .pages-option button,
+.bloc-scan .parameters2 .pages-option2 button{
+    font-family: 'Poppins';
+    font-weight: 900;
+    height: 100%;
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: var(--grey3);
+    background-color: var(--grey1);
+}
+
+.bloc-scan .parameters2 .pages-option2 button{
+    padding: 5px 5px;
+}
+
+.bloc-scan .parameters .pages-option button:hover,
+.bloc-scan .parameters2 .pages-option2 button:hover {
+    background-color: var(--grey2);
+    border: solid 2px var(--grey2);
+    color: var(--white);
+}
+
+.bloc-scan .parameters .pages-option #next-chapter{
+    position: absolute;
+    right: 0;
+}
+
+.bloc-scan .parameters .pages-option #flex-page-btn{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    position: absolute;
+    right: 0;
+}
+
+/* hover des boutons */
+.bloc-scan .parameters .menus-options button:hover{
+    background-color: var(--grey1);
+    color: var(--green);
+}
+.bloc-scan .parameters .menus-options button:hover i{
+    color: var(--green);
+}
+
+/* LIGHT MODE */
+body {
+    background-color: #000;
+}
+body.light-mode{
+    background-color: #fff;
+}
+body.light-mode .bloc-scan{
+    background-color: #fff;
+}
+body.light-mode .parameters,
+body.light-mode .parameters2{
+    background-color: #fff;
+}
+body.light-mode #manga-title{
+    color: var(--black);
+}
+body.light-mode #manga-title .green{
+    color: #626d61;
+}
+body.light-mode .bloc-scan .parameters .menus-options button {
+    border: solid 2px #ebf0ec;
+    background-color: #ebf0ec;
+}
+body.light-mode .bloc-scan .parameters .menus-options button i {
+    color: var(--grey2);
+}
+body.light-mode .bloc-scan .parameters .menus-options button:hover {
+    border: solid 2px #fff;
+    background-color: #fff;
+}
+body.light-mode .bloc-scan .parameters .menus-options button:hover i {
+    color: var(--grey1);
+}
+
+body.light-mode .bloc-scan .parameters .pages-options .chapter-btn {
+    border: solid 2px var(--green);
+}
+body.light-mode .bloc-scan .parameters .pages-option button,
+body.light-mode .bloc-scan .parameters2 .pages-option2 button{
+    color: var(--grey3);
+    background-color: #ebf0ec;
+    border: solid 2px #ebf0ec;
+}
+body.light-mode .bloc-scan .parameters .pages-option button:hover,
+body.light-mode .bloc-scan .parameters2 .pages-option2 button:hover{
+    color: var(--grey2);
+    background-color: var(--white);
+}
+
+
+body.light-mode .bloc-scan .parameters .pages-option select {
+    background-color: var(--white);   
+    border: solid 2px #ebf0ec;      
+    color: var(--grey3);
+}
+body.light-mode .bloc-scan .parameters .pages-option select option {
+    color: var(--grey3);
+    background-color: var(--white);    
+}
+body.light-mode .bloc-scan .parameters .pages-option select:focus {  
+    outline: none;  
+    color: var(--grey3);
+}
+
+ 
+body.light-mode::-webkit-scrollbar-thumb {
+    background-color: var(--green);
+}
+
+
+
+
+
+
+
+
+
+/* !!!!! SCANS !!!!! */
+.bloc-scan .pages-flex-horizontale {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+.bloc-scan .pages-flex-verticale {
+    position: relative;
+    width: 60em;
+    height: fit-content;
+}
+
+.bloc-scan .pages-flex-horizontale #btn-over-img,
+.bloc-scan .pages-flex-verticale #btn-over-img{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+.bloc-scan .pages-flex-horizontale #btn-over-img #previous-on-img,
+.bloc-scan .pages-flex-horizontale #btn-over-img #next-on-img,
+.bloc-scan .pages-flex-verticale #btn-over-img #previous-on-img,
+.bloc-scan .pages-flex-verticale #btn-over-img #next-on-img{
+    position: relative;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+}
+.bloc-scan .pages-flex-horizontale #btn-over-img #previous-on-img,
+.bloc-scan .pages-flex-verticale #btn-over-img #previous-on-img{
+    width: 30%;
+}
+.bloc-scan .pages-flex-horizontale #btn-over-img #next-on-img,
+.bloc-scan .pages-flex-verticale #btn-over-img #next-on-img{
+    width: 70%;
+}
+.bloc-scan .pages-flex-horizontale #btn-over-img #next-on-img:hover {
+    cursor: url("/img/cursors/right-arrow.png") 16 16, auto;
+}
+.bloc-scan .pages-flex-horizontale #btn-over-img #previous-on-img:hover{
+    cursor: url("/img/cursors/left-arrow.png") 16 16, auto;
+}
+.bloc-scan .pages-flex-verticale #go-down-on-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+}
+.bloc-scan .pages-flex-verticale #go-down-on-img:hover{
+    cursor: url("/img/cursors/down-arrow.png") 16 16, auto;
+}
+
+.bloc-scan .pages-flex-verticale img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.bloc-scan .pages-flex-horizontale img {
+    width: auto;
+    height: 75em;
+}
