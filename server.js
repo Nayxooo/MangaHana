@@ -16,14 +16,30 @@ const PORT = 3000;
 // // Application du middleware à toutes les routes API
 // app.use('/api/', limiter);
 
+// Donne l'accès au robots.txt
+app.get('/robots.txt', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'robots.txt')); 
+});
+
 // Route pour la page profil.html
 app.get('/profil', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'profil.html')); 
 });
 
-// Route pour la page catalogue.html
 app.get('/catalogue', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'catalogue.html')); 
+});
+
+app.get('/about-us', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'a-propos.html')); 
+});
+
+app.get('/privacy-policy', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'privacy-policy.html')); 
+});
+
+app.get('/dmca', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dmca.html')); 
 });
 
 // Route pour obtenir les données des mangas
@@ -47,12 +63,10 @@ app.get('/:manga', (req, res) => {
     const manga = req.params.manga;
     const mangaDir = path.join(__dirname, 'scans', manga);
 
-    // Vérifier si le répertoire du manga existe dans le dossier "scans"
     fs.access(mangaDir, fs.constants.F_OK, (err) => {
         if (err) {
             return res.redirect('/');
         }
-        // Si le manga existe, renvoyer la page manga.html
         res.sendFile(path.join(__dirname, 'public', 'manga.html'));
     });
 });
@@ -68,13 +82,12 @@ app.get('/api/:manga/chapters', (req, res) => {
             return res.status(500).send('Erreur de lecture des chapitres');
         }
 
-        // Filtrer les dossiers qui correspondent aux chapitres
         const chapters = files.filter(file => fs.statSync(path.join(chaptersDir, file)).isDirectory());
 
         // trie les chapitres comme des nombres (éviter que 10 soit au dessus de 1)
         chapters.sort((a, b) => parseInt(a) - parseInt(b));
 
-        res.json(chapters); // Retourner la liste des chapitres
+        res.json(chapters); 
     });
 });
 
@@ -82,7 +95,7 @@ app.get('/api/:manga/chapters', (req, res) => {
 app.get('/api/:manga/chapters/:chapter/pages', (req, res) => {
     const manga = req.params.manga;
     const chapter = req.params.chapter;
-    const chapterDir = path.join(__dirname, 'scans', manga, chapter); // Chemin vers le chapitre
+    const chapterDir = path.join(__dirname, 'scans', manga, chapter); 
 
     fs.readdir(chapterDir, (err, files) => {
         if (err) {
@@ -90,10 +103,9 @@ app.get('/api/:manga/chapters/:chapter/pages', (req, res) => {
             return res.status(500).send('Erreur de lecture des pages');
         }
 
-        // Filtrer les fichiers d'images (par exemple : .jpg, .png, etc.)
         const pages = files.filter(file => /\.(jpg|jpeg|png|gif)$/.test(file));
 
-        // Trier les pages numériquement si elles sont nommées avec des nombres
+        // Trie les pages numériquement si elles sont nommées avec des nombres
         pages.sort((a, b) => parseInt(a) - parseInt(b));
 
         res.json(pages); // Retourner la liste des pages
@@ -119,6 +131,32 @@ app.get('/api/:manga/chapters/:chapter', (req, res) => {
     });
 });
 
+// API pour obtenir le dernier chapitre disponible d'un manga
+app.get('/api/:manga/last-chapter', (req, res) => {
+    const manga = req.params.manga;
+    const chaptersDir = path.join(__dirname, 'scans', manga); 
+
+    fs.readdir(chaptersDir, (err, files) => {
+        if (err) {
+            console.error(`Erreur de lecture des chapitres pour ${manga}:`, err);
+            return res.status(500).send('Erreur lors de la lecture des chapitres');
+        }
+        const chapters = files.filter(file => fs.statSync(path.join(chaptersDir, file)).isDirectory());
+
+        if (chapters.length > 0) {
+            chapters.sort((a, b) => parseInt(a) - parseInt(b));
+
+            // Prends le dernier chapitre
+            const lastChapter = chapters[chapters.length - 1];
+            res.json({ dernierChapitre: lastChapter });
+        } else {
+            res.json({ dernierChapitre: null }); 
+        }
+    });
+});
+
+
+
 // Servir le dossier 'public' pour le contenu statique
 app.use(express.static(path.join(__dirname, 'public')));
 // Servir le dossier 'scans' pour accéder aux images
@@ -140,8 +178,6 @@ app.get('/:manga/:chapter', (req, res) => {
 
         fs.access(chapterDir, fs.constants.F_OK, (chapterErr) => {
             if (chapterErr) {
-                console.error(`Chapitre non trouvé : ${chapter} pour le manga ${manga}`);
-                // Renvoie vers la page du manga s'il existe mais n'a pas encore de chapitres
                 return res.redirect(`/${manga}`);
             }
 
