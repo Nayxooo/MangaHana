@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         mangaDetails.classList.add('manga-details');
 
                         const mangaImage = document.createElement('img');
-                        mangaImage.src = manga.Image; 
+                        mangaImage.src = `img/couvertures/tome-${key}.avif`; 
                         mangaImage.alt = `tome-${key}`; 
                         mangaImage.classList.add('img');
 
@@ -95,23 +95,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour mettre à jour l'affichage du bouton
     function toggleClearButton() {
         if (searchInput.value.length > 0) {
-            clearButton.style.display = 'block'; // Afficher si quelque chose est tapé
+            clearButton.style.display = 'block';
         } else {
-            clearButton.style.display = 'none'; // Masquer sinon
+            clearButton.style.display = 'none';
         }
     }
 
-    // Appeler toggleClearButton dès que la page se charge
     toggleClearButton();
 
-    // Écouter les changements dans le champ de recherche
     searchInput.addEventListener('input', toggleClearButton);
 
-    // Lorsque le bouton est cliqué, on réinitialise le champ et cache le bouton
     clearButton.addEventListener('click', () => {
-        searchInput.value = ''; // Vider le champ de recherche
-        toggleClearButton(); // Masquer le bouton après la réinitialisation
-        searchInput.focus(); // Remettre le focus sur l'input
+        searchInput.value = ''; 
+        toggleClearButton(); 
+        searchInput.focus(); 
     });
 });
 
@@ -179,3 +176,46 @@ fetch('/api/manga-data')
         });
     })
     .catch(error => console.error('Erreur lors du chargement des mangas:', error));
+
+// Lazy Loading
+document.addEventListener('DOMContentLoaded', () => {
+    const flexboxes = document.querySelectorAll('.lazy-flex'); 
+
+    function handleIntersection(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                
+                entry.target.classList.add('lazy-loaded');
+                observer.unobserve(entry.target);
+            }
+        });
+    }
+
+    // Crée un nouvel observer
+    const observer = new IntersectionObserver(handleIntersection, {
+        root: null, 
+        threshold: 0.1 
+    });
+
+    flexboxes.forEach(flexbox => {
+        observer.observe(flexbox);
+    });
+});
+
+
+
+
+
+
+
+
+
+// Service Worker
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js")
+            .catch(error => {
+                console.log("Erreur d'enregistrement du Service Worker :", error);
+            });
+    });
+}
