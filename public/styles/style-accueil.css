@@ -13,17 +13,50 @@
     }
 }
 
+@keyframes reveall {
+    0% {
+        filter: blur(3px);
+    }
+    100% {
+        filter: blur(0);
+    }
+}
+@keyframes reveall2 {
+    0% {
+        filter: blur(1px);
+    }
+    100% {
+        filter: blur(0);
+    }
+}
+
+.resp-cata-link {
+    display: none;
+    opacity: 0; 
+    transform: translateY(-30px); 
+    animation: slideIn 0.8s ease forwards; 
+    animation-delay: 0.1s; 
+}
+.resp-cata-link img{
+    max-width: 100%;
+    height: auto;
+}
+
 section .sec-populaire {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 36em;
+    height: 32em;
+    opacity: 0; 
+    transform: translateY(-30px); 
+    animation: slideIn 0.8s ease forwards; 
+    animation-delay: 0.1s; 
 }
 
 section .sec-populaire .mainflex {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 95em;
     height: 90%;
 }
 
@@ -44,6 +77,8 @@ section .sec-populaire .mainflex .flex-container {
     height: 100%;
     padding: 2px 15px;
     gap: 15px;
+
+    animation: reveal 1s ease forwards;
 }
 
 section .sec-populaire .mainflex .flex-container .flexboxleft,
@@ -59,9 +94,10 @@ section .sec-populaire .mainflex .flex-container .flexboxright {
 !!!!!!!!!!! PARTIE GAUCHE !!!!!!!!!!!!*/
 
 section .sec-populaire .mainflex .flex-container .flexboxleft {
+    position: relative;
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     border: 2px solid var(--grey1); 
 }
 
@@ -109,6 +145,10 @@ section .sec-populaire .mainflex .flex-container .flexboxleft .right-arrow-btn b
     border: 2px solid var(--black);
 }
 
+section .sec-populaire .mainflex .flex-container .flexboxleft a {
+    width: fit-content;
+    height: fit-content;   
+}
 
 /* Elements de l'affiche */
 section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex {
@@ -124,7 +164,7 @@ section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .infos
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 55%;   
+    width: 90%;   
     height: 100%; 
 }
 
@@ -134,24 +174,35 @@ section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .infos
     font-weight: 900;
     font-style: italic;
     font-size: 60px;
+    color: var(--white);
+}
+section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .infos p{
+    color: var(--white);
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
 }
 
-section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .infos .tag-flexbox{
-    display: flex;
-    flex-direction: row;
-    margin-left: 6.5%;
-    margin-top: 0.8%;
-    margin-bottom: 2%;
-    gap: 10px;
+section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .tag-flexbox {
+    position: absolute;
+    bottom: 5%; /* Ou "bottom: 0;" pour l'aligner complètement en bas */
+    left: 50%; /* Centre horizontalement */
+    transform: translateX(-50%); /* Ajuste la position au centre */
+    z-index: 999;
+}
+section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .tag-flexbox #tag{
+    margin-right: 5px;
+    color: var(--grey3);
+    background-color: var(--black);
+    border: solid 2px var(--grey1);
+}
+section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .tag-flexbox #tag:hover{
+    color: var(--white);
+    background-color: var(--grey1);
 }
 
 section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .infos #synopsis{
     margin-left: 7%;
     font-size: 16px;
-}
-
-section .sec-populaire .mainflex  #know-more-btn {
-    z-index: 1000;
+    width: 35em;
 }
 
 section .sec-populaire .mainflex .flex-container .flexboxleft .manga-flex .manga-img {
@@ -192,104 +243,188 @@ section .sec-populaire .mainflex .flex-container .flexboxleft:hover .manga-img i
     transform: scale(1.04); 
 }
 
-/* =========================================================================================
 
-!!!!!!!!!!! PARTIE DROITE !!!!!!!!!!!!*/
-/* Nom de manga long NON SUPPORTES */
-section .sec-populaire .mainflex .flex-container .flexboxright {
+
+
+
+
+/* !!!!! DERNIERES SORTIES !!!!! */
+.dernieres-sorties {
     display: flex;
-    flex-direction: column;
-    width: 20%;
-    background-color: var(--light-black);
-}
-section .sec-populaire .flexboxright .pop-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
     width: 100%;
-    height: 10%;
+    height: fit-content;
+
+    opacity: 0; 
+    transform: translateY(-30px); 
+    animation: slideIn 0.8s ease forwards; 
+    animation-delay: 0.3s; 
 }
-section .sec-populaire .flexboxright .pop-title h1{
-    background-color: var(--grey1);
-    padding: 0 15px;
-    border-radius: 6px;
-    color: var(--green)
-}
-section .sec-populaire .flexboxright .pop-box {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    width: 100%;
-    height: 18%;
-    transition: background-color 0.2s ease;
-}
-section .sec-populaire .flexboxright .pop-box .number-flex{
-    display: flex;
-    justify-content: center;
-    width: 25%;
-}
-section .sec-populaire .flexboxright .pop-box .number{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.7em;
-    height: 1.7em;
-    background-color: var(--grey1);
-    color: var(--white);
-    border-radius: 5px;
-    margin-top: 0.9em;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-section .sec-populaire .flexboxright .pop-box .img-info-flex{
+.dernieres-sorties .mainflex{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    width: 20em;
-}
-section .sec-populaire .flexboxright .img-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 95em;
     height: 100%;
+    gap: 15px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+}
+.dernieres-sorties .mainflex .sorties-flex{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: var(--light-black);
+    padding-top: 15px;
+
+    animation: reveal2 0.8s ease forwards;
+}
+.dernieres-sorties .mainflex .sorties-flex .sorties-title{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dernieres-sorties .mainflex .sorties-flex h1{
+    color: var(--green);
+    background-color: var(--grey1);
+    border-radius: 8px;
+    padding: 0 15px;
+}
+.dernieres-sorties .mainflex .sorties{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    height: fit-content;
+    margin: 15px 0;
+}
+.dernieres-sorties .mainflex .mangabox{
+    width: fit-content;
+    height: fit-content;
     overflow: hidden;
-    border-radius: 10px;
+    margin-bottom: 5px;
 }
-section .sec-populaire .flexboxright .img-container img{
-    max-height: 90%;
+.dernieres-sorties .mainflex .mangabox .imgLink{
+    height: fit-content;
+    width: fit-content;
 }
-section .sec-populaire .flexboxright .info-container {
+.dernieres-sorties .mainflex .mangabox .imgLink .img-container{
+    height: 11em;
+    width: fit-content;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.dernieres-sorties .mainflex .mangabox .imgLink .img-container img{
+    height: 100%;
+    width: auto;
+    transition: scale 0.2s ease, opacity 0.2s ease;
+}
+.dernieres-sorties .mainflex .mangabox .data{
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    color: var(--white);
-    font-family: "Poppins";
-    margin-left: 0.5em;
+    width: 100%;
+    height: 25%;
 }
-section .sec-populaire .flexboxright a .manga-name {
+.dernieres-sorties .mainflex .mangabox .data a{
+    font-size: 14px;
+    color: var(--dark-white);
     transition: color 0.2s ease;
 }
-
-/* !!!!! HOVER EFFECT PARTIE DROITE !!!!! */
-section .sec-populaire .flexboxright a:hover {
-    background-color: var(--grey1);
-}
-section .sec-populaire .flexboxright a:hover .number {
-    background-color: var(--black);
+.dernieres-sorties .mainflex .mangabox .data a .bolder{
+    font-family: 'Poppins';
+    font-size: 16px;
     color: var(--white);
 }
-section .sec-populaire .flexboxright a:hover .manga-name {
+.dernieres-sorties .mainflex .mangabox .data p{
+    font-size: 14px;
+    color: var(--grey3);
+}
+.dernieres-sorties .mainflex .mangabox:hover img{
+    scale: 1.1;
+    opacity: 0.8;
+}
+.dernieres-sorties .mainflex .mangabox:hover a .bolder{
     color: var(--green);
 }
-section .sec-populaire .flexboxright a:hover .grey {
-    color: var(--dark-white);
+.dernieres-sorties .mainflex .mangabox .data a:hover{
+    color: var(--grey2);
 }
 
 
 
 
+/* Historique de lecture */
+.history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+    border: none;
+}
+.manga-history {
+    width: 93em;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.history-title {
+    width: 100%;
+}
+.history-title h1{
+    color: var(--white);
+    text-transform: uppercase;
+}
+
+.manga-history .sep-line {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--green), var(--black));
+    border-top-left-radius: 5px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--light-black);
+    border-radius: 8px;
+    border-top-left-radius: 0;
+    min-height: 5em;
+}
+.history-list a {
+    width: 100%;
+    color: var(--grey3);
+    font-weight: 900;
+    font-size: 18px;
+    padding: 7px 0;
+    padding-left: 20px; 
+    transition: color 0.2s ease, background-color 0.2s, padding-left 0.2s ease;
+}
+.history-list a:hover {
+    background-color: var(--grey1);
+    color: var(--white);
+    padding-left: 30px
+}
+.history-list a .white{
+    color: var(--dark-white);
+    transition: color 0.2s ease;
+}
+.history-list a:hover .white{
+    color: var(--green);
+}
 
 
+
+.separation{
+    width: 100%;
+    height: 2em;
+    background-color: var(--black);
+}
 
 
 
@@ -302,14 +437,17 @@ section .pepites {
     justify-content: center;
     width: 100%;
     height: 20em;
-    margin-bottom: 30px;
+}
+
+section #classiques {
+    margin: 2em 0 1em 0;
 }
 
 section .pepites .mainflex {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 80%;
+    width: 95em;
     height: 90%;
 }
 
@@ -377,7 +515,7 @@ section .pepites .mainflex .flexbox .flex-content .slider-flex .image-container{
     height: 70%;
     border-radius: 10px;
     overflow: hidden;
-    transition: height 0.3s ease;
+    transition: height 0.25s ease;
 }
 
 section .pepites .mainflex .flexbox .flex-content .slider-flex .image-container img{
@@ -397,7 +535,7 @@ section .pepites .mainflex .flexbox .flex-content .slider-flex #little-title{
 }
 
 section .pepites .mainflex .flexbox .flex-content .slider-flex:hover .image-container{
-    height: 83%;
+    height: 82%;
 }
 section .pepites .mainflex .flexbox .flex-content .slider-flex:hover h3{
     color: var(--white);
@@ -446,5 +584,48 @@ section .pepites .mainflex .flexbox .flex-content .slider-flex:hover .image-cont
     100% {
       transform: translateX(-100%);
     }
+}
+
+
+
+
+
+/* MESSAGE OFFLINE */
+.offline-message{
+    display: none;
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: solid 2px var(--green);
+    background-color: var(--light-black);
+    gap: 10px;
+    padding: 15px;
+    margin: 15rem 0;
+}
+
+.offline-message p{
+    text-align: center;
+    font-size: 18px;
+}
+
+.offline-message button{
+    color: var(--green);
+    border: none;
+    width: fit-content;
+    background-color: var(--grey1);
+    border: solid 2px var(--grey1);
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 900;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.offline-message button:hover{
+    color: var(--dark-white);
+    background-color: var(--black);
 }
 

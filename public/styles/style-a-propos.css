@@ -34,7 +34,7 @@
 .bloc-central p,a{
     font-family: "Montserrat";
     font-size: 15px;
-    color: var(--grey3);
+    color: var(--dark-white);
 }
 
 .bloc-central a{
@@ -58,6 +58,21 @@
     height: 30vh;
 }
 
+.contact {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-top: 5px;
+}
+.contact i{
+    font-size: 25px;
+    color: #bbd5f8;
+}
+.contact p{
+    color: var(--white);
+    font-size: 18px;
+}
+
 /* responsive */
 @media (max-width: 1000px) {
     .bloc-central {
@@ -68,4 +83,31 @@
     .bloc-central {
         width: 90%;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+.easter-egg {
+    position: absolute;
+    left: 88px;
+    bottom: 344px;
+    width: 2px;
+    height: 2px;
+    background-color: var(--black);
+}
+.easter-egg img{
+    display: none;
+    width: 1280px;
+    height: 720px;
+}
+.easter-egg:hover img{
+    display: block;
 }

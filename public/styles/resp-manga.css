@@ -15,6 +15,9 @@
     .bloc-entier .flexbox .left-flex{
         width: 100%;
     }
+    .bloc-entier .flexbox .left-flex .data-section .left-flex{
+        width: 35%;
+    }
     .history .history-line {
         height: fit-content;
     }
@@ -53,21 +56,31 @@
         text-align: center;
     }
     .data-section .data{
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 20px 0 0 0;
     }   
     .data-section .data .left-flex{
-        height: 35em;
+        width: 20em !important;
+        height: fit-content;
         gap: 30px;
         margin-bottom: 2em;
     }
     .data-section .data .left-flex .img-container{
-        width: fit-content;
+        width: 20em;
+        height: fit-content;
+    }
+    .data-section .data .left-flex .img-container img{
+        width: 100%;
+        height: auto;
     }
     .data-section .data .left-flex button{
-        width: 13em;
+        width: 100%;
         font-size: 18px;
     }
     .data-section .data .much-info  {
+        width: 100%;
         padding: 0;
         background-color: var(--light-black);
         border-radius: 8px;
@@ -76,7 +89,7 @@
     .data-section .data .much-info .tags {
         flex-wrap: wrap;
         height: fit-content;
-        margin-bottom: 1em;
+        margin: 1em 0;
         gap: 10px;
     }
     .bloc-entier .flexbox .left-flex .data-section .data {
@@ -133,12 +146,9 @@
 
 @media (max-width: 380px) {
     .data-section .data .left-flex{
-        margin-bottom: -20px;
+        width: 90% !important;
     }
     .data-section .data .left-flex .img-container{
-        height: 71%;
-    }
-    .data-section .data .left-flex button{
-        height: 10%;
+        width: 100%;
     }
 }

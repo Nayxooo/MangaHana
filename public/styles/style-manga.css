@@ -43,20 +43,26 @@
     height: 100%;
 }
 .data-section .data .left-flex{
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 26.5em;
+    height: fit-content;
+    width: 30%;
     gap: 10px;
 }
 
 .data-section .data .left-flex .img-container{
-    width: fit-content;
-    height: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 30em;
+    height: auto;
 }
 
 .data-section .data .left-flex .img-container img{
-    max-height: 100%;
+    max-width: 100%;
     border-radius: 10px;
 }
 
@@ -66,7 +72,7 @@
     width: 100%;
     background-color: var(--grey1);
     border: solid 2px var(--grey1);
-    height: 15%;
+    height: 3.5em;
     font-family: 'Poppins';
     font-size: 15px;
     font-weight: 900;
@@ -91,6 +97,7 @@
 
 .data-section .data .much-info  {
     padding: 0 30px;
+    width: 70%;
     height: fit-content;
 }
 .data-section .data .much-info  h1 {
@@ -323,13 +330,25 @@
     color: var(--grey3);
     font-weight: 900;
     background-color: var(--grey1);
+    border: solid 2px var(--grey1);
     padding: 5px 0;
     border-radius: 6px;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition: color 0.2s ease, background-color 0.2s ease, border 0.2s ease;
 }
 .chapter-section .scroll-flexbox a:hover {
-    color: var(--green);
+    color: var(--dark-white);
     background-color: var(--black);
+}
+
+.chapter-section .scroll-flexbox .read {
+    color: var(--grey2);
+    background-color: var(--black);
+    border: solid 2px var(--grey1);
+}
+
+.chapter-section .scroll-flexbox .read:hover {
+    color: var(--dark-white);
+    border: solid 2px var(--black);
 }
 
 .chapter-section .explication {
