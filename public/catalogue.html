@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Catalogue | MangaHana</title> 
+        <title>Catalogue | Mangahana</title> 
         <meta charset="UTF-8">
         <meta name="description" content="MangaHana - Lecture de scans">
         <meta name="keywords" content="mangahana, scan, vf, sans pubs, free">
@@ -14,6 +14,7 @@
         <link rel="shortcut icon" type="image/png" href="img/mangahana-icon.png">
         <link rel="shortcut icon" sizes="192x192" href="img/mangahana-icon.png">
         <link rel="apple-touch-icon" href="img/mangahana-icon.png">
+        <link rel="manifest" href="manifest.json">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/navbar-footer.css">
@@ -171,7 +172,7 @@
                             <p>Horreur</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" data-tag="Mystere"></div>
+                            <div class="checkbox" data-tag="Mystère"></div>
                             <p>Mystère</p>
                         </div>
                         <div class="tag-checkbox">
@@ -179,7 +180,7 @@
                             <p>Romance</p>
                         </div>
                         <div class="tag-checkbox">
-                            <div class="checkbox" data-tag="Science-Fiction"></div>
+                            <div class="checkbox" data-tag="Science-fiction"></div>
                             <p>Science-Fiction</p>
                         </div>
                         <div class="tag-checkbox">
@@ -195,36 +196,6 @@
                             <p>Suspense</p>
                         </div>
                     </div>
-
-                    <!-- <script>
-                        document.addEventListener('DOMContentLoaded', () => {
-                            const checkboxes = document.querySelectorAll('.checkbox');
-                            const genre = document.querySelectorAll('.checkbox');
-                            
-                            checkboxes.forEach(checkbox => {
-                                let state = 0;
-
-                                function updateCheckbox() {
-                                    checkbox.classList.remove('neutral', 'cross', 'check');
-                                    if (state === 0) {
-                                        checkbox.classList.add('neutral');
-                                    } else if (state === 1) {
-                                        checkbox.classList.add('cross');
-                                    } else if (state === 2) {
-                                        checkbox.classList.add('check');
-                                    }
-                                }
-
-                                checkbox.addEventListener('click', () => {
-                                    state = (state + 1) % 3;
-                                    updateCheckbox();
-                                });
-
-                                // Initialize the checkbox
-                                updateCheckbox();
-                            });
-                        });
-                    </script> -->
 
                     <div class="filter-title">
                         <h1>Filtrer par lettre</h1>
@@ -256,6 +227,9 @@
                         <button id="x">X</button>
                         <button id="y">Y</button>
                         <button id="z">Z</button>
+                        <!-- <span class="letter" data-letter="A">A</span>
+                        <span class="letter" data-letter="B">B</span>
+                        <span class="letter" data-letter="C">C</span> -->
                     </div>
 
                     <button id="reset-filters">Réinitialiser les filtres</button>
@@ -284,31 +258,44 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const searchedInput = document.getElementById('searched_text');
-                let allMangas = {}; // Variable pour stocker tous les mangas
+                let allMangas = {};
+                let activeLetter = ''; 
+                let currentPage = 1; 
+
+                let mangasPerPage;
+
+                const smallScreen = window.matchMedia('(max-width: 790px)');
+                const normalScreen = window.matchMedia('(min-width: 791px) and (max-width: 8000px)');
+
+                function checkScreenSize() {
+                    if (smallScreen.matches) {
+                        mangasPerPage = 27;
+                    } else if (normalScreen.matches) {
+                        mangasPerPage = 28;
+                    }
+                }
+
+                checkScreenSize();
+                smallScreen.addEventListener('change', checkScreenSize);
+                normalScreen.addEventListener('change', checkScreenSize);
         
-                // Charger tous les mangas et les stocker dans la variable
                 fetch('/api/manga-data')
                     .then(response => response.json())
                     .then(mangas => {
-                        allMangas = mangas; // Stocker les mangas
-                        afficherMangas(allMangas); // Afficher tous les mangas au début
+                        allMangas = mangas;
+                        afficherMangas(allMangas); 
                     })
-                    .catch(error => console.error('Erreur lors du chargement des mangas:', error));
         
-                // Filtrer les mangas par tags
                 function filtrerMangasParTags(mangas, selectedTags, excludedTags) {
                     const filteredMangas = {};
                     Object.keys(mangas).forEach(mangaKey => {
                         const manga = mangas[mangaKey];
         
-                        // Convertir les tags en tableau
                         const mangaTags = manga.Tags.split(',').map(tag => tag.trim());
         
-                        // Vérifier les tags
                         const hasSelectedTags = selectedTags.length === 0 || selectedTags.every(tag => mangaTags.includes(tag));
                         const hasExcludedTags = excludedTags.length > 0 && excludedTags.some(tag => mangaTags.includes(tag));
         
-                        // Ajouter le manga si les conditions sont remplies
                         if (hasSelectedTags && !hasExcludedTags) {
                             filteredMangas[mangaKey] = manga;
                         }
@@ -316,7 +303,6 @@
                     return filteredMangas;
                 }
         
-                // Filtrer les mangas
                 function filtrerMangas(query) {
                     const filteredMangas = {};
                     Object.keys(allMangas).forEach(mangaKey => {
@@ -330,43 +316,42 @@
                     return filteredMangas;
                 }
         
-                // Fonction pour trier les mangas par ordre alphabétique
                 function trierMangas(mangas) {
                     return Object.keys(mangas)
                         .map(mangaKey => ({
                             key: mangaKey,
                             ...mangas[mangaKey]
                         }))
-                        .sort((a, b) => a.Nom.localeCompare(b.Nom)); // Tri par ordre alphabétique
+                        .sort((a, b) => a.Nom.localeCompare(b.Nom));
                 }
         
-                // Fonction pour afficher les mangas
+                // Fonction pour afficher les mangas en tenant compte de la pagination
                 function afficherMangas(mangas) {
                     const mangaFlex = document.querySelector('.mangas-flex');
-                    mangaFlex.innerHTML = ''; // Réinitialiser la liste avant de réafficher
-
-                    // Vérifier s'il n'y a pas de mangas filtrés
+                    mangaFlex.innerHTML = ''; 
+        
                     if (Object.keys(mangas).length === 0) {
-                        mangaFlex.innerHTML = '<div class="content">Aucun résultat trouvé.</div>';
-                        return; // Si aucun manga ne correspond, arrêter la fonction
+                        mangaFlex.innerHTML = '<div class="no-result">Aucun résultat trouvé.</div>';
+                        return; 
                     }
-
-                    // Trier les mangas avant de les afficher
+        
                     const sortedMangas = trierMangas(mangas);
-
-                    // Afficher les mangas triés avec un délai
-                    sortedMangas.forEach((manga, index) => {
-                        // Appel à l'API pour obtenir le dernier chapitre
+                    const totalPages = Math.ceil(sortedMangas.length / mangasPerPage);
+                    const startIndex = (currentPage - 1) * mangasPerPage;
+                    const endIndex = Math.min(startIndex + mangasPerPage, sortedMangas.length);
+                    const mangasToDisplay = sortedMangas.slice(startIndex, endIndex);
+        
+                    mangasToDisplay.forEach(manga => {
                         fetch(`/api/${manga.key}/last-chapter`)
                             .then(response => response.json())
                             .then(data => {
                                 const lastChapter = data.dernierChapitre ? `Chapitre ${data.dernierChapitre}` : 'Bientôt disponible';
                                 const numChap = data.dernierChapitre ? `${data.dernierChapitre}` : 'null';
-
+        
                                 const mangaHTML = `
-                                    <div class="content" style="animation-delay: ${index * 100}ms;"> <!-- Délai d'animation -->
+                                    <div class="content" data-manga-key="${manga.key}">
                                         <a href="/${manga.key}" class="img-container">
-                                            <img src="${manga.Image}" alt="tome-${manga.Nom}">
+                                            <img src="img/couvertures/tome-${manga.key}.avif" alt="tome-${manga.Nom}">
                                         </a>
                                         <div class="infos">
                                             <a href="/${manga.key}">${manga.Nom}</a>
@@ -374,12 +359,22 @@
                                         </div>
                                     </div>
                                 `;
-
-                                // Ajouter le manga au DOM
+        
                                 mangaFlex.insertAdjacentHTML('beforeend', mangaHTML);
                             })
                             .catch(error => console.error('Erreur lors de la récupération du dernier chapitre:', error));
                     });
+        
+                    updatePagination(totalPages);
+                }
+        
+                // Met à jour la pagination
+                function updatePagination(totalPages) {
+                    const prevButton = document.querySelector('.prev-btn');
+                    const nextButton = document.querySelector('.next-btn');
+        
+                    prevButton.classList.toggle('inactive', currentPage === 1);
+                    nextButton.classList.toggle('inactive', currentPage === totalPages);
                 }
         
                 // Fonction de debounce
@@ -398,65 +393,84 @@
                 // Écouter l'événement 'input' pour la recherche avec debounce
                 searchedInput.addEventListener('input', debounce(() => {
                     const query = searchedInput.value.trim().toLowerCase();
+                    currentPage = 1; 
                     if (query.length >= 3) {
                         const resultatsFiltres = filtrerMangas(query);
-                        afficherMangas(resultatsFiltres); // Afficher les résultats filtrés
+                        afficherMangas(resultatsFiltres); 
                     } else {
-                        afficherMangas(allMangas); // Réafficher tous les mangas
+                        afficherMangas(allMangas); 
                     }
-                }, 700)); // 700 millisecondes pour le debounce
+                }, 700)); 
         
-                // Gestion des filtres de tags
                 const checkboxes = document.querySelectorAll('.checkbox');
                 const applyFiltersButton = document.getElementById('apply-filters');
                 const resetFiltersButton = document.getElementById('reset-filters');
+                
+                const letterButtons = document.querySelectorAll('.filter-letters button');
+        
+                letterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        letterButtons.forEach(btn => btn.classList.remove('active-letter'));
+                        letterButtons.forEach(btn => btn.classList.add('non-active'));
+        
+                        // Activer la lettre cliquée
+                        button.classList.add('active-letter');
+                        activeLetter = button.textContent; 
+                    });
+                });
         
                 applyFiltersButton.addEventListener('click', () => {
                     const selectedTags = [];
                     const excludedTags = [];
-
+        
                     checkboxes.forEach(checkbox => {
                         const tag = checkbox.getAttribute('data-tag');
                         const state = checkbox.classList.contains('check') ? 'check' : (checkbox.classList.contains('cross') ? 'cross' : 'neutral');
-
+        
                         if (state === 'check') {
                             selectedTags.push(tag);
                         } else if (state === 'cross') {
                             excludedTags.push(tag);
                         }
                     });
-
+        
                     const query = searchedInput.value.trim().toLowerCase();
+                    currentPage = 1; 
                     const filteredBySearch = query.length >= 3 ? filtrerMangas(query) : allMangas;
                     const filteredByTags = filtrerMangasParTags(filteredBySearch, selectedTags, excludedTags);
-
-                    // Si une lettre est sélectionnée, filtrer par lettre aussi
-                    const finalFilteredMangas = selectedLetter ? filtrerMangasParLettre(filteredByTags, selectedLetter) : filteredByTags;
-
-                    afficherMangas(finalFilteredMangas);
+                    const filteredByLetter = filterMangasByLetter(filteredByTags, activeLetter); 
+        
+                    afficherMangas(filteredByLetter);
                 });
         
-                // Réinitialiser les filtres
+                function filterMangasByLetter(mangas, letter) {
+                    const filteredMangas = {};
+                    Object.keys(mangas).forEach(mangaKey => {
+                        const manga = mangas[mangaKey];
+                        if (manga.Nom && manga.Nom.startsWith(letter)) {
+                            filteredMangas[mangaKey] = manga;
+                        }
+                    });
+                    return filteredMangas;
+                }
+        
                 resetFiltersButton.addEventListener('click', () => {
-                    searchedInput.value = ''; // Réinitialiser la recherche
+                    searchedInput.value = ''; 
                     
-                    // Réinitialiser tous les checkboxes
                     checkboxes.forEach(checkbox => {
-                        checkbox.classList.remove('check', 'cross'); // Réinitialiser tous les checkboxes
-                        checkbox.classList.add('neutral'); // Mettre tous les checkboxes en état neutre
+                        checkbox.classList.remove('check', 'cross');
+                        checkbox.classList.add('neutral');
                     });
                     
-                    // Réinitialiser l'état des boutons de lettres
                     letterButtons.forEach(button => {
-                        button.classList.remove('active-letter', 'non-active'); // Supprimer les classes active et non-active
-                        // Si vous voulez également ajouter une classe de base (par exemple 'letter-button') pour styliser les boutons
-                        button.classList.add('letter-button'); // Ajoutez la classe de base pour tous les boutons (optionnel)
+                        button.classList.remove('active-letter');
+                        button.classList.add('non-active');
                     });
-
-                    // Réafficher tous les mangas
+                    activeLetter = ''; 
+                    
+                    currentPage = 1; 
                     afficherMangas(allMangas); 
                 });
-
         
                 // Init des checkboxes
                 checkboxes.forEach(checkbox => {
@@ -474,43 +488,74 @@
                     }
         
                     checkbox.addEventListener('click', () => {
-                        state = (state + 1) % 3; // Change l'état du checkbox
+                        state = (state + 1) % 3; 
                         updateCheckbox();
                     });
         
-                    // Initialize the checkbox
                     updateCheckbox();
                 });
-            });
+        
+                // Gestion de la pagination
+                const prevButton = document.querySelector('.prev-btn');
+                const nextButton = document.querySelector('.next-btn');
+                function scrollToTop() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
 
-            const letterButtons = document.querySelectorAll('.filter-letters button');
-            let selectedLetter = null; // Pour stocker la lettre sélectionnée
-
-            // Fonction pour afficher les mangas filtrés par lettre
-            function filtrerMangasParLettre(mangas, letter) {
-                const filteredMangas = {};
-                Object.keys(mangas).forEach(mangaKey => {
-                    const manga = mangas[mangaKey];
-                    if (manga.Nom && manga.Nom.charAt(0).toLowerCase() === letter.toLowerCase()) {
-                        filteredMangas[mangaKey] = manga;
+                prevButton.addEventListener('click', scrollToTop);
+                nextButton.addEventListener('click', scrollToTop);
+        
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        const query = searchedInput.value.trim().toLowerCase();
+                        const filteredBySearch = query.length >= 3 ? filtrerMangas(query) : allMangas;
+                        const selectedTags = [];
+                        const excludedTags = [];
+        
+                        checkboxes.forEach(checkbox => {
+                            const tag = checkbox.getAttribute('data-tag');
+                            const state = checkbox.classList.contains('check') ? 'check' : (checkbox.classList.contains('cross') ? 'cross' : 'neutral');
+        
+                            if (state === 'check') {
+                                selectedTags.push(tag);
+                            } else if (state === 'cross') {
+                                excludedTags.push(tag);
+                            }
+                        });
+        
+                        const filteredByTags = filtrerMangasParTags(filteredBySearch, selectedTags, excludedTags);
+                        const filteredByLetter = filterMangasByLetter(filteredByTags, activeLetter);
+        
+                        afficherMangas(filteredByLetter);
                     }
                 });
-                return filteredMangas;
-            }
-
-            // Écouter les clics sur les lettres
-            letterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const letter = button.id; // Récupérer la lettre à partir de l'id du bouton
-                    selectedLetter = letter; // Mettre à jour la lettre sélectionnée
-
-                    // Activer le bouton et désactiver les autres
-                    letterButtons.forEach(btn => {
-                        btn.classList.remove('active-letter'); // Supprimer la classe active de tous les boutons
-                        btn.classList.add('non-active'); // Ajouter la classe non-active à tous les boutons
+        
+                nextButton.addEventListener('click', () => {
+                    const query = searchedInput.value.trim().toLowerCase();
+                    const filteredBySearch = query.length >= 3 ? filtrerMangas(query) : allMangas;
+                    const selectedTags = [];
+                    const excludedTags = [];
+        
+                    checkboxes.forEach(checkbox => {
+                        const tag = checkbox.getAttribute('data-tag');
+                        const state = checkbox.classList.contains('check') ? 'check' : (checkbox.classList.contains('cross') ? 'cross' : 'neutral');
+        
+                        if (state === 'check') {
+                            selectedTags.push(tag);
+                        } else if (state === 'cross') {
+                            excludedTags.push(tag);
+                        }
                     });
-                    button.classList.add('active-letter'); // Ajouter la classe active au bouton cliqué
-                    button.classList.remove('non-active'); // Retirer la classe non-active du bouton cliqué
+        
+                    const filteredByTags = filtrerMangasParTags(filteredBySearch, selectedTags, excludedTags);
+                    const filteredByLetter = filterMangasByLetter(filteredByTags, activeLetter);
+                    const totalPages = Math.ceil(Object.keys(filteredByLetter).length / mangasPerPage);
+        
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        afficherMangas(filteredByLetter);
+                    }
                 });
             });
         </script>

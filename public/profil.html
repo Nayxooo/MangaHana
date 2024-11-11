@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Profil | MangaHana</title> 
+        <title>Profil | Mangahana</title> 
         <meta charset="UTF-8">
         <meta name="description" content="MangaHana - Lecture de scans">
         <meta name="keywords" content="mangahana, scan, vf, sans pubs, free">
@@ -14,6 +14,7 @@
         <link rel="shortcut icon" type="image/png" href="img/mangahana-icon.png">
         <link rel="shortcut icon" sizes="192x192" href="img/mangahana-icon.png">
         <link rel="apple-touch-icon" href="img/mangahana-icon.png">
+        <link rel="manifest" href="manifest.json">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/navbar-footer.css">
@@ -283,7 +284,7 @@
                                         <a href="/${mangaName}" class="favoritebox">
                                             <div class="img-container">
                                                 <div class="img-gradient"></div>
-                                                <img src="${mangaInfo.Image}" alt="tome-${mangaInfo.Alias}">
+                                                <img src="img/couvertures/tome-${mangaName}.avif" alt="tome-${mangaInfo.Nom}">
                                             </div>
                                             <div class="title-box">
                                                 <p id="manga-title">${mangaInfo.Nom}</p>

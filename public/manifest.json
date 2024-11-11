@@ -1,0 +1,21 @@
+{
+    "name": "Mangahana - Lecture de scans",
+    "short_name": "Mangahana",
+    "start_url": "/",
+    "display": "fullscreen",
+    "background_color": "#0e110f",
+    "theme_color": "#c6ecb7",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/img/mangahana-icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/mangahana-icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

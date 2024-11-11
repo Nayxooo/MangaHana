@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="description" content="MangaHana - Lecture de scans">
+        <meta name="keywords" content="mangahana, scan, vf, sans pubs, free">
+        <link rel="canonical" href="https://mangahana.fr/catalogue/{{tag}}">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <link rel="shortcut icon" type="image/png" href="/img/mangahana-icon.png">
+        <link rel="shortcut icon" sizes="192x192" href="/img/mangahana-icon.png">
+        <link rel="apple-touch-icon" href="/img/mangahana-icon.png">
+        <link rel="manifest" href="/manifest.json">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="/styles/navbar-footer.css">
+        <link rel="stylesheet" href="/styles/style-catalogue.css">
+        <link rel="stylesheet" href="/styles/resp-catalogue.css">
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav>
+
+            <!-- Burger button -->
+            <div class="burger-menu">
+                <button class="burger-menu-btn">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </button>
+            </div>
+
+            <!-- Logo -->
+            <a class="nav-img" href="/"><img src="/img/mangahana-logo.png" alt="MangaHana-logo"></a>
+            
+            <!-- Barre de recherche -->
+            <div class="nav-searchbar">
+                <div class="flexbox">
+                    <i class='bx bx-search'></i>
+                    <input name="search_text" id="search_text" type="search" class="search-input" placeholder="Rechercher..." autocomplete="off">
+                    <button type="button" class="clear-button" id="clear-button">
+                        <img src="/img/cursors/cross.avif" alt="Clear search" class="clear-icon">
+                    </button>
+                </div>
+                <!-- Résultats de recherche -->
+                <div id="search-results" class="search-results"></div>
+            </div>
+        
+            <!-- Logo icone-->
+            <a class ="nav-img-2" href="/"><img src="/img/mangahana-icon.png" alt="MangaHana-logo"></a>
+
+            <!-- Options navbar -->
+            <div class="nav-categories">
+                <a href="/" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-home'></i></div>
+                    <div class="a-container">Acc<span class="green-text">ueil</span></div>
+                </a>
+                <a href="/catalogue" class="flex-container">
+                    <div class="bx-container"><i class='bx bxs-bookmarks'></i></div>
+                    <div class="a-container">Cata<span class="green-text">logue</span></div>
+                </a>
+                <a href="#" class="flex-container randomMangaLink">    
+                    <div class="bx-container"><i class='bx bx-shuffle'></i></div>
+                    <div class="a-container">Se lan<span class="green-text">cer</span></div>
+                </a>
+                <a href="/profil" class="flex-container">
+                    <div class="bx-container"><i class='bx bx-street-view'></i></div>
+                    <div class="a-container">Pro<span class="green-text">fil</span></div>
+                </a>
+            </div>
+
+            <div class="decoration-line">
+                <div class="left-line"></div>
+                <div class="right-line"></div>
+            </div>
+        </nav>
+
+        <!-- Slide Menu -->
+        <div class="slidemenu">
+            <div class="top-section">
+                <button id="close-slidemenu"><i class='bx bx-x'></i></button>
+                <a class="logoLink" href="/"><img class="nav-img" src="/img/mangahana-logo.png" alt="MangaHana-logo"></a>
+                <div class="sep-section"></div>
+            </div>
+
+            <a href="/">
+                <div class="options">
+                    <i class='bx bxs-home'></i>
+                    <p>Acc<span class="green">ueil</span></p>
+                </div>
+            </a>
+
+            <a href="/catalogue">
+                <div class="options">
+                    <i class='bx bxs-bookmarks'></i>
+                    <p>Cata<span class="green">logue</span></p>
+                </div>
+            </a>
+
+            <a href="#" class="randomMangaLink">
+                <div class="options">
+                    <i class='bx bx-shuffle'></i>
+                    <p>Se lan<span class="green">cer</span></p>
+                </div>
+            </a>
+
+            <a href="/profil">
+                <div class="options">
+                    <i class='bx bx-street-view'></i>
+                    <p>Pro<span class="green">fil</span></p>
+                </div>
+            </a>
+
+            <p class="bottom">© 2024 MangaHana - Tous droits réservés.</p>
+        </div>
+
+        <button id="to-top-btn">
+            <i class='bx bx-up-arrow-alt'></i>
+        </button>
+
+        <section class="mainbloc">
+            <div class="tags-bloc">
+                <div class="tag-title">
+                    <h1 id="tag-title"></h1>
+                    <a class="back-to-catalogue" href="/catalogue">Catalogue ></a>
+                </div>
+                <div class="tag-sep-line"></div>
+                <div id="manga-list" class="filtered-manga"></div>
+            </div>
+        </section>
+        
+        <script src="/script/script-cookies.js"></script>
+
+        <!-- Searchbar, slide-menu, to top btn -->
+        <script>
+            // SEARCHBAR de la NAVBAR
+            document.addEventListener('DOMContentLoaded', () => {
+                const searchInput = document.getElementById('search_text');
+                const searchResults = document.getElementById('search-results');
+
+                function handleSearchInput() {
+                    const searchQuery = searchInput.value.toLowerCase();
+                    searchResults.innerHTML = ''; 
+
+                    if (searchQuery.length < 3) {
+                        searchResults.style.display = 'none'; 
+                        return;
+                    }
+
+                    fetch('/api/manga-data')
+                        .then(response => response.json())
+                        .then(data => {
+                            const filteredResults = Object.keys(data).filter(key => 
+                                data[key].Nom.toLowerCase().includes(searchQuery) ||
+                                data[key].Alias.toLowerCase().includes(searchQuery)
+                            );
+
+                            if (filteredResults.length > 0) {
+                                searchResults.style.display = 'flex'; 
+                                
+                                const maxResults = 6;
+                                filteredResults.slice(0, maxResults).forEach((key, index) => {
+                                    const manga = data[key];
+                                    const resultItem = document.createElement('a');
+                                    resultItem.href = `/${key}`; 
+                                    resultItem.classList.add('search-result-item');
+
+                                    const mangaDetails = document.createElement('div');
+                                    mangaDetails.classList.add('manga-details');
+
+                                    const mangaImage = document.createElement('img');
+                                    mangaImage.src = `/img/couvertures/tome-${key}.avif`; 
+                                    mangaImage.alt = `tome-${key}`; 
+                                    mangaImage.classList.add('img');
+
+                                    const mangaInfo = document.createElement('div');
+                                    mangaInfo.classList.add('infos');
+                                    const mangaName = document.createElement('p');
+                                    mangaName.classList.add('bolder');
+                                    mangaName.textContent = manga.Nom; 
+                                    const mangaTags = document.createElement('p');
+                                    mangaTags.classList.add('darker');
+                                    const tags = manga.Tags;
+                                    mangaTags.textContent = `Genres : ${tags}`; 
+
+                                    mangaInfo.appendChild(mangaName);
+                                    mangaInfo.appendChild(mangaTags);
+                                    mangaDetails.appendChild(mangaImage);
+                                    mangaDetails.appendChild(mangaInfo);
+
+                                    resultItem.appendChild(mangaDetails);
+                                    searchResults.appendChild(resultItem);
+
+                                    if (index === filteredResults.slice(0, maxResults).length - 1) {
+                                        resultItem.style.borderBottomLeftRadius = '8px';
+                                        resultItem.style.borderBottomRightRadius = '8px';
+                                    }
+                                });
+                            } else {
+                                searchResults.style.display = 'none'; 
+                            }
+                        })
+                        .catch(error => console.error('Erreur lors du chargement des données des mangas:', error));
+                }
+
+                searchInput.addEventListener('input', handleSearchInput);
+
+                document.addEventListener('click', (event) => {
+                    if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+                        searchResults.style.display = 'none'; 
+                    }
+                });
+
+                searchInput.addEventListener('focus', () => {
+                    if (searchInput.value.length >= 3) {
+                        searchResults.style.display = 'flex'; 
+                    }
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const searchInput = document.getElementById('search_text');
+                const clearButton = document.getElementById('clear-button');
+
+                function toggleClearButton() {
+                    if (searchInput.value.length > 0) {
+                        clearButton.style.display = 'block'; 
+                    } else {
+                        clearButton.style.display = 'none'; 
+                    }
+                }
+
+                toggleClearButton();
+
+                searchInput.addEventListener('input', toggleClearButton);
+
+                clearButton.addEventListener('click', () => {
+                    searchInput.value = ''; 
+                    toggleClearButton(); 
+                    searchInput.focus(); 
+                });
+            });
+
+            window.onscroll = function() {
+                const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+                const toTopButton = document.getElementById('to-top-btn');
+                    
+                const showAfter = 100;
+
+                if (scrollPosition < showAfter) {
+                    toTopButton.style.display = "none";
+                } else {
+                    toTopButton.style.display = "block";
+                }
+            };
+
+            document.getElementById('to-top-btn').addEventListener('click', function() {
+                window.scrollTo({
+                top: 0, 
+                behavior: 'smooth' 
+                });
+            });
+
+            // SLIDE MENU
+            const burgerButton = document.querySelector('.burger-menu-btn');
+            const slideMenu = document.querySelector('.slidemenu');
+            const closeSlidemenuBtn = document.getElementById('close-slidemenu');
+            const overlay = document.createElement('div');
+
+            overlay.classList.add('overlay');
+            document.body.appendChild(overlay);
+
+            burgerButton.addEventListener('click', () => {
+                slideMenu.classList.toggle('open');  
+                overlay.classList.toggle('active');  
+            });
+
+            overlay.addEventListener('click', () => {
+                slideMenu.classList.remove('open');  
+                overlay.classList.remove('active');  
+            });
+
+            closeSlidemenuBtn.addEventListener('click', () => {
+                slideMenu.classList.remove('open');  
+                overlay.classList.remove('active');  
+            });
+
+            // RANDOM MANGA
+            fetch('/api/manga-data')
+                .then(response => response.json())
+                .then(data => {
+                    // Liste des mangas
+                    const mangaList = Object.keys(data).map(key => ({ name: data[key].Nom, url: `/${key}` }));
+
+                    const randomMangaLinks = document.querySelectorAll('.randomMangaLink');
+
+                    randomMangaLinks.forEach(link => {
+                        link.addEventListener('click', function(event) {
+                            event.preventDefault(); 
+                            const randomIndex = Math.floor(Math.random() * mangaList.length); 
+                            const selectedManga = mangaList[randomIndex]; 
+                            window.location.href = selectedManga.url; 
+                        });
+                    });
+                })
+                .catch(error => console.error('Erreur lors du chargement des mangas:', error));
+            
+            // Service Worker
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", () => {
+                    navigator.serviceWorker.register("/service-worker.js")
+                        .catch(error => {
+                            console.log("Erreur d'enregistrement du Service Worker :", error);
+                        });
+                });
+            }
+        </script>
+
+        <!-- Mangas filtrés -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const mangaListElement = document.getElementById("manga-list");
+                const pathParts = window.location.pathname.split('/');
+                let tagTitle = pathParts[2]; 
+
+                if (tagTitle === "slice-of-life") {
+                    tagTitle = "slice of life";
+                }
+                if (tagTitle === "comedie") {
+                    tagTitle = "comédie";
+                }
+                if (tagTitle === "mystere") {
+                    tagTitle = "mystère";
+                }
+
+                const capitalizeFirstLetter = (string) => {
+                    return string.charAt(0).toUpperCase() + string.slice(1);
+                };
+
+                const formattedTagTitle = capitalizeFirstLetter(tagTitle);
+                document.title = `Genre : ${formattedTagTitle} | Mangahana`;
+                document.getElementById("tag-title").textContent = formattedTagTitle;
+
+                function createMangaHTML(mangaKey, mangaData) {
+                    const mangaName = mangaData.Nom.length > 15 ? mangaData.Nom.slice(0, 13) + "..." : mangaData.Nom;
+
+                    return `
+                        <div class="mangabox">
+                            <a class="imgLink" href="/${mangaKey}">
+                                <div class="img-container">
+                                    <img src="/img/couvertures/tome-${mangaKey}.avif" alt="tome-${mangaData.Nom}">
+                                </div>
+                            </a>
+                            <div class="data">
+                                <a href="/${mangaKey}">
+                                    <span class="bolder">${mangaName}</span>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                fetch("/api/manga-data")
+                    .then(response => response.json())
+                    .then(data => {
+                        const filteredManga = Object.entries(data)
+                            .filter(([key, manga]) => 
+                                manga.Tags.toLowerCase().split(", ").includes(tagTitle)
+                            )
+                            .sort((a, b) => a[1].Nom.localeCompare(b[1].Nom)); 
+
+                        if (filteredManga.length > 0) {
+                            mangaListElement.innerHTML = filteredManga.map(([key, mangaData]) => createMangaHTML(key, mangaData)).join("");
+                        } else {
+                            mangaListElement.innerHTML = `<p>Aucun manga du genre <span class="green">${formattedTagTitle}</span></p>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Erreur lors de la récupération des données des mangas:", error);
+                        mangaListElement.innerHTML = `<p>Erreur lors du chargement des mangas.</p>`;
+                    });
+            });
+        </script>
+
+        <footer>
+            <div class="decoration-line">
+                <div class="left-line"></div>
+                <div class="right-line"></div>
+            </div>
+
+            <div class="flexbox">
+                <div class="flex-container">
+                    <a href="/">Accueil</a>
+                    <div class="footer-line"></div>
+                    <a href="/about-us">À propos de nous</a>
+                    <div class="footer-line"></div>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <div class="footer-line"></div>
+                    <a href="/dmca">DMCA</a>
+                </div>
+                <p>©MangaHana - Tous droits réservés.</p>
+            </div>
+
+        </footer>
+    </body>
+</html>

@@ -14,6 +14,7 @@
         <link rel="shortcut icon" type="image/png" href="img/mangahana-icon.png">
         <link rel="shortcut icon" sizes="192x192" href="img/mangahana-icon.png">
         <link rel="apple-touch-icon" href="img/mangahana-icon.png">
+        <link rel="manifest" href="manifest.json">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/navbar-footer.css">
@@ -205,71 +206,6 @@
                     <!-- Recommendations aléatoires -->
                     <div class="reco-section">
                         <div class="titre-bloc"><h1>Recommendations</h1></div>
-                        <div class="random-manga">
-                            <a href="youtube.com" target="_blank">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-20TH-CENTURYBOYS.jpg" alt="tome-20TH-CENTURYBOYS">
-                                </div>
-                                <div class="infos">
-                                    <h1>20Th Century Boys</h1>
-                                    <div class="tag-box">
-                                        <p><span class="recommendation-tag">Tags</span> : Horreur, Mystère</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="random-manga">
-                            <a href="youtube.com" target="_blank">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-BALLROOM.jpg" alt="tome-BALLROOM">
-                                </div>
-                                <div class="infos">
-                                    <h1>Kaoru Hana wa Rin to Saku</h1>
-                                    <div class="tag-box">
-                                        <p>Tags : <span class="recommendation-tag">Sports, Romance, Comédie</span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="random-manga">
-                            <a href="youtube.com" target="_blank">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-BLUE-BOX.jpg" alt="tome-BLUE-BOX">
-                                </div>
-                                <div class="infos">
-                                    <h1>Blue Box</h1>
-                                    <div class="tag-box">
-                                        <p>Tags : <span class="recommendation-tag">Sports, Romance</span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="random-manga">
-                            <a href="youtube.com" target="_blank">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-FIRE-PUNCH.jpg" alt="tome-FIRE-PUNCH">
-                                </div>
-                                <div class="infos">
-                                    <h1>Fire Punch</h1>
-                                    <div class="tag-box">
-                                        <p>Tags : <span class="recommendation-tag">Action, Supernaturel</span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="random-manga">
-                            <a href="youtube.com" target="_blank">
-                                <div class="img-container">
-                                    <img src="img/couvertures/tome-CSM.jpg" alt="tome-CSM">
-                                </div>
-                                <div class="infos">
-                                    <h1>Chainsaw Man</h1>
-                                    <div class="tag-box">
-                                        <p>Tags : <span class="recommendation-tag">Action, Supernaturel</span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
                     </div>
 
                     <!-- Historique de lecture -->
@@ -301,6 +237,51 @@
                     })
             });
         </script>  
+
+        <!-- Recommendation aléatoire de manga -->
+        <script>
+            function getRandomMangas(mangas, count) {
+                const shuffled = mangas.sort(() => 0.5 - Math.random()); 
+                return shuffled.slice(0, count); 
+            }
+
+            async function displayRecommendations() {
+                try {
+                    const response = await fetch('/api/manga-data'); 
+                    const mangas = await response.json(); 
+
+                    const randomMangas = getRandomMangas(Object.entries(mangas), 5);
+
+                    const recoSection = document.querySelector('.reco-section');
+
+                    randomMangas.forEach(([mangaKey, mangaData]) => {
+                        const mangaElement = document.createElement('div');
+                        mangaElement.classList.add('random-manga');
+                        
+                        const mangaName = mangaData.Nom
+
+                        mangaElement.innerHTML = `
+                            <a href="/${mangaKey}">
+                                <div class="img-container">
+                                    <img src="img/couvertures/tome-${mangaKey}.avif" alt="tome-${mangaKey.toUpperCase()}">
+                                </div>
+                                <div class="infos">
+                                    <h1>${mangaName}</h1>
+                                    <div class="tag-box">
+                                        <p>Tags : <span class="recommendation-tag">${mangaData.Tags}</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        `;
+                        recoSection.appendChild(mangaElement);
+                    });
+                } catch (error) {
+                    console.error('Erreur lors de la récupération des mangas:', error);
+                }
+            }
+
+            displayRecommendations();
+        </script>
 
         <!-- Historique de lecture -->
         <script>
@@ -372,18 +353,21 @@
                 tags.forEach(tag => {
                     const tagDiv = document.createElement('div');
                     tagDiv.classList.add('tag');
-                    tagDiv.innerHTML = `<div id="tag"><p>${tag}</p></div>`;
+                    const formattedTag = tag.toLowerCase()
+                        .normalize("NFD") 
+                        .replace(/[\u0300-\u036f]/g, "") 
+                        .replace(/\s+/g, '-');
+                    tagDiv.innerHTML = `<a href="/catalogue/${formattedTag}" id="tag">${tag}</a>`;
                     tagsContainer.appendChild(tagDiv);
                 });
         
                 const imageElement = document.querySelector('.img-container img');
-                imageElement.src = mangaData.Image; 
+                imageElement.src = `img/couvertures/tome-${mangaName}.avif`;
                 imageElement.alt = mangaData.Nom; 
         
                 const MangaName = mangaData.Nom;
-                document.title = `${MangaName} | MangaHana`;
+                document.title = `${MangaName} | Mangahana`;
         
-                // Initialiser le bouton des favoris en fonction du cookie
                 initFavoriteButton(mangaName);
 
                 updateHistoryList();
@@ -397,19 +381,16 @@
                 const index = favoriteMangas.indexOf(mangaName);
         
                 if (index === -1) {
-                    // Ajouter aux favoris
                     favoriteMangas.push(mangaName);
                     setCookie('favManga', favoriteMangas.join(','), 7);
                     setButtonActive(true);
                 } else {
-                    // Retirer des favoris
                     favoriteMangas.splice(index, 1);
                     setCookie('favManga', favoriteMangas.join(','), 7);
                     setButtonActive(false);
                 }
             }
         
-            // Fonction pour définir l'état du bouton (actif ou non)
             function setButtonActive(isActive) {
                 const addToFavoritesBtn = document.getElementById('addtoFav');
                 if (isActive) {
@@ -429,20 +410,18 @@
                 const isFavorite = favoriteMangas.includes(mangaName);
                 setButtonActive(isFavorite);
         
-                // Ajouter un événement au bouton "Ajouter aux favoris"
                 const addToFavoritesBtn = document.getElementById('addtoFav');
                 addToFavoritesBtn.addEventListener('click', function() {
                     toggleFavorite(mangaName);
                 });
             }
         
-            // Charger les chapitres lors du chargement de la page
+            // Charge les chapitres lors du chargement de la page
             window.onload = async function() {
-                const mangaName = window.location.pathname.split('/')[1]; // Récupérer le nom du manga depuis l'URL
-                await loadChaptersInScrollBox(mangaName); // Charger les chapitres dans la flexbox
+                const mangaName = window.location.pathname.split('/')[1]; 
+                await loadChaptersInScrollBox(mangaName);
             };
-        
-            // Fonction pour charger et afficher les chapitres dans la scroll-flexbox
+
             async function loadChaptersInScrollBox(manga) {
                 try {
                     const response = await fetch(`/api/${manga}/chapters`);
@@ -450,10 +429,12 @@
         
                     const scrollContainer = document.querySelector('.scroll-flexbox');
                     const explication = document.querySelector('.explication');
-                    scrollContainer.innerHTML = ''; // Vider la flexbox avant d'ajouter des chapitres
+                    scrollContainer.innerHTML = ''; 
+
+                    const readHistory = getReadHistory();
         
                     if (chapters.length > 0) {
-                        // Si des chapitres existent, cacher le message d'explication
+                        // Si des chapitres existent, cache le message d'explication
                         explication.style.display = 'none';
         
                         chapters.forEach(chapter => {
@@ -462,8 +443,12 @@
         
                             link.href = `/${manga}/${chapter}`;
                             link.textContent = chapterLabel;
+
+                            if (readHistory[manga]?.includes(chapter)) {
+                                link.classList.add('read');
+                            }
+
                             link.addEventListener('click', () => handleChapterChange(manga, chapter));
-        
                             scrollContainer.appendChild(link);
                         });
                     } else {
@@ -472,6 +457,19 @@
                 } catch (error) {
                     console.error('Erreur lors du chargement des chapitres :', error);
                 }
+            }
+
+            // Fonction pour récupérer l'historique des chapitres lus depuis le local storage
+            function getReadHistory() {
+                const history = localStorage.getItem('read');
+                return history ? JSON.parse(history) : {};
+            }
+
+            // Marque les chapitres comme lus (Ajoute "read") lors du changement de chapitre
+            async function handleChapterChange(manga, chapter) {
+                addReadChapter(manga, chapter);
+
+                await loadChaptersInScrollBox(manga);
             }
         
             // Fonction pour formater les labels des chapitres
